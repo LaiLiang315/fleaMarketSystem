@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-10-29 14:17:58 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.fleaMarket.domain.goodsInfo" table="GOODSINFO">
+        <id name="goods_id" type="java.lang.String">
+            <column name="GOODS_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="goods_name" type="java.lang.String">
+            <column name="goods_name" />
+        </property>
+        <property name="goods_belong" type="java.lang.String">
+            <column name="goods_belong" />
+        </property>
+        <property name="goods_price" type="java.lang.String">
+            <column name="goods_price" />
+        </property>
+        <property name="goods_state" type="java.lang.String">
+            <column name="goods_state" />
+        </property>
+        <property name="goods_describe" type="java.lang.String">
+            <column name="goods_describe" />
+        </property>
+        <property name="goods_type" type="java.lang.String">
+            <column name="goods_type" />
+        </property>
+        <property name="goods_creationtime" type="java.lang.String">
+            <column name="goods_creationtime" />
+        </property>
+        <property name="goods_modifytime" type="java.lang.String">
+            <column name="goods_modifytime" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-10-31 17:23:05 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.fleaMarket.domain.picture" table="PICTURE">
+        <id name="picture_id" type="java.lang.String">
+            <column name="picture_id" />
+            <generator class="assigned" />
+        </id>
+        <property name="picture_name" type="java.lang.String">
+            <column name="picture_name" />
+        </property>
+        <property name="picture_belong" type="java.lang.String">
+            <column name="picture_belong" />
+        </property>
+        <property name="picture_sequence" type="java.lang.String">
+            <column name="picture_sequence" />
+        </property>
+        <property name="picture_creationtime" type="java.lang.String">
+            <column name="picture_creationtime" />
+        </property>
+        <property name="picture_modifytime" type="java.lang.String">
+            <column name="picture_modifytime" />
+        </property>
+        <property name="is_delete" type="java.lang.Integer">
+            <column name="is_delete" />
+        </property>
+    </class>
+</hibernate-mapping>

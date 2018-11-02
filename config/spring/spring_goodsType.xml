@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="goodsTypeAction"
+		class="com.fleaMarket.goodsType.action.GoodsTypeAction"
+		scope="prototype">
+		<property name="goodsTypeService"
+			ref="goodsTypeService"></property>
+	</bean>
+	<bean id="goodsTypeService"
+		class="com.fleaMarket.goodsType.service.impl.GoodsTypeServiceImpl">
+		<property name="goodsTypeDao" ref="goodsTypeDao"></property>
+	</bean>
+	<bean id="goodsTypeDao"
+		class="com.fleaMarket.goodsType.dao.impl.GoodsTypeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+</beans>

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-10-29 14:17:58 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.fleaMarket.domain.comment" table="COMMENT">
+        <id name="comment_id" type="java.lang.String">
+            <column name="comment_id" />
+            <generator class="assigned" />
+        </id>
+        <property name="comment_goods" type="java.lang.String">
+            <column name="comment_goods" />
+        </property>
+        <property name="comment_content" type="java.lang.String">
+            <column name="comment_content" />
+        </property>
+        <property name="comment_ways" type="java.lang.String">
+            <column name="comment_ways" />
+        </property>
+        <property name="comment_from_user" type="java.lang.String">
+            <column name="comment_from_user" />
+        </property>
+        <property name="comment_to_user" type="java.lang.String">
+            <column name="comment_to_user" />
+        </property>
+        <property name="comment_creationtime" type="java.lang.String">
+            <column name="comment_creationtime" />
+        </property>
+        <property name="comment_modifytime" type="java.lang.String">
+            <column name="comment_modifytime" />
+        </property>
+        <property name="is_delete" type="java.lang.Integer">
+            <column name="is_delete" />
+        </property>
+    </class>
+</hibernate-mapping>

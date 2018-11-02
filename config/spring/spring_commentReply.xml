@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="commentReplyAction"
+		class="com.fleaMarket.commentReply.action.CommentReplyAction"
+		scope="prototype">
+		<property name="commentReplyService"
+			ref="commentReplyService"></property>
+	</bean>
+	<bean id="commentReplyService"
+		class="com.fleaMarket.commentReply.service.impl.CommentReplyServiceImpl">
+		<property name="commentReplyDao" ref="commentReplyDao"></property>
+	</bean>
+	<bean id="commentReplyDao"
+		class="com.fleaMarket.commentReply.dao.impl.CommentReplyDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+</beans>

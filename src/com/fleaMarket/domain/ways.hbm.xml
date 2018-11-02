@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-10-29 14:17:58 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.fleaMarket.domain.ways" table="WAYS">
+        <id name="ways_id" type="java.lang.String">
+            <column name="ways_id" />
+            <generator class="assigned" />
+        </id>
+        <property name="ways_belong" type="java.lang.String">
+            <column name="ways_belong" />
+        </property>
+        <property name="ways_content" type="java.lang.String">
+            <column name="ways_content" />
+        </property>
+        <property name="ways_creationtime" type="java.lang.String">
+            <column name="ways_creationtime" />
+        </property>
+        <property name="ways_modifytime" type="java.lang.String">
+            <column name="ways_modifytime" />
+        </property>
+        <property name="is_delete" type="java.lang.Integer">
+            <column name="is_delete" />
+        </property>
+    </class>
+</hibernate-mapping>

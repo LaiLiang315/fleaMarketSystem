@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-10-29 14:17:58 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.fleaMarket.domain.user" table="USER">
+        <id name="user_id" type="java.lang.String">
+            <column name="user_id" />
+            <generator class="assigned" />
+        </id>
+        <property name="nickname" type="java.lang.String">
+            <column name="nickname" />
+        </property>
+        <property name="username" type="java.lang.String">
+            <column name="username" />
+        </property>
+        <property name="password" type="java.lang.String">
+            <column name="password" />
+        </property>
+        <property name="headportrait" type="java.lang.String">
+            <column name="headportrait" />
+        </property>
+        <property name="address" type="java.lang.String">
+            <column name="address" />
+        </property>
+        <property name="sex" type="java.lang.String">
+            <column name="sex" />
+        </property>
+        <property name="collection" type="java.lang.String">
+            <column name="collection" />
+        </property>
+        <property name="user_creationtime" type="java.lang.String">
+            <column name="user_creationtime" />
+        </property>
+        <property name="user_modifytime" type="java.lang.String">
+            <column name="user_modifytime" />
+        </property>
+        <property name="is_delete" type="java.lang.Integer">
+            <column name="is_delete" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-10-29 14:17:58 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.fleaMarket.domain.type" table="TYPE">
+        <id name="type_id" type="java.lang.String">
+            <column name="type_id" />
+            <generator class="assigned" />
+        </id>
+        <property name="type_name" type="java.lang.String">
+            <column name="type_name" />
+        </property>
+        <property name="type_creationtime" type="java.lang.String">
+            <column name="type_creationtime" />
+        </property>
+        <property name="type_modifytime" type="java.lang.String">
+            <column name="type_modifytime" />
+        </property>
+        <property name="is_delete" type="java.lang.Integer">
+            <column name="is_delete" />
+        </property>
+    </class>
+</hibernate-mapping>

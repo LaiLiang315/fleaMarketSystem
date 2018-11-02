@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-10-29 14:17:58 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.fleaMarket.domain.transaction_record" table="TRANSACTION_RECORD">
+        <id name="transaction_id" type="java.lang.String">
+            <column name="transaction_id" />
+            <generator class="assigned" />
+        </id>
+        <property name="transaction_to_user" type="java.lang.String">
+            <column name="transaction_to_user" />
+        </property>
+        <property name="transaction_from_user" type="java.lang.String">
+            <column name="transaction_from_user" />
+        </property>
+        <property name="transaction_belong" type="java.lang.String">
+            <column name="transaction_belong" />
+        </property>
+        <property name="transaction_creationtime" type="java.lang.String">
+            <column name="transaction_creationtime" />
+        </property>
+        <property name="transaction_modifytime" type="java.lang.String">
+            <column name="transaction_modifytime" />
+        </property>
+        <property name="is_delete" type="java.lang.Integer">
+            <column name="is_delete" />
+        </property>
+    </class>
+</hibernate-mapping>
