@@ -1,5 +1,8 @@
 package goodsType;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.junit.Test;
@@ -8,6 +11,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.fleaMarket.domain.type;
+import com.fleaMarket.domain.typeOne;
+import com.fleaMarket.goodsType.dao.DTO.GoodsTypeDTO;
 import com.fleaMarket.goodsType.service.GoodsTypeService;
 
 /**
@@ -36,6 +41,11 @@ public class TypeTest {
 		
 		
 	}
-	
+	@Test
+	public void goodsTypeDTOTest() {
+		List<GoodsTypeDTO> listGoodsTypeDTO = new ArrayList<>();
+		listGoodsTypeDTO = goodsTypeService.getListGoodsTypeDTO();
+		System.out.println("*******"+listGoodsTypeDTO);
+	}
 
 }

@@ -1,6 +1,9 @@
 package com.fleaMarket.commentReply.dao;
 
 import java.util.List;
+
+import com.fleaMarket.domain.comment;
+import com.fleaMarket.domain.transaction_record;
 /**
  * 评论与回复的dao层
  * @author LL
@@ -48,4 +51,13 @@ public interface CommentReplyDao {
 	 * 获取对象列表
 	 */
 	public List<?> listObject(String hql);
+
+	transaction_record getRecordByInfoId(String trim);
+
+	/**
+	 * 查询品论和回复
+	 * @param trim
+	 * @return
+	 */
+	List<comment> getCommentByInfoId(String trim);
 }

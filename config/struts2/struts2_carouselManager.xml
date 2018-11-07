@@ -7,7 +7,7 @@
 		strict-method-invocation="false">
 		<action name="carouselManager_*"
 			class="com.fleaMarket.carouselManager.action.CarouselManagerAction" method="{1}">
-	
+			<result name="fd">/UpLoadPic.jsp</result>
 		</action>
 	</package>
 	

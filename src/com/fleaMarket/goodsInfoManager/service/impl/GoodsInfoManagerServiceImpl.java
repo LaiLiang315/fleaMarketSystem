@@ -13,6 +13,9 @@ import com.fleaMarket.goodsInfoManager.VO.GoodsManagerVO;
 import com.fleaMarket.goodsInfoManager.dao.GoodsInfoManagerDao;
 import com.fleaMarket.goodsInfoManager.service.GoodsInfoManagerService;
 
+import util.BuildUuid;
+import util.TimeUtil;
+
 /**
  * 商品信息的service层实现层
  * 
@@ -155,6 +158,19 @@ public class GoodsInfoManagerServiceImpl implements GoodsInfoManagerService {
 		}
 		return listGoodsManagerDTO;
 		
+	}
+
+	/**
+	 * 添加商品信息
+	 */
+	@Override
+	public String addGoods(goodsInfo info) {
+		info.setGoods_id(BuildUuid.getUuid());
+		info.setGoods_creationtime(TimeUtil.getStringSecond());
+		info.setGoods_modifytime(TimeUtil.getStringSecond());
+		info.setGoods_state("出售中");
+		goodsInfoManagerDao.saveOrUpdateObject(info);
+		return null;
 	}
 
 }

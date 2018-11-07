@@ -2,6 +2,10 @@ package com.fleaMarket.carouselManager.dao;
 
 import java.util.List;
 
+import com.fleaMarket.domain.carousel;
+import com.fleaMarket.domain.goodsInfo;
+import com.fleaMarket.domain.picture;
+
 /**
  * 轮播图管理的DAO层接口
  * 
@@ -52,5 +56,26 @@ public interface CarouselManagerDao {
 	 * 获取对象列表
 	 */
 	public List<?> listObject(String hql);
+
+	/**
+	 * 跟据id查询轮播图
+	 * @param trim
+	 * @return
+	 */
+	carousel getCarouselById(String trim);
+
+	/**
+	 * 查询带有特殊标记的图片
+	 * @param pictrueName
+	 * @return
+	 */
+	List<picture> getSpectialPic(String pictrueName);
+
+	/**
+	 * 获取第一张图片
+	 * @param goodsInfo
+	 * @return
+	 */
+	picture getFirstPic(String goodsInfo);
 
 }

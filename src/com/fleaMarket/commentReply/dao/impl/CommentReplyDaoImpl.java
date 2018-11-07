@@ -1,5 +1,6 @@
 package com.fleaMarket.commentReply.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -7,8 +8,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.fleaMarket.commentReply.dao.CommentReplyDao;
+import com.fleaMarket.domain.carousel;
+import com.fleaMarket.domain.comment;
+import com.fleaMarket.domain.transaction_record;
 
-public class CommentReplyDaoImpl implements CommentReplyDao{
+public class CommentReplyDaoImpl implements CommentReplyDao {
 
 	/**
 	 * session注入
@@ -30,7 +34,6 @@ public class CommentReplyDaoImpl implements CommentReplyDao{
 	/**
 	 * session注入结束
 	 */
-
 
 	/**
 	 * 保存、更新对象
@@ -67,6 +70,7 @@ public class CommentReplyDaoImpl implements CommentReplyDao{
 		session.clear();
 		return list;
 	}
+
 	/**
 	 * 获取对象总数量
 	 * 
@@ -83,6 +87,7 @@ public class CommentReplyDaoImpl implements CommentReplyDao{
 			return 0;
 		}
 	}
+
 	/**
 	 * 移除对象
 	 */
@@ -91,6 +96,7 @@ public class CommentReplyDaoImpl implements CommentReplyDao{
 		getSession().delete(obj);
 		return 1;
 	}
+
 	/**
 	 * 获取对象列表
 	 */
@@ -103,4 +109,35 @@ public class CommentReplyDaoImpl implements CommentReplyDao{
 		return list;
 	}
 
+	/**
+	 * 跟据信息id查询交易记录表中的买家
+	 * 
+	 * @param trim
+	 */
+	@Override
+	public transaction_record getRecordByInfoId(String trim) {
+		transaction_record record = new transaction_record();
+		Session session = getSession();
+		String hql = "from transaction_record where is_delete='0' and transaction_belong= :ID";
+		Query query = session.createQuery(hql);
+		query.setParameter("ID", trim);
+		record = (transaction_record) query.uniqueResult();
+		return record;
+	}
+
+	/**
+	 * 跟据信息id查询评论回复表中的信息
+	 * 
+	 * @param trim
+	 */
+	@Override
+	public List<comment> getCommentByInfoId(String trim) {
+		List<comment> listComment = new ArrayList<>();
+		Session session = getSession();
+		String hql = "from comment where is_delete='0' and comment_goods= :ID";
+		Query query = session.createQuery(hql);
+		query.setParameter("ID", trim);
+		listComment = (List<comment>) query.list();
+		return listComment;
+	}
 }

@@ -8,6 +8,7 @@ package com.fleaMarket.domain;
  */
 public class transaction_record {
 	private String transaction_id; // 交易记录id
+	private String transaction_orderNumber;  //订单号
 	private String transaction_to_user; // 被交易者
 	private String transaction_from_user; // 交易者
 	private String transaction_belong; // 交易记录所属商品
@@ -21,6 +22,14 @@ public class transaction_record {
 
 	public void setTransaction_id(String transaction_id) {
 		this.transaction_id = transaction_id;
+	}
+
+	public String getTransaction_orderNumber() {
+		return transaction_orderNumber;
+	}
+
+	public void setTransaction_orderNumber(String transaction_orderNumber) {
+		this.transaction_orderNumber = transaction_orderNumber;
 	}
 
 	public String getTransaction_to_user() {
@@ -73,10 +82,10 @@ public class transaction_record {
 
 	@Override
 	public String toString() {
-		return "transaction_record [transaction_id=" + transaction_id + ", transaction_to_user=" + transaction_to_user
-				+ ", transaction_from_user=" + transaction_from_user + ", transaction_belong=" + transaction_belong
-				+ ", transaction_creationtime=" + transaction_creationtime + ", transaction_modifytime="
-				+ transaction_modifytime + ", is_delete=" + is_delete + "]";
+		return "transaction_record [transaction_id=" + transaction_id + ", transaction_orderNumber="
+				+ transaction_orderNumber + ", transaction_to_user=" + transaction_to_user + ", transaction_from_user="
+				+ transaction_from_user + ", transaction_belong=" + transaction_belong + ", transaction_creationtime="
+				+ transaction_creationtime + ", transaction_modifytime=" + transaction_modifytime + ", is_delete="
+				+ is_delete + "]";
 	}
-
 }

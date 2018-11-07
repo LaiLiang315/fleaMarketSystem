@@ -10,7 +10,7 @@ public class picture {
 	private String picture_id; // 图片id
 	private String picture_name; // 图片名称
 	private String picture_belong; // 图片所属商品
-	private String picture_sequence;
+	private Integer picture_sequence;
 	private String picture_creationtime; // 创建时间
 	private String picture_modifytime; // 修改时间
 	private Integer is_delete; // 是否删除
@@ -39,11 +39,12 @@ public class picture {
 		this.picture_belong = picture_belong;
 	}
 
-	public String getPicture_sequence() {
+
+	public Integer getPicture_sequence() {
 		return picture_sequence;
 	}
 
-	public void setPicture_sequence(String picture_sequence) {
+	public void setPicture_sequence(Integer picture_sequence) {
 		this.picture_sequence = picture_sequence;
 	}
 
@@ -78,4 +79,5 @@ public class picture {
 				+ picture_creationtime + ", picture_modifytime=" + picture_modifytime + ", is_delete=" + is_delete
 				+ "]";
 	}
+
 }

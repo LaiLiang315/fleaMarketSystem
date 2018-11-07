@@ -1,7 +1,12 @@
 package com.fleaMarket.goodsType.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fleaMarket.domain.type;
+import com.fleaMarket.domain.typeOne;
 import com.fleaMarket.goodsType.dao.GoodsTypeDao;
+import com.fleaMarket.goodsType.dao.DTO.GoodsTypeDTO;
 import com.fleaMarket.goodsType.service.GoodsTypeService;
 import com.google.gson.JsonElement;
 
@@ -90,4 +95,29 @@ public class GoodsTypeServiceImpl implements GoodsTypeService {
 		return null;
 	}
 
+	/**
+	 *类型的分级DTO
+	 */
+	@Override
+	public List<GoodsTypeDTO> getListGoodsTypeDTO() {
+		List<GoodsTypeDTO> listGoodsTypeDTO = new ArrayList<GoodsTypeDTO>();
+		List<typeOne> typeOnes = new ArrayList<>();
+		List<type> types = new ArrayList<>();
+		typeOnes = (List<typeOne>) goodsTypeDao.listObject("from typeOne where is_delete='0' order by typeOne_modifytime desc");
+		System.out.println("1111"+typeOnes);
+		if(!typeOnes.isEmpty()) {
+			for (typeOne typeOne : typeOnes) {
+				types = goodsTypeDao.getTypeByTypeOneId(typeOne.getTypeOne_id());
+				GoodsTypeDTO goodsTypeDTO = new GoodsTypeDTO();
+				if(!types.isEmpty()) {
+					
+				goodsTypeDTO.setListType(types);
+				}
+				goodsTypeDTO.setTypeOne(typeOne);
+				listGoodsTypeDTO.add(goodsTypeDTO);
+			}
+			
+		}
+		return listGoodsTypeDTO;
+	}
 }

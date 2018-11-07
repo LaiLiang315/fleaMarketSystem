@@ -2,6 +2,7 @@ package com.fleaMarket.goodsInfoManager.service;
 
 import java.util.List;
 
+import com.fleaMarket.domain.goodsInfo;
 import com.fleaMarket.goodsInfoManager.DTO.GoodsManagerDTO;
 import com.fleaMarket.goodsInfoManager.DTO.GoodsPicDTO;
 import com.fleaMarket.goodsInfoManager.DTO.GoodsPicsDTO;
@@ -28,5 +29,12 @@ public interface GoodsInfoManagerService {
 	 */
 
 	public List<GoodsManagerDTO> queryGoodsManagerDTO();
+
+	/**
+	 * 添加商品信息
+	 * @param info
+	 * @return
+	 */
+	public String addGoods(goodsInfo info);
 
 }

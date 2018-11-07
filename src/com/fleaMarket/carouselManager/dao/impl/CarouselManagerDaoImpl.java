@@ -8,6 +8,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.fleaMarket.carouselManager.dao.CarouselManagerDao;
+import com.fleaMarket.domain.carousel;
+import com.fleaMarket.domain.picture;
 
 public class CarouselManagerDaoImpl implements CarouselManagerDao {
 
@@ -105,4 +107,35 @@ public class CarouselManagerDaoImpl implements CarouselManagerDao {
 		session.clear();
 		return list;
 	}
+	/**
+	 * 根据id获取图片
+	 */
+	@Override
+	public carousel getCarouselById(String trim) {
+		carousel carousel = new carousel();
+		Session session = getSession();
+		String hql ="from carousel where carousel_isdelete='0' and carousel_id= :ID";
+		Query query = session.createQuery(hql);
+		query.setParameter("ID", trim);
+		carousel =(carousel) query.uniqueResult();
+		 return carousel;
+	}
+	// 获取带有特殊标记的图集信息
+		@Override
+		public List<picture> getSpectialPic(String pictrueName) {
+			Session session = getSession();
+			String hql = "from picture where picture_sequence='9999' and picture_name like '%"+pictrueName+"%'";
+			Query query = session.createQuery(hql);
+			List<picture> picture = (List<picture>) query.list();
+			return picture;
+		}
+		//获取第一张图片
+		@Override
+		public picture getFirstPic(String goodsInfoId) {
+			Session session = getSession();
+			String hql = "from picture where  is_delete='0' and picture_belong= '"+goodsInfoId+"'";
+			Query query = session.createQuery(hql);
+			picture firstPic = (picture) query.list().get(0);
+			return firstPic;
+		}
 }

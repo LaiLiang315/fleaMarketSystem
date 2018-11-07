@@ -1,6 +1,7 @@
 package com.fleaMarket.goodsType.action;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,6 +10,8 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.fleaMarket.domain.type;
+import com.fleaMarket.domain.typeOne;
+import com.fleaMarket.goodsType.dao.DTO.GoodsTypeDTO;
 import com.fleaMarket.goodsType.service.GoodsTypeService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -34,10 +37,20 @@ public class GoodsTypeAction extends ActionSupport implements ServletResponseAwa
 		this.goodsTypeService = goodsTypeService;
 	}
 
+	private typeOne typeOne;
+	
 	private type newType;
 
 	private String idList;
 
+	public typeOne getTypeOne() {
+		return typeOne;
+	}
+
+	public void setTypeOne(typeOne typeOne) {
+		this.typeOne = typeOne;
+	}
+	
 	public type getNewType() {
 		return newType;
 	}
@@ -45,6 +58,7 @@ public class GoodsTypeAction extends ActionSupport implements ServletResponseAwa
 	public void setNewType(type newType) {
 		this.newType = newType;
 	}
+
 
 	public String getIdList() {
 		return idList;
@@ -140,5 +154,18 @@ public class GoodsTypeAction extends ActionSupport implements ServletResponseAwa
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	/**
+	 * 一级栏目二级栏目的dto
+	 * @throws IOException
+	 */
+	public  void getListGoodsTypeDTO() throws IOException{
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
+		List<GoodsTypeDTO> listDTO = goodsTypeService.getListGoodsTypeDTO();
+		response.getWriter().write(gson.toJson(listDTO));
+		
 	}
 }

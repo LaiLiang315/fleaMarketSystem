@@ -1,5 +1,6 @@
 package com.fleaMarket.goodsType.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -7,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.fleaMarket.domain.type;
+import com.fleaMarket.domain.typeOne;
 import com.fleaMarket.goodsType.dao.GoodsTypeDao;
 
 /**
@@ -141,6 +143,39 @@ public class GoodsTypeDaoImpl implements GoodsTypeDao {
 		Query query = session.createQuery(hql);
 		query.setParameter("ID", trim);
 		type = (type)query.uniqueResult();
+		if(type!=null) {
+			return type;
+		}
+		return null;
+	}
+	/**
+	 * 跟据一级栏目id查找二级栏目
+	 * @param trim 
+	 */
+	@Override
+	public List<type> getTypeByTypeOneId(Object trim) {
+		List<type> types = new ArrayList<>();
+		Session session = getSession();
+		String hql ="from type where type_belong= :ID ";
+		Query query = session.createQuery(hql);
+		query.setParameter("ID", trim);
+		types = (List<type>)query.list();
+		if(!types.isEmpty()) {
+			return types;
+		}
+		return null;
+	}
+	/**
+	 * 跟据一级栏目的name得到二级栏目
+	 */
+	@Override
+	public typeOne getTypeOneByTypeOneName(Object trim) {
+		typeOne type = new typeOne();
+		Session session = getSession();
+		String hql ="from typeOne where typeOne_name= :ID ";
+		Query query = session.createQuery(hql);
+		query.setParameter("ID", trim);
+		type = (typeOne)query.uniqueResult();
 		if(type!=null) {
 			return type;
 		}

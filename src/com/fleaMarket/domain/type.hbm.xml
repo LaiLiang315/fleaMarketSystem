@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2018-10-29 14:17:58 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2018-11-6 21:52:18 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="com.fleaMarket.domain.type" table="TYPE">
         <id name="type_id" type="java.lang.String">
@@ -10,6 +10,9 @@
         </id>
         <property name="type_name" type="java.lang.String">
             <column name="type_name" />
+        </property>
+        <property name="type_belong" type="java.lang.String">
+            <column name="type_belong" />
         </property>
         <property name="type_creationtime" type="java.lang.String">
             <column name="type_creationtime" />

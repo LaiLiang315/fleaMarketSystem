@@ -25,8 +25,8 @@
 	</ul>
 	
 	
-	<ul id="selectTypes">
-	</ul>
+	<!-- <ul id="selectTypes">
+	</ul> -->
 </body>
 <script type="text/javascript">
 //放入类型信息

@@ -5,7 +5,7 @@
 <hibernate-mapping>
     <class name="com.fleaMarket.domain.goodsInfo" table="GOODSINFO">
         <id name="goods_id" type="java.lang.String">
-            <column name="GOODS_ID" />
+            <column name="goods_id" />
             <generator class="assigned" />
         </id>
         <property name="goods_name" type="java.lang.String">

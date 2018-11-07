@@ -8,6 +8,9 @@
             <column name="transaction_id" />
             <generator class="assigned" />
         </id>
+        <property name="transaction_orderNumber" type="java.lang.String">
+            <column name="transaction_orderNumber" />
+        </property>
         <property name="transaction_to_user" type="java.lang.String">
             <column name="transaction_to_user" />
         </property>

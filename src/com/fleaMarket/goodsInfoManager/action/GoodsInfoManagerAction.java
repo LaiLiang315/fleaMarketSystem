@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
+import com.fleaMarket.domain.goodsInfo;
 import com.fleaMarket.goodsInfoManager.DTO.GoodsManagerDTO;
 import com.fleaMarket.goodsInfoManager.DTO.GoodsPicsDTO;
 import com.fleaMarket.goodsInfoManager.VO.GoodsManagerVO;
@@ -31,22 +32,33 @@ public class GoodsInfoManagerAction extends ActionSupport implements ServletResp
 		return goodsInfoManagerService;
 	}
 	
-	public List<GoodsManagerDTO> listGoodsManagerDTO;
+	public void setGoodsInfoManagerService(GoodsInfoManagerService goodsInfoManagerService) {
+		this.goodsInfoManagerService = goodsInfoManagerService;
+	}
+	
+	private goodsInfo info;
+	
+	public goodsInfo getInfo() {
+		return info;
+	}
+
+	public void setInfo(goodsInfo info) {
+		this.info = info;
+	}
+
+	private List<GoodsManagerDTO> listGoodsManagerDTO;
+	
 	public List<GoodsManagerDTO> getListGoodsManagerDTO() {
 		return listGoodsManagerDTO;
 	}
 	public void setListGoodsManagerDTO(List<GoodsManagerDTO> listGoodsManagerDTO) {
 		this.listGoodsManagerDTO = listGoodsManagerDTO;
 	}
+	
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	public void setGoodsInfoManagerService(GoodsInfoManagerService goodsInfoManagerService) {
-		this.goodsInfoManagerService = goodsInfoManagerService;
-	}
-
+	/**
+	 * 商品信息的分页
+	 */
 	private GoodsManagerVO goodsManagerVO;
 	
 	
@@ -138,6 +150,17 @@ public class GoodsInfoManagerAction extends ActionSupport implements ServletResp
 		return "fd";
 //		response.getWriter().write(gson.toJson(listGoodsManagerDTO));
 	}
-	
-	
+	/**
+	 * 用户添加商品
+	 * @throws IOException 
+	 */
+	public void addGoods() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
+		String add = goodsInfoManagerService.addGoods(info);
+		response.getWriter().write(gson.toJson(add));
+		
+	}
 }

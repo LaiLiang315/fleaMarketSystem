@@ -3,6 +3,7 @@ package com.fleaMarket.goodsType.dao;
 import java.util.List;
 
 import com.fleaMarket.domain.type;
+import com.fleaMarket.domain.typeOne;
 
 /**
  * 商品类型管理的dao层
@@ -64,5 +65,20 @@ public interface GoodsTypeDao {
 	 * @param trim 
 	 */
 	public type getTypeByTypeId(Object trim);
+
+	/**
+	 * 根据一级栏目id查询二级栏目
+	 * @param trim
+	 * @return
+	 */
+	
+	public List<type> getTypeByTypeOneId(Object trim);
+
+	/**
+	 * 跟据一级栏目的name得到二级栏目
+	 * @param trim
+	 * @return
+	 */
+	typeOne getTypeOneByTypeOneName(Object trim);
 
 }
