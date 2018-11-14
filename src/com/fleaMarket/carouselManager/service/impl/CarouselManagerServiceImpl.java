@@ -46,6 +46,7 @@ public class CarouselManagerServiceImpl implements CarouselManagerService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 	/**
 	 * 删除轮播图
 	 */
@@ -90,7 +91,7 @@ public class CarouselManagerServiceImpl implements CarouselManagerService {
 	/**
 	 * 添加图片
 	 */
-	public void addPictrues( picture pic) {
+	public void addPictrues(picture pic) {
 		pic.setPicture_id(BuildUuid.getUuid());
 		pic.setPicture_sequence(9999);
 		// 将图集顺序设置为特殊值，便去后面补充信息是重置
@@ -106,37 +107,37 @@ public class CarouselManagerServiceImpl implements CarouselManagerService {
 	@Override
 	public String addAndComplete(goodsInfo goodsInfo, List<Map<String, Object>> listMap) {
 		// 首先添加作品信息
-				// 生成uuid
-				String result = null;
-				String goodsInfoId = BuildUuid.getUuid();
-				goodsInfo.setGoods_id(goodsInfoId);
-				goodsInfo.setGoods_state("出售中");
-				goodsInfo.setGoods_creationtime(TimeUtil.getStringSecond());
-				goodsInfo.setGoods_modifytime(TimeUtil.getStringSecond());
-				carouselManageDao.saveOrUpdateObject(goodsInfo);
-				for (int i = 0; i < listMap.size(); i++) {
-					String pictrueName = (String) listMap.get(i).get("key");
-					String sequence = (String) listMap.get(i).get("value");
-					int se = Integer.parseInt(sequence);
-					// 查询出带有特殊标记的图集信息
-					List<picture> pics = carouselManageDao.getSpectialPic(pictrueName);
-					if (pics.size() > 0) {
-						System.out.println("HHHH");
-						picture mypicture = pics.get(0);
-						mypicture.setPicture_belong(goodsInfoId);
-						mypicture.setPicture_sequence(se);
-						try {
-							carouselManageDao.saveOrUpdateObject(mypicture);
-							result = "success";
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-							result = "error";
-						}
-					} else {
-						result = "error";
-					}
+		// 生成uuid
+		String result = null;
+		String goodsInfoId = BuildUuid.getUuid();
+		goodsInfo.setGoods_id(goodsInfoId);
+		goodsInfo.setGoods_state("出售中");
+		goodsInfo.setGoods_creationtime(TimeUtil.getStringSecond());
+		goodsInfo.setGoods_modifytime(TimeUtil.getStringSecond());
+		carouselManageDao.saveOrUpdateObject(goodsInfo);
+		for (int i = 0; i < listMap.size(); i++) {
+			String pictrueName = (String) listMap.get(i).get("key");
+			String sequence = (String) listMap.get(i).get("value");
+			int se = Integer.parseInt(sequence);
+			// 查询出带有特殊标记的图集信息
+			List<picture> pics = carouselManageDao.getSpectialPic(pictrueName);
+			if (pics.size() > 0) {
+				System.out.println("HHHH");
+				picture mypicture = pics.get(0);
+				mypicture.setPicture_belong(goodsInfoId);
+				mypicture.setPicture_sequence(se);
+				try {
+					carouselManageDao.saveOrUpdateObject(mypicture);
+					result = "success";
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					result = "error";
 				}
-				return result;
+			} else {
+				result = "error";
+			}
+		}
+		return result;
 	}
 }

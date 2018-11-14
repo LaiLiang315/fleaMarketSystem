@@ -47,5 +47,17 @@ public class TypeTest {
 		listGoodsTypeDTO = goodsTypeService.getListGoodsTypeDTO();
 		System.out.println("*******"+listGoodsTypeDTO);
 	}
-
+	/**
+	 * 跟据一级菜单id查询二级菜单
+	 */
+   @Test
+   public void TestGetListType() {
+	   typeOne typeOne = new typeOne();
+	   List<type> listType = new ArrayList<>();
+	   typeOne.setTypeOne_id("T1");
+	   listType = goodsTypeService.getListType(typeOne);
+	   System.out.println("HHHHHH"+listType);
+   }
+   
+   
 }

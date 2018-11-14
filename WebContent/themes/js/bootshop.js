@@ -15,6 +15,7 @@ $(document).ready(function(){
 	{
 		e.preventDefault();
 		var subMenu = $(this).siblings('ul');
+		console.log(subMenu)
 		var li = $(this).parents('li');
 		var subMenus = $('#sidebar li.subMenu ul');
 		var subMenus_parents = $('#sidebar li.subMenu');

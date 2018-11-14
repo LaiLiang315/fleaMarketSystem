@@ -168,4 +168,17 @@ public class GoodsTypeAction extends ActionSupport implements ServletResponseAwa
 		response.getWriter().write(gson.toJson(listDTO));
 		
 	}
+	/**
+	 * 跟据一级栏目id查询二级栏目
+	 * @throws IOException 
+	 */
+	public void getListType() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
+		System.out.println("ssss");
+		List<type> types = goodsTypeService.getListType(typeOne);
+		response.getWriter().write(gson.toJson(types));
+	}
 }

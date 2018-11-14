@@ -221,9 +221,9 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 		}
 		// 上传文件，及保存文件信息到数据库
 		public void uploadAndSavePic() {
-			String code = "";
-			String result = "";
-			String res = "";
+			String code = "";  //0上传成功 1上传失败
+			String result = ""; //返回结果
+			String res = ""; // 将belongId传给前台
 			try {
 				String folderpath = "D:/Aupload/test1";
 				if (file != null) {
@@ -304,7 +304,7 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 			System.out.println("CcdmwcC:" + picture);
 
 		}
-		// 添加
+		// 添加和完善信息
 		public void addAndComplete() {
 			JSONArray json = JSONArray.fromObject(pictrueMap); // 使用net.sf.json.JSONObject对象来解析json
 			JSONObject jsonOne;
@@ -344,8 +344,6 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 			ActionContext.getContext().getValueStack().set("goodsInfo", goodsInfo);
 			return "fd";
 		}
-		
-
 		
 		
 }

@@ -6,10 +6,12 @@ import java.util.List;
 import com.fleaMarket.domain.goodsInfo;
 import com.fleaMarket.domain.picture;
 import com.fleaMarket.domain.type;
+import com.fleaMarket.domain.typeOne;
 import com.fleaMarket.goodsInfoManager.DTO.GoodsManagerDTO;
 import com.fleaMarket.goodsInfoManager.DTO.GoodsPicDTO;
 import com.fleaMarket.goodsInfoManager.DTO.GoodsPicsDTO;
 import com.fleaMarket.goodsInfoManager.VO.GoodsManagerVO;
+import com.fleaMarket.goodsInfoManager.VO.TypeInfoPicVO;
 import com.fleaMarket.goodsInfoManager.dao.GoodsInfoManagerDao;
 import com.fleaMarket.goodsInfoManager.service.GoodsInfoManagerService;
 
@@ -35,7 +37,7 @@ public class GoodsInfoManagerServiceImpl implements GoodsInfoManagerService {
 	}
 
 	/**
-	 * 分页查询六条
+	 * 按类型分页查询每条信息的第一张图片
 	 */
 	@Override
 	public GoodsManagerVO findSixGoodsVO(GoodsManagerVO goodsManagerVO) {
@@ -44,14 +46,8 @@ public class GoodsInfoManagerServiceImpl implements GoodsInfoManagerService {
 		List<type> listType = new ArrayList<>();
 		String listGoodsInfoHql = "from goodsInfo where 1=1";
 		String goodsInfoCountHql = "select count(*) from goodsInfo where 1=1";
-
-		/*
-		 * listGoodsInfo = (List<goodsInfo>)
-		 * goodsInfoManagerDao.queryForPage(listGoodsInfoHql,
-		 * goodsManagerVO.getPageIndex(), goodsManagerVO.getPageSize());
-		 */
 		// 这里如果不加desc表示正序，如果加上desc表示倒序
-		goodsInfoCountHql = goodsInfoCountHql + " order by production_info_creationtime desc";
+		goodsInfoCountHql = goodsInfoCountHql + " order by goods_creationtime desc";
 		int goodsInfoCount = goodsInfoManagerDao.getCount(goodsInfoCountHql);
 		// 设置总数量
 		goodsManagerVO.setTotalRecords(goodsInfoCount);
@@ -106,20 +102,19 @@ public class GoodsInfoManagerServiceImpl implements GoodsInfoManagerService {
 					listGoodsManagerDTO.add(goodsManagerDTO);
 				}
 			}
-
+			goodsManagerVO.setListGoodsManagerDTO(listGoodsManagerDTO);
 		}
 
 		return goodsManagerVO;
 	}
 
 	/**
-	 * 类型信息图片dto
+	 * 查询每个类型的所有信息的所有图集
 	 */
 	@Override
 	public List<GoodsManagerDTO> queryGoodsManagerDTO() {
 		List<GoodsManagerDTO> listGoodsManagerDTO = new ArrayList<>();
 		List<type> listType = new ArrayList<>();
-
 		listType = (List<type>) goodsInfoManagerDao
 				.listObject("from type where is_delete='0' order by type_modifytime desc");
 		if (!listType.isEmpty()) {
@@ -171,6 +166,135 @@ public class GoodsInfoManagerServiceImpl implements GoodsInfoManagerService {
 		info.setGoods_state("出售中");
 		goodsInfoManagerDao.saveOrUpdateObject(info);
 		return null;
+	}
+
+	/**
+	 * 查询最新六条信息和第一张图片
+	 * @return
+	 */
+	@Override
+	public List<GoodsPicDTO> findFirstPicLatestDTO() {
+		List<GoodsPicDTO> listGoodsPicDTO = new ArrayList<>();
+		List<goodsInfo> ListInfo = new ArrayList<>();
+		ListInfo = goodsInfoManagerDao.getSixInfoBytime();
+		if(!ListInfo.isEmpty()) {
+			for (goodsInfo info : ListInfo) {
+				GoodsPicDTO goodsPicDTO = new GoodsPicDTO();
+				picture pic = new picture();
+				pic = goodsInfoManagerDao.getFirstPicByInfoId(info.getGoods_id());
+				if(pic!=null) {
+					goodsPicDTO.setPic(pic);
+				}
+				goodsPicDTO.setInfo(info);
+				listGoodsPicDTO.add(goodsPicDTO);
+			}
+			
+		}
+		return listGoodsPicDTO;
+	}
+
+	/**
+	 * 查询每个类型售价最低的四条信息和第一张图片
+	 */
+	@Override
+	public List<GoodsManagerDTO> findFourInfoDTO() {
+		// TODO Auto-generated method stub
+		List<GoodsManagerDTO> listGoodsManagerDTO = new ArrayList<>();
+		List<type> listType = new ArrayList<>();
+		listType = (List<type>) goodsInfoManagerDao
+				.listObject("from type where is_delete='0' order by type_modifytime desc");
+		System.out.println("1:"+listType);
+		for (type type : listType) {
+			List<goodsInfo> ListInfo = new ArrayList<>();
+			List<GoodsPicDTO> listGoodsPicDTO = new ArrayList<>();
+			ListInfo = (List<goodsInfo>) goodsInfoManagerDao.getCheapestFourInfoByTypeId(type.getType_id());
+			/**
+			 * 把类型set进dto
+			 */
+			/**
+			 * 遍历所有类型
+			 * 跟据类型id查询listInfo
+			 * 遍历listInfo
+			 * 跟据info_Id查询listPic
+			 */
+			System.out.println("2:"+ListInfo);
+			if (!ListInfo.isEmpty()) {
+				for (goodsInfo info : ListInfo) {
+					picture Pic = new picture();
+					GoodsPicDTO goodsPicDTO = new GoodsPicDTO();
+					goodsPicDTO.setInfo(info);
+					Pic = goodsInfoManagerDao.getFirstPicByInfoId(info.getGoods_id());
+					
+					if (Pic != null) {
+						goodsPicDTO.setPic(Pic);
+						listGoodsPicDTO.add(goodsPicDTO);
+					}
+				}
+				GoodsManagerDTO goodsManagerDTO = new GoodsManagerDTO();
+				goodsManagerDTO.setListGoodsPicDTO(listGoodsPicDTO);
+				goodsManagerDTO.setType(type);
+				listGoodsManagerDTO.add(goodsManagerDTO);
+			}
+		}
+		return listGoodsManagerDTO;
+	}
+
+	/**
+	 * 根据类型id查询所有信息
+	 */
+	@Override
+	public TypeInfoPicVO findAllGoodsByTypeVO(TypeInfoPicVO typeInfoPicVO, type typeId) {
+		List<GoodsPicDTO> listGoodsPicDTO = new ArrayList<>();
+		List<goodsInfo> listGoodsInfo = new ArrayList<>();
+		
+		String listGoodsInfoHql = "from goodsInfo where goods_type='"+typeId.getType_id()+"'";
+		String goodsInfoCountHql = "select count(*) from goodsInfo where goods_type='"+typeId.getType_id()+"'";
+		// 这里如果不加desc表示正序，如果加上desc表示倒序
+		goodsInfoCountHql = goodsInfoCountHql + " order by goods_creationtime desc";
+		int goodsInfoCount = goodsInfoManagerDao.getCount(goodsInfoCountHql);
+		// 设置总数量
+		typeInfoPicVO.setTotalRecords(goodsInfoCount);
+		// 设置总页数
+		typeInfoPicVO.setTotalPages(((goodsInfoCount - 1) / typeInfoPicVO.getPageSize()) + 1);
+		// 判断是否拥有上一页
+		if (typeInfoPicVO.getPageIndex() <= 1) {
+			typeInfoPicVO.setHavePrePage(false);
+		} else {
+			typeInfoPicVO.setHavePrePage(true);
+		}
+		// 判断是否拥有下一页
+		if (typeInfoPicVO.getPageIndex() >= typeInfoPicVO.getTotalPages()) {
+
+			typeInfoPicVO.setHaveNextPage(false);
+		} else {
+			typeInfoPicVO.setHaveNextPage(true);
+		}
+		listGoodsInfo = goodsInfoManagerDao.getAllInfoByTypeId(typeId.getType_id());
+		if(!listGoodsInfo.isEmpty()) {
+			for (goodsInfo info : listGoodsInfo) {
+				GoodsPicDTO goodsPicDTO = new GoodsPicDTO();
+				picture pic = new picture();
+				pic = goodsInfoManagerDao.getFirstPicByInfoId(info.getGoods_id());
+				if(pic!=null) {
+					goodsPicDTO.setPic(pic);
+				}
+				goodsPicDTO.setInfo(info);
+				listGoodsPicDTO.add(goodsPicDTO);
+			}
+			typeInfoPicVO.setListGoodsPicDTO(listGoodsPicDTO);
+		}
+		return typeInfoPicVO;
+	}
+
+	/**
+	 * 跟据二级菜单id找一级菜单
+	 */
+	@Override
+	public type getTypeOneByTypeId(type typeId) {
+		type type = new type();
+		type = goodsInfoManagerDao.getTypeOneByTypeId(typeId.getType_id());
+		
+		return type;
 	}
 
 }

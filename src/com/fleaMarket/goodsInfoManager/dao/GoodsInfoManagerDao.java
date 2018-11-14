@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.fleaMarket.domain.goodsInfo;
 import com.fleaMarket.domain.picture;
+import com.fleaMarket.domain.type;
+import com.fleaMarket.domain.typeOne;
 
 /**
  * 商品信息管理里的dao层
@@ -79,5 +81,21 @@ public interface GoodsInfoManagerDao {
 	 * @return
 	 */
 	List<picture> getPicsByInfoId(String trim);
+
+	List<goodsInfo> getSixInfoBytime();
+
+	List<goodsInfo> getCheapestFourInfoByTypeId(String trim);
+
+	/**
+	 * 跟据类型id查询所有信息
+	 * @param string
+	 * @return
+	 */
+	public List<goodsInfo> getAllInfoByTypeId(String string);
+
+	/**
+	 * 跟据二级菜单id找一级菜单
+	 */
+	type getTypeOneByTypeId(String trim);
 
 }

@@ -10,9 +10,13 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.fleaMarket.domain.goodsInfo;
+import com.fleaMarket.domain.type;
+import com.fleaMarket.domain.typeOne;
 import com.fleaMarket.goodsInfoManager.DTO.GoodsManagerDTO;
+import com.fleaMarket.goodsInfoManager.DTO.GoodsPicDTO;
 import com.fleaMarket.goodsInfoManager.DTO.GoodsPicsDTO;
 import com.fleaMarket.goodsInfoManager.VO.GoodsManagerVO;
+import com.fleaMarket.goodsInfoManager.VO.TypeInfoPicVO;
 import com.fleaMarket.goodsInfoManager.service.GoodsInfoManagerService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -36,8 +40,10 @@ public class GoodsInfoManagerAction extends ActionSupport implements ServletResp
 		this.goodsInfoManagerService = goodsInfoManagerService;
 	}
 	
+	
 	private goodsInfo info;
 	
+	private type typeId;
 	public goodsInfo getInfo() {
 		return info;
 	}
@@ -45,6 +51,15 @@ public class GoodsInfoManagerAction extends ActionSupport implements ServletResp
 	public void setInfo(goodsInfo info) {
 		this.info = info;
 	}
+
+	public type getTypeId() {
+		return typeId;
+	}
+
+	public void setTypeId(type typeId) {
+		this.typeId = typeId;
+	}
+
 
 	private List<GoodsManagerDTO> listGoodsManagerDTO;
 	
@@ -61,7 +76,11 @@ public class GoodsInfoManagerAction extends ActionSupport implements ServletResp
 	 */
 	private GoodsManagerVO goodsManagerVO;
 	
-	
+	/**
+	 * 
+	 * @return
+	 */
+	private TypeInfoPicVO typeInfoPicVO;
 	
 	public GoodsManagerVO getGoodsManagerVO() {
 		return goodsManagerVO;
@@ -123,6 +142,26 @@ public class GoodsInfoManagerAction extends ActionSupport implements ServletResp
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * 分页按类型查询六条商品信息显示
+	 */
+	public void findAllGoodsByTypeVO() {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
+		TypeInfoPicVO typeInfoPicVO = new TypeInfoPicVO();
+		typeInfoPicVO = goodsInfoManagerService.findAllGoodsByTypeVO(typeInfoPicVO,typeId);
+		try {
+			response.getWriter().write(gson.toJson(typeInfoPicVO));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
 	/**
 	 * 查询图集DTO
 	 * @throws IOException 
@@ -150,6 +189,32 @@ public class GoodsInfoManagerAction extends ActionSupport implements ServletResp
 		return "fd";
 //		response.getWriter().write(gson.toJson(listGoodsManagerDTO));
 	}
+	
+	/**
+	 * 查询最近上线的六条商品
+	 * @throws IOException 
+	 */
+	public void findFirstPicLatestDTO() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
+	    List<GoodsPicDTO> listGoodsPicDTO = goodsInfoManagerService.findFirstPicLatestDTO();
+	    response.getWriter().write(gson.toJson(listGoodsPicDTO));
+	}
+	
+	/**
+	 * 查询每个类型的最便宜的四条商品并拿到第一张图片
+	 * @throws IOException 
+	 */
+	public void findFourInfoDTO() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
+		List<GoodsManagerDTO> listGoodsManagerDTO = goodsInfoManagerService.findFourInfoDTO();
+		 response.getWriter().write(gson.toJson(listGoodsManagerDTO));
+	}
 	/**
 	 * 用户添加商品
 	 * @throws IOException 
@@ -161,6 +226,17 @@ public class GoodsInfoManagerAction extends ActionSupport implements ServletResp
 		response.setContentType("text/html;charset=utf-8");
 		String add = goodsInfoManagerService.addGoods(info);
 		response.getWriter().write(gson.toJson(add));
-		
+	}
+	/**
+	 * 跟据二级菜单id找一级菜单
+	 * @throws IOException 
+	 */
+	public void getTypeOneByTypeId() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
+		type type = goodsInfoManagerService.getTypeOneByTypeId(typeId);
+		response.getWriter().write(gson.toJson(type));
 	}
 }

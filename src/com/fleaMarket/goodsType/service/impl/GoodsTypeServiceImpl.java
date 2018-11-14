@@ -1,5 +1,6 @@
 package com.fleaMarket.goodsType.service.impl;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -120,4 +121,22 @@ public class GoodsTypeServiceImpl implements GoodsTypeService {
 		}
 		return listGoodsTypeDTO;
 	}
+
+	/**
+	 * 跟据一级栏目id查询二级栏目
+	 * @throws IOException 
+	 */
+	@Override
+	public List<type> getListType(typeOne typeOne) {
+		List<type> types = new ArrayList<>();
+		System.out.println("hhh"+typeOne);
+		types = goodsTypeDao.getTypeByTypeOneId(typeOne.getTypeOne_id());
+		System.out.println("qqqq"+types);
+		if(!types.isEmpty()) {
+			
+			return types;
+		}
+		return null;
+	}
+	
 }

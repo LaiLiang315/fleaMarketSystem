@@ -9,6 +9,8 @@ import org.hibernate.SessionFactory;
 
 import com.fleaMarket.domain.goodsInfo;
 import com.fleaMarket.domain.picture;
+import com.fleaMarket.domain.type;
+import com.fleaMarket.domain.typeOne;
 import com.fleaMarket.goodsInfoManager.dao.GoodsInfoManagerDao;
 /**
  * 商品信息管理的dao层实现层
@@ -119,7 +121,7 @@ public class GoodsInfoManagerDaoImpl implements GoodsInfoManagerDao {
 	public List<goodsInfo> getSixGoodsInfoByTypeId(String trim) {
 		List<goodsInfo> listGoodsInfo = new ArrayList<>();
 		Session session = getSession();
-		String hql = "from goodsInfo where is_delete ='0' and  and production_info_type= :ID";
+		String hql = "from goodsInfo where goods_type= :ID";
 		Query query = session.createQuery(hql);
 		query.setParameter("ID", trim);
 		if (!query.list().isEmpty()) {
@@ -171,5 +173,66 @@ public class GoodsInfoManagerDaoImpl implements GoodsInfoManagerDao {
 			listPic = (List<picture>) query.list();
 		}
 		return listPic;
+	}
+	
+	/**
+	 * 根据时间查询最新的六条信息
+	 */
+	@Override
+	public List<goodsInfo> getSixInfoBytime() {
+		List<goodsInfo> listInfo = new ArrayList<>();
+		Session session = getSession();
+		String hql = "from goodsInfo order by goods_creationtime desc";
+		Query query = session.createQuery(hql).setMaxResults(6);
+		if (!query.list().isEmpty()) {
+			listInfo = (List<goodsInfo>) query.list();
+		System.out.println("LLL"+listInfo);
+		}
+		return listInfo;
+	}
+	/**
+	 * 通过类型id查询商品信息
+	 */
+	@Override
+	public List<goodsInfo> getCheapestFourInfoByTypeId(String trim) {
+		List<goodsInfo> listInfo = new ArrayList<>();
+		Session session = getSession();
+		String hql = "from goodsInfo where goods_type=:ID order by --goods_price";
+		Query query = session.createQuery(hql).setMaxResults(4);
+		query.setParameter("ID", trim);
+		if (!query.list().isEmpty()) {
+			listInfo = (List<goodsInfo>) query.list();
+		}
+		return listInfo;
+	}
+
+	/**
+	 * 查询一个类型所有信息
+	 */
+	@Override
+	public List<goodsInfo> getAllInfoByTypeId(String trim) {
+		List<goodsInfo> listInfo = new ArrayList<>();
+		Session session = getSession();
+		String hql = "from goodsInfo where goods_type=:ID ";
+		Query query = session.createQuery(hql);
+		query.setParameter("ID", trim);
+		if (!query.list().isEmpty()) {
+			listInfo = (List<goodsInfo>) query.list();
+		}
+		return listInfo;
+	}
+
+	@Override
+	public type getTypeOneByTypeId(String trim) {
+		type type = new type();
+		Session session = getSession();
+		String hql ="from type where type_id= :ID ";
+		Query query = session.createQuery(hql);
+		query.setParameter("ID", trim);
+		type = (type)query.uniqueResult();
+		if(type!=null) {
+			return type;
+		}
+		return null;
 	}
 }

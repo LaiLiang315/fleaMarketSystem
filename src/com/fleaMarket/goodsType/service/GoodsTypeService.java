@@ -1,5 +1,6 @@
 package com.fleaMarket.goodsType.service;
 
+import java.io.IOException;
 import java.util.List;
 
 import com.fleaMarket.domain.type;
@@ -36,5 +37,11 @@ public interface GoodsTypeService {
 	 * @return
 	 */
 	public List<GoodsTypeDTO> getListGoodsTypeDTO();
+
+	/**
+	 * 跟据一级栏目id查询二级栏目
+	 * @throws IOException 
+	 */
+	public List<type> getListType(typeOne typeOne);
 
 }
