@@ -20,7 +20,7 @@ public class TypeInfoPicVO {
 
 	private int pageIndex = 1;
 
-	private int pageSize = 1;
+	private int pageSize = 2;
 
 	private int totalPages = 1;
 	/**

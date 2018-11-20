@@ -36,7 +36,7 @@
 		<div class="layui-form-item">
 			<label class="layui-form-label">商品描述</label>
 			<div class="layui-input-block">
-				<textarea id="goods_describe" name="" placeholder="请输入作品描述"
+				<textarea id="goods_describe" name="goods_describe" placeholder="请输入作品描述"
 					class="layui-textarea linksDesc"></textarea>
 			</div>
 		</div>
@@ -69,6 +69,7 @@
 		src="${pageContext.request.contextPath }/js/jquery.1.8.2.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery.plugin.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/layui/layui.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/toastr.js"></script>
 	<script>
 //筛选类型
 var typeId = null;
@@ -101,9 +102,9 @@ function saveGoodsInfo(){
 		//放入作品信息
 		formData.append("goodsInfo.goods_name",$("input[name='goods_name']").val());
 		formData.append("goodsInfo.goods_price",$("input[name='goods_price']").val());
-		formData.append("goodsInfo.goods_describe",$("input[name='goods_describe']").val());
-		/* formData.append("goodsInfo.goods_type",userId);
-		formData.append("goodsInfo.goods_type",typeId); */
+		formData.append("goodsInfo.goods_describe",$("textarea[name='goods_describe']").val());
+// 		 formData.append("goodsInfo.goods_type",userId);
+		formData.append("goodsInfo.goods_type",typeId); 
 		formData.append("pictrueMap",pushData);
 		$.ajax({
 			type:'POST',
@@ -190,7 +191,7 @@ layui.use('upload', function(){
   var upload = layui.upload;
   var demoListView = $('#demoList')
   //执行实例
-  var uploadInst = upload.render({
+   ,uploadListIns = upload.render({
     elem: '#test1' //绑定元素
     ,url: '/fleaMarketSystem/carouselManager/carouselManager_uploadAndSavePic' //上传接口
     ,accept: 'images'
@@ -271,7 +272,5 @@ layui.use('upload', function(){
   });
 })
 </script>
-
-
 </body>
 </html>

@@ -21,5 +21,11 @@ public interface LoginRegisterService {
      * @return
      */
 	public user userRegister(user newUser);
+	/**
+	 * 跟据用户名查询用户
+	 * @param username
+	 * @return
+	 */
+	public user getUserByUserName(user newUser);
 
 }

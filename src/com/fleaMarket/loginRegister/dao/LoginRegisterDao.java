@@ -62,4 +62,6 @@ public interface LoginRegisterDao {
 	 */
 	public user getUserByUserName(String username);
 
+//	public user getUserByUserName(user username);
+
 }

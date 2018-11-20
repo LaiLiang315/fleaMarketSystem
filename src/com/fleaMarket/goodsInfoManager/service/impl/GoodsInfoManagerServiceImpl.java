@@ -117,6 +117,7 @@ public class GoodsInfoManagerServiceImpl implements GoodsInfoManagerService {
 		List<type> listType = new ArrayList<>();
 		listType = (List<type>) goodsInfoManagerDao
 				.listObject("from type where is_delete='0' order by type_modifytime desc");
+		System.out.println("listType"+listType);
 		if (!listType.isEmpty()) {
 			for (type type : listType) {
 				List<goodsInfo> ListInfo = new ArrayList<>();
@@ -131,7 +132,6 @@ public class GoodsInfoManagerServiceImpl implements GoodsInfoManagerService {
 				 * 遍历listInfo
 				 * 跟据info_Id查询listPic
 				 */
-				if (!ListInfo.isEmpty()) {
 					for (goodsInfo info : ListInfo) {
 						List<picture> listPics = new ArrayList<>();
 						GoodsPicsDTO goodsPicsDTO = new GoodsPicsDTO();
@@ -147,10 +147,10 @@ public class GoodsInfoManagerServiceImpl implements GoodsInfoManagerService {
 					goodsManagerDTO.setListGoodsPicsDTO(listGoodsPicsDTO);
 					goodsManagerDTO.setType(type);
 					listGoodsManagerDTO.add(goodsManagerDTO);
-				}
 			}
 			
 		}
+		System.out.println("listGoodsManagerDTO"+listGoodsManagerDTO);
 		return listGoodsManagerDTO;
 		
 	}
@@ -232,6 +232,7 @@ public class GoodsInfoManagerServiceImpl implements GoodsInfoManagerService {
 				}
 				GoodsManagerDTO goodsManagerDTO = new GoodsManagerDTO();
 				goodsManagerDTO.setListGoodsPicDTO(listGoodsPicDTO);
+				System.out.println("goodsManagerDTO"+goodsManagerDTO);
 				goodsManagerDTO.setType(type);
 				listGoodsManagerDTO.add(goodsManagerDTO);
 			}
@@ -269,7 +270,9 @@ public class GoodsInfoManagerServiceImpl implements GoodsInfoManagerService {
 		} else {
 			typeInfoPicVO.setHaveNextPage(true);
 		}
-		listGoodsInfo = goodsInfoManagerDao.getAllInfoByTypeId(typeId.getType_id());
+		listGoodsInfo = (List<goodsInfo>) goodsInfoManagerDao.queryForPage(
+				"from goodsInfo where goods_type='"+typeId.getType_id()+"' order by goods_creationtime desc", typeInfoPicVO.getPageIndex(),
+				typeInfoPicVO.getPageSize());
 		if(!listGoodsInfo.isEmpty()) {
 			for (goodsInfo info : listGoodsInfo) {
 				GoodsPicDTO goodsPicDTO = new GoodsPicDTO();

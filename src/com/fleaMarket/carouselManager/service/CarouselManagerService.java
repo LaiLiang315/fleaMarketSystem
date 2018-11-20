@@ -3,6 +3,7 @@ package com.fleaMarket.carouselManager.service;
 import java.util.List;
 import java.util.Map;
 
+import com.fleaMarket.domain.carousel;
 import com.fleaMarket.domain.goodsInfo;
 import com.fleaMarket.domain.picture;
 
@@ -23,14 +24,24 @@ public interface CarouselManagerService {
 	 */
 	String deleteCarousel(String idList);
 
+	/**
+	 * 用户添加图片
+	 * @param picture
+	 */
 	void addPictrues(picture picture);
 
 	/**
-	 * 添加并完善信息
+	 * 用户添加并完善商品信息
 	 * @param goodsInfo
 	 * @param listMap
 	 * @return
 	 */
 	String addAndComplete(goodsInfo goodsInfo, List<Map<String, Object>> listMap);
+
+	/**
+	 * 用户添加轮播图
+	 * @param carousel
+	 */
+	void addCarousel(carousel carousel);
 
 }

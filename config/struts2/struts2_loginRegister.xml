@@ -7,8 +7,8 @@
 		strict-method-invocation="false">
 		<action name="loginRegister_*"
 			class="com.fleaMarket.loginRegister.action.LoginRegisterAction" method="{1}">
-		 <result name="ok">/jj.jsp</result>
-		 <result name="fail">/kk.jsp</result>
+		<!--  <result name="ok">/jj.jsp</result>
+		 <result name="fail">/kk.jsp</result> -->
 		</action>
 	</package>
 	</struts>

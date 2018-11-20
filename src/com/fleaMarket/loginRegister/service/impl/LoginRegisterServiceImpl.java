@@ -45,7 +45,6 @@ public class LoginRegisterServiceImpl implements LoginRegisterService {
 	/**
 	 * 注册
 	 */
-	@SuppressWarnings("null")
 	@Override
 	public user userRegister(user newUser) {
 		user user = new user();
@@ -56,6 +55,23 @@ public class LoginRegisterServiceImpl implements LoginRegisterService {
 			return user;
 		}
 
+		return null;
+	}
+
+	/**
+	 * 跟据用户名查询用户
+	 */
+	@Override
+	public user getUserByUserName(user newUser) {
+		System.out.println("MMM"+newUser);
+		user user = new user();
+		if(newUser.getUsername()!=null) {
+			user = loginRegisterDao.getUserByUserName(newUser.getUsername());
+			System.out.println("KK"+user);
+			if(user!=null) {
+				return user;
+			}
+		}
 		return null;
 	}
 

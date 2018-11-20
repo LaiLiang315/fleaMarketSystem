@@ -140,4 +140,18 @@ public class CarouselManagerServiceImpl implements CarouselManagerService {
 		}
 		return result;
 	}
+
+	/**
+	 * 用户添加轮播图
+	 */
+	@Override
+	public void addCarousel(carousel carousel) {
+
+		carousel.setCarousel_id(BuildUuid.getUuid());
+		// 将图集顺序设置为特殊值，便去后面补充信息是重置
+		carousel.setCarousel_creationtime(TimeUtil.getStringSecond());
+		carousel.setCarousel_modifytime(TimeUtil.getStringSecond());
+		carousel.setIs_delete(0);;
+		carouselManageDao.saveOrUpdateObject(carousel);
+	}
 }

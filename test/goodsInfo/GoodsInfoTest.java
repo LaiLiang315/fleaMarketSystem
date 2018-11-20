@@ -46,7 +46,7 @@ public class GoodsInfoTest {
 	
 	
 	@Test
-	public void TestTypePicInfoDTO() {
+	public void TestGoodsManagerDTO() {
 		List<GoodsManagerDTO> listGoodsManagerDTO = new ArrayList<>();
 		GoodsManagerDTO goodsManagerDTO = new GoodsManagerDTO();
 		type type = new type();
@@ -77,6 +77,7 @@ public class GoodsInfoTest {
 		TypeInfoPicVO typeInfoPicVO = new TypeInfoPicVO();
 		type typeId = new type();
 		typeId.setType_id("Type001");
+		typeInfoPicVO.setPageIndex(1);
 		typeInfoPicVO = goodsInfoManagerService.findAllGoodsByTypeVO(typeInfoPicVO, typeId);
 	System.out.println("typeInfoPicVO"+typeInfoPicVO);
 	}

@@ -82,6 +82,8 @@ public class GoodsInfoManagerAction extends ActionSupport implements ServletResp
 	 */
 	private TypeInfoPicVO typeInfoPicVO;
 	
+	private int page;
+	
 	public GoodsManagerVO getGoodsManagerVO() {
 		return goodsManagerVO;
 	}
@@ -89,6 +91,23 @@ public class GoodsInfoManagerAction extends ActionSupport implements ServletResp
 	public void setGoodsManagerVO(GoodsManagerVO goodsManagerVO) {
 		this.goodsManagerVO = goodsManagerVO;
 	}
+
+	public TypeInfoPicVO getTypeInfoPicVO() {
+		return typeInfoPicVO;
+	}
+
+	public void setTypeInfoPicVO(TypeInfoPicVO typeInfoPicVO) {
+		this.typeInfoPicVO = typeInfoPicVO;
+	}
+
+	public int getPage() {
+		return page;
+	}
+
+	public void setPage(int page) {
+		this.page = page;
+	}
+
 
 	/**
 	 * 实现request和response
@@ -144,7 +163,7 @@ public class GoodsInfoManagerAction extends ActionSupport implements ServletResp
 	}
 	
 	/**
-	 * 分页按类型查询六条商品信息显示
+	 * 分页按类型查询商品信息显示
 	 */
 	public void findAllGoodsByTypeVO() {
 		GsonBuilder gsonBuilder = new GsonBuilder();
@@ -152,6 +171,8 @@ public class GoodsInfoManagerAction extends ActionSupport implements ServletResp
 		Gson gson = gsonBuilder.create();
 		response.setContentType("text/html;charset=utf-8");
 		TypeInfoPicVO typeInfoPicVO = new TypeInfoPicVO();
+		typeInfoPicVO.setPageIndex(page);
+		System.out.println("?????????????///////"+page);
 		typeInfoPicVO = goodsInfoManagerService.findAllGoodsByTypeVO(typeInfoPicVO,typeId);
 		try {
 			response.getWriter().write(gson.toJson(typeInfoPicVO));
@@ -239,4 +260,14 @@ public class GoodsInfoManagerAction extends ActionSupport implements ServletResp
 		type type = goodsInfoManagerService.getTypeOneByTypeId(typeId);
 		response.getWriter().write(gson.toJson(type));
 	}
+//	/**
+//	 * 跟据上架时间查询待出售的六条商品信息和图片
+//	 */
+//	public void getSixGoodsByTime() {
+//		GsonBuilder gsonBuilder = new GsonBuilder();
+//		gsonBuilder.setPrettyPrinting();// 格式化json数据
+//		Gson gson = gsonBuilder.create();
+//		response.setContentType("text/html;charset=utf-8");
+//		
+//	}
 }

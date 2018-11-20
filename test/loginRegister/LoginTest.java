@@ -23,12 +23,21 @@ public class LoginTest {
 	public void setLoginRegisterService(LoginRegisterService loginRegisterService) {
 		this.loginRegisterService = loginRegisterService;
 	}
+	//登陆测试
 @Test
 public void loginTest1() {
 	  user newUser = new user();
 	  newUser.setUsername("111");
-	  newUser.setPassword("12");
-	  user user2= loginRegisterService.login(newUser);
-	  System.out.println("wwwwwwwwwww"+user2);
+	  newUser.setPassword("1");
+	   loginRegisterService.login(newUser);
+	  
   }
+//测试跟据username查询用户
+@Test 
+ public void getUserByUserNameTest() {
+	user newUser = new user();
+	newUser.setUsername("15079917292");
+	loginRegisterService.getUserByUserName(newUser);
+	System.out.println("JJSS"+loginRegisterService.getUserByUserName(newUser));
+}
 }

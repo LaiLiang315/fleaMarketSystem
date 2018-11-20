@@ -39,6 +39,7 @@ public class LoginRegisterAction extends ActionSupport implements ServletRespons
 	}
 
 	private user newUser;
+	
 
 	public user getNewUser() {
 		return newUser;
@@ -47,6 +48,7 @@ public class LoginRegisterAction extends ActionSupport implements ServletRespons
 	public void setNewUser(user newUser) {
 		this.newUser = newUser;
 	}
+
 
 	/**
 	 * 实现request和response
@@ -90,8 +92,9 @@ public class LoginRegisterAction extends ActionSupport implements ServletRespons
 	 * @throws IOException
 	 */
 	public String login() throws IOException {
-		System.out.println("222222");
-	/*	String result = "";*/
+		System.out.println("222222"+newUser);
+		String result = "";
+		
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
@@ -105,24 +108,27 @@ public class LoginRegisterAction extends ActionSupport implements ServletRespons
 		 */
 		user user = loginRegisterService.login(newUser);
 		if (user == null) {
-			System.out.println("a");
-			/*result = "error";
+			result = "error";
+			System.out.println("B"+result);
 			response.getWriter().write(result);
-			response.getWriter().close();*/
-			return "fail";
+			response.getWriter().close();
+			
 
 		}
 		else {
 			session.setAttribute("user_session", session);
 			System.out.println("b");
-			/*result = "success";
+			result = "success";
+			System.out.println("A"+result);
 			response.getWriter().write(result);
-			response.getWriter().close();*/
-			return "ok"; 
+			response.getWriter().close();
+			 
 		}
 		
+		return null;
+		
 	}
-
+//用户注册
 	public String userRegister() {
 		System.out.println("fd"); 
 		String result = "";
@@ -151,4 +157,14 @@ public class LoginRegisterAction extends ActionSupport implements ServletRespons
 		}*/
 	}
 
+	//跟据用户名得到用户
+	public void getUserByUserName() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
+		user user = loginRegisterService.getUserByUserName(newUser);
+		response.getWriter().write(gson.toJson(user));
+	}
+	
 }
