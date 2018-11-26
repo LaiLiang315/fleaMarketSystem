@@ -1,6 +1,7 @@
 package com.fleaMarket.carouselManager.service.impl;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -153,5 +154,16 @@ public class CarouselManagerServiceImpl implements CarouselManagerService {
 		carousel.setCarousel_modifytime(TimeUtil.getStringSecond());
 		carousel.setIs_delete(0);;
 		carouselManageDao.saveOrUpdateObject(carousel);
+	}
+
+	//查询所有轮播图
+	@Override
+	public List<carousel> findCarousels() {
+		List<carousel> listCarousel = new ArrayList<>();
+		listCarousel = (List<carousel>) carouselManageDao.listObject("from carousel where is_delete='0' order by carousel_creationtime desc");
+		if(!listCarousel.isEmpty()) {
+			return listCarousel;
+		}
+		return null;
 	}
 }

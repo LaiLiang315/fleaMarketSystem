@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/layui/css/layui.css"
-	media="all" />
+	media="all" />	
 </head>
 <body>
 	<form class="layui-form" style="width: 60%;">
@@ -42,9 +42,9 @@
 		</div>
 		<div class="layui-upload">
 			<div class="layui-inline">
-				<button type="button" class="layui-btn layui-btn-normal" id="test1">
+				 <button type="button" class="layui-btn layui-btn-normal" id="test1">
 					<i class="layui-icon">&#xe67c;</i>上传图片
-				</button>
+				</button> 
 			</div>
 			<table class="layui-table" id="pictrues">
 				<thead>
@@ -60,7 +60,7 @@
 			</table>
 			<div style="margin: auto; width: 250px">
 				<input type="button" class="layui-btn" id="testListAction"
-					onclick="isNull()" value="提交作品" />
+					onclick="isNull()" value="提交商品" />
 				<button type="reset" class="layui-btn layui-btn-primary">重置信息</button>
 			</div>
 		</div>
@@ -76,8 +76,29 @@ var typeId = null;
    $(document).ready(function(){
 	//获取分类信息
 	getTypeInfo();
+	
 });
  
+   
+ //得到当前登陆的用户
+   function getuser(){
+   	$.ajax({
+   		async : false,
+   		type : 'POST',
+   		url : '/fleaMarketSystem/loginRegister/loginRegister_getSes',
+   		cache : false, // cache的作用就是第一次请求完毕之后，如果再次去请求，可以直接从缓存里面读取而不是再到服务器端读取。
+   		processData : false, // 不序列化data
+   		contentType : false,
+   		success : function(result) {
+   			alert("yu3212"+result)
+   			console.log("5555566666"+result)
+   			var sessin = JSON.parse(result)
+   		}
+   	})
+   	
+   }
+   
+   
    //定义键值对象
 function ObjData(key,value){
 	this.Key=key;
@@ -99,7 +120,7 @@ function saveGoodsInfo(){
 		}
 		var pushData = JSON.stringify(array);//将数组转为json字符串
 		var formData = new FormData();
-		//放入作品信息
+		//放入商品信息
 		formData.append("goodsInfo.goods_name",$("input[name='goods_name']").val());
 		formData.append("goodsInfo.goods_price",$("input[name='goods_price']").val());
 		formData.append("goodsInfo.goods_describe",$("textarea[name='goods_describe']").val());

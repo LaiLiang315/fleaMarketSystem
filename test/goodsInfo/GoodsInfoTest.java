@@ -10,6 +10,8 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.fleaMarket.domain.goodsInfo;
+import com.fleaMarket.domain.picture;
 import com.fleaMarket.domain.type;
 import com.fleaMarket.goodsInfoManager.DTO.GoodsManagerDTO;
 import com.fleaMarket.goodsInfoManager.DTO.GoodsPicDTO;
@@ -81,11 +83,32 @@ public class GoodsInfoTest {
 		typeInfoPicVO = goodsInfoManagerService.findAllGoodsByTypeVO(typeInfoPicVO, typeId);
 	System.out.println("typeInfoPicVO"+typeInfoPicVO);
 	}
+	
 	@Test
 	public void getTypeOneByTypeId() {
 		type type = new type();
 		type.setType_id("Type001");
 		 goodsInfoManagerService.getTypeOneByTypeId(type);
 		System.out.println("wwww"+goodsInfoManagerService.getTypeOneByTypeId(type));
+	}
+	/**
+	 * 跟据信息id查询图片
+	 */
+	@Test
+	public void getPicsByGoodsIdTest() {
+		String data_id = "a2b6a69b-d618-4f47-9138-4a7b0dbb9f8f";
+		List<picture> listPics = new ArrayList<>();
+		listPics = goodsInfoManagerService.getPicsByGoodsId(data_id);
+		System.out.println("DFP:"+listPics);
+	}
+	/**
+	 * 跟据商品id查询商品信息
+	 */
+	@Test
+	public void getInfoByGoodsIdTest() {
+		String data_id = "a2b6a69b-d618-4f47-9138-4a7b0dbb9f8f";
+		goodsInfo info = new goodsInfo();
+		info = goodsInfoManagerService.getgoodsInfoByGoodsId(data_id);
+		System.out.println("SS:"+info);
 	}
 }

@@ -10,6 +10,7 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.fleaMarket.domain.goodsInfo;
+import com.fleaMarket.domain.picture;
 import com.fleaMarket.domain.type;
 import com.fleaMarket.domain.typeOne;
 import com.fleaMarket.goodsInfoManager.DTO.GoodsManagerDTO;
@@ -40,9 +41,24 @@ public class GoodsInfoManagerAction extends ActionSupport implements ServletResp
 		this.goodsInfoManagerService = goodsInfoManagerService;
 	}
 	
+	private String data_id;
 	
+	public String getData_id() {
+		return data_id;
+	}
+
+	public void setData_id(String data_id) {
+		this.data_id = data_id;
+	}
+ 
+	/**
+	 * 商品信息
+	 */
 	private goodsInfo info;
 	
+	/**
+	 * 类型id
+	 */
 	private type typeId;
 	public goodsInfo getInfo() {
 		return info;
@@ -270,4 +286,26 @@ public class GoodsInfoManagerAction extends ActionSupport implements ServletResp
 //		response.setContentType("text/html;charset=utf-8");
 //		
 //	}
+	/**
+	 * 跟据信息id查询图片
+	 * @throws IOException 
+	 */
+	public void getPicsByGoodsId() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
+		List<picture> listPic = goodsInfoManagerService.getPicsByGoodsId(data_id);
+		response.getWriter().write(gson.toJson(listPic));
+//		return "kkk";
+	}
+	//跟据商品id得到商品
+	public void getgoodsInfoByGoodsId() {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
+		goodsInfo info = goodsInfoManagerService.getgoodsInfoByGoodsId(data_id);
+		
+	}
 }

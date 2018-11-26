@@ -1,5 +1,8 @@
 package carousel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.junit.Test;
@@ -8,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.fleaMarket.carouselManager.service.CarouselManagerService;
+import com.fleaMarket.domain.carousel;
 
 /**
  * 轮播图测试类
@@ -28,14 +32,16 @@ public class CarouselTest {
 		this.carouselManagerService = carouselManagerService;
 	}
 	/**
-	 * 上传图片测试
+	 * 查询轮播图测试
 	 */
 	@Test
-	public void fileUpLoad() {
+	public void findCarouselsTest() {
+		List<carousel> listCarousel = new ArrayList<>();
 		
+		listCarousel = carouselManagerService.findCarousels();
 		
-		
-		
-		
+		System.out.println("listCarousel"+listCarousel);
 	}
+	
+	
 }

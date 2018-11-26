@@ -300,4 +300,33 @@ public class GoodsInfoManagerServiceImpl implements GoodsInfoManagerService {
 		return type;
 	}
 
+	/**
+	 * 跟据商品信息id查询图片
+	 */
+	@Override
+	public List<picture> getPicsByGoodsId(String data_id) {
+		System.out.println("DF:"+data_id);
+		// TODO Auto-generated method stub
+		List<picture> listPics = new ArrayList<>();
+		listPics = goodsInfoManagerDao.getPicsByInfoId(data_id);
+		if(!listPics.isEmpty()) 
+		{
+			return listPics;
+		}
+		return null;
+	}
+
+	/**
+	 * 跟据商品信息查询商品
+	 */
+	@Override
+	public goodsInfo getgoodsInfoByGoodsId(String data_id) {
+		goodsInfo info = new goodsInfo();
+		info = goodsInfoManagerDao.getInfoByGoodsId(data_id);
+		if(info!=null) {
+			return info;
+		}
+		return null;
+	}
+
 }

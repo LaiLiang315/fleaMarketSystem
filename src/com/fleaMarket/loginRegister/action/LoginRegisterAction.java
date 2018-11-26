@@ -1,6 +1,7 @@
 package com.fleaMarket.loginRegister.action;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +15,7 @@ import com.fleaMarket.domain.user;
 import com.fleaMarket.loginRegister.service.LoginRegisterService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
@@ -116,7 +118,7 @@ public class LoginRegisterAction extends ActionSupport implements ServletRespons
 
 		}
 		else {
-			session.setAttribute("user_session", session);
+			session.setAttribute("user_session", user);
 			System.out.println("b");
 			result = "success";
 			System.out.println("A"+result);
@@ -128,6 +130,17 @@ public class LoginRegisterAction extends ActionSupport implements ServletRespons
 		return null;
 		
 	}
+	
+	//得到session的值
+	public void getSes() throws IOException {
+		 HttpSession session = ServletActionContext.getRequest().getSession();
+		 GsonBuilder gsonBuilder = new GsonBuilder();
+			gsonBuilder.setPrettyPrinting();// 格式化json数据
+			Gson gson = gsonBuilder.create();
+			response.setContentType("text/html;charset=utf-8");
+			response.getWriter().write(gson.toJson(session));
+	}
+	
 //用户注册
 	public String userRegister() {
 		System.out.println("fd"); 
@@ -166,5 +179,18 @@ public class LoginRegisterAction extends ActionSupport implements ServletRespons
 		user user = loginRegisterService.getUserByUserName(newUser);
 		response.getWriter().write(gson.toJson(user));
 	}
-	
+	//用户退出登录
+	public void logout() throws IOException {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setHeader("Access-Control-Allow-Origin", "*");
+		response.setHeader("Access-Control-Allow-Methods", "GET,POST");
+		response.setContentType("text/html;charset=utf-8");
+		HttpServletRequest request = ServletActionContext.getRequest();
+		HttpSession session = request.getSession();
+		PrintWriter pw = response.getWriter();
+		ActionContext.getContext().getSession().remove("user_session");
+		System.out.println("执行退出=------");
+		pw.write("logoutSuccess");
+		
+	}
 }

@@ -3,10 +3,9 @@ var typeId = null
 $(document).ready(function() {
 	// 获取六条分类信息
 	getTypeInfo();
-	//大轮播图自动播放
-	$('#myCarousel').carousel({
-		  interval: 4000
-		})
+	
+	getuser();
+	
 	// 小轮播自动进行
 	$('#featured').carousel({
 		interval : 4000
@@ -15,6 +14,7 @@ $(document).ready(function() {
 	$(function() {
 		$('#gallery a').lightBox();
 	});
+	
 });
 // 获取分类信息
 function getTypeInfo() {
@@ -49,7 +49,7 @@ function putType(listGoodsTypeDTO) {
 }
 // 获得二级分类信息
 function getTypeTwo(typeOne) {
-	console.log("KKK" + typeOne)
+//	console.log("KKK" + typeOne)
 	$.ajax({
 		type : 'POST',
 		url : '/fleaMarketSystem/goodsType/goodsType_getListType',
@@ -69,7 +69,7 @@ function getTypeTwo(typeOne) {
 };
 // 查询分类下拉菜单
 function putTypeTwo(types) {
-	console.log("HHHHGGG" + types)
+//	console.log("HHHHGGG" + types)
 	var length = types.length;
 	var str = '<ul class="sub" style="display:block" >'
 	// 获取二级菜单
@@ -79,7 +79,7 @@ function putTypeTwo(types) {
 				+ '<a>' + types[j].type_name + '</a>' + '</li>'
 	}
 	str = str + '</ul>'
-	console.log("types[0].type_belong" + (types[0].type_belong))
+//	console.log("types[0].type_belong" + (types[0].type_belong))
 	$("#" + types[0].type_belong + "").append(str)
 }
 function getSubMenu(str) {
@@ -105,7 +105,7 @@ function getList(str){
     	} else {
 		$("#"+str.id+"").addClass('act');
 	}
-	console.log(typeof (str))
+//	console.log(typeof (str))
 	alert("a");
 	$
 			.ajax({
@@ -123,7 +123,7 @@ function getList(str){
 					var typeInfoPicVO = JSON.parse(result)
 					Page(typeInfoPicVO);
 					var strStart = '';
-					console.log("zzzzzzzzzzzzzzzzzzzzzzzzz"+typeInfoPicVO.listGoodsPicDTO)
+//					console.log("zzzzzzzzzzzzzzzzzzzzzzzzz"+typeInfoPicVO.listGoodsPicDTO)
 					if (typeof(typeInfoPicVO.listGoodsPicDTO) === "undefined") {
 						
 						strStart = strStart+'<li>'+'</li>'
@@ -135,7 +135,7 @@ function getList(str){
 								+ '<li>'
 								+ '<div class="thumbnail">'
 								+ '<a>'
-								+ '<img style="width:80px" src="/fleaMarketSystem/carouselManager/carouselManager_IoReadImage?fileFileName='
+								+ '<img style="width:160px;height:160px" src="/fleaMarketSystem/carouselManager/carouselManager_IoReadImage?fileFileName='
 								+ typeInfoPicVO.listGoodsPicDTO[i].pic.picture_name
 								+ '" />'
 								+ '</a>'
@@ -147,11 +147,11 @@ function getList(str){
 								+ typeInfoPicVO.listGoodsPicDTO[i].info.goods_name
 								+ '</p>'
 								+ '<h4 style="text-align:center">'
-								+ '<a class ="btn" >'
+								+ '<a href="javascript:void(0)" class ="btn" onClick="getDetal(this)" >'
 								+ '<i class="icon-zoom-in">'
 								+ '</i>'
 								+ '</a>'
-								+ '<a class="btn">'+'购买'
+								+ '<a href="javascript:void(0)" class="btn">'+'购买'
 								+ '<i class="icon-shopping-cart">'
 								+ '</i>'
 								+ '</a>'
@@ -160,14 +160,14 @@ function getList(str){
 								+ typeInfoPicVO.listGoodsPicDTO[i].info.goods_price
 								+ '</a>' + '</h4>' + '</div>'
 						strStart = strStart + '</li>'
-					}
+					   }
 					}
 					strStart = strStart + '</ul>'
 					$("#latestGoods").html(strStart);
 				}
 			})
 }
-
+//分页获取商品信息
 function getListGoodsInfo(str,pageNew) {
 //$("#"+str.id+"").children('a').addClass("act");
 //	console.log("VCXZ" + str)
@@ -195,7 +195,7 @@ function getListGoodsInfo(str,pageNew) {
 								+ '<li>'
 								+ '<div class="thumbnail">'
 								+ '<a>'
-								+ '<img style="width:80px" src="/fleaMarketSystem/carouselManager/carouselManager_IoReadImage?fileFileName='
+								+ '<img style="width:160px;height:160px" src="/fleaMarketSystem/carouselManager/carouselManager_IoReadImage?fileFileName='
 								+ typeInfoPicVO.listGoodsPicDTO[i].pic.picture_name
 								+ '" />'
 								+ '</a>'
@@ -207,11 +207,11 @@ function getListGoodsInfo(str,pageNew) {
 								+ typeInfoPicVO.listGoodsPicDTO[i].info.goods_name
 								+ '</p>'
 								+ '<h4 style="text-align:center">'
-								+ '<a class ="btn" >'
+								+ '<a href="javascript:void(0)" class ="btn" onClick="getDetal(this)" >'
 								+ '<i class="icon-zoom-in">'
 								+ '</i>'
 								+ '</a>'
-								+ '<a class="btn">'+'购买'
+								+ '<a href="javascript:void(0)" class="btn">'+'购买'
 								+ '<i class="icon-shopping-cart">'
 								+ '</i>'
 								+ '</a>'
@@ -306,16 +306,31 @@ function Page(typeInfoPicVO) {
 }
 // 点击当前页
 function getCurPage(num) {
-	console.log("dangqian" + num.id)
+//	console.log("dangqian" + num.id)
 	$("#pagination li").removeClass("active");
 	$("#" + (parseInt(num.id)) + "").addClass("active");
-	console.log("BMNB"+$(".pagination").children("li").html())
+//	console.log("BMNB"+$(".pagination").children("li").html())
 	//获取可见的ul的li的class为active的 id
 	var str= $(".sub:visible").children("li.small.act").attr("id");
 	var pageNew = parseInt(num.id) 
 	getListGoodsInfo(str,pageNew)
 }
 
-
-
-
+//得到当前登陆的用户
+function getuser(){
+	$.ajax({
+		async : false,
+		type : 'POST',
+		url : '/fleaMarketSystem/loginRegister/loginRegister_getSes',
+		cache : false, // cache的作用就是第一次请求完毕之后，如果再次去请求，可以直接从缓存里面读取而不是再到服务器端读取。
+		processData : false, // 不序列化data
+		contentType : false,
+		success : function(result) {
+			alert("SESSION")
+			console.log("SESSION"+result)
+			var sessin = JSON.parse(result)
+		}
+	})
+	
+}
+//跳转到详情页

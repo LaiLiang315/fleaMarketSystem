@@ -78,4 +78,8 @@ public interface CarouselManagerDao {
 	 */
 	picture getFirstPic(String goodsInfo);
 
+	/**
+	 * 查询所有轮播图
+	 */
+//	List<carousel> listCarousel(); 
 }

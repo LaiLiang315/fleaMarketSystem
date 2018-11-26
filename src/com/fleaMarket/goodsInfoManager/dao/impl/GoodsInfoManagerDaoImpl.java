@@ -235,4 +235,22 @@ public class GoodsInfoManagerDaoImpl implements GoodsInfoManagerDao {
 		}
 		return null;
 	}
+
+	/**
+	 * 根据信息id查询信息
+	 */
+	@Override
+	public goodsInfo getInfoByGoodsId(String data_id) {
+		// TODO Auto-generated method stub
+		goodsInfo info = new goodsInfo();
+		Session session = getSession();
+		String hql ="from goodsInfo where goods_id= :ID ";
+		Query query = session.createQuery(hql);
+		query.setParameter("ID", data_id);
+		info = (goodsInfo)query.uniqueResult();
+		if(info!=null) {
+			return info;
+		}
+		return null;
+	}
 }

@@ -35,15 +35,15 @@ function putInfo(listGoodsPicDTO) {
 		strStart = strStart
 				+ '<li>'
 				+ '<div class="thumbnail">'
-				+ '<a>'
-				+ '<img style="width:80px" src="/fleaMarketSystem/carouselManager/carouselManager_IoReadImage?fileFileName='
+				+ '<a href="javascript:void(0)" onClick="getDetal(this)"id="'+listGoodsPicDTO[i].info.goods_id+'">'
+				+ '<img style="width:160px;height:160px" src="/fleaMarketSystem/carouselManager/carouselManager_IoReadImage?fileFileName='
 				+ listGoodsPicDTO[i].pic.picture_name + '" />' + '</a>'
 				+ '<div class="caption">' + '<h5>'
 				+ listGoodsPicDTO[i].info.goods_name + '</h5>' + '<p>'
 				+ listGoodsPicDTO[i].info.goods_name + '</p>'
-				+ '<h4 style="text-align:center">' + '<a class ="btn" >'
+				+ '<h4 style="text-align:center">' + '<a href="javascript:void(0)" class ="btn" onClick="getDetal(this)"id="'+listGoodsPicDTO[i].info.goods_id+'">'
 				+ '<i class="icon-zoom-in">' + '</i>' + '</a>'
-				+ '<a class="btn">' + '购买' + '<i class="icon-shopping-cart">'
+				+ '<a href="javascript:void(0)" class="btn" >' + '购买' + '<i class="icon-shopping-cart">'
 				+ '</i>' + '</a>' + '<a class="btn btn-primary">' + '￥'
 				+ listGoodsPicDTO[i].info.goods_price + '</a>' + '</h4>'
 				+ '</div>'
@@ -90,8 +90,8 @@ function putFourInfo(listGoodsManagerDTO) {
 					+ '<div class="thumbnail">'
 					+ '<i class="tag">'
 					+ '</i>'
-					+ '<a href="">'
-					+ '<img src="/fleaMarketSystem/carouselManager/carouselManager_IoReadImage?fileFileName='
+					+ '<a href="javascript:void(0)">'
+					+ '<img style="width:160px;height:160px" src="/fleaMarketSystem/carouselManager/carouselManager_IoReadImage?fileFileName='
 					+ listGoodsManagerDTO[i].listGoodsPicDTO[j].pic.picture_name
 					+ '" alt="">'
 					+ '</a>'
@@ -100,7 +100,7 @@ function putFourInfo(listGoodsManagerDTO) {
 					+ listGoodsManagerDTO[i].listGoodsPicDTO[j].info.goods_name
 					+ '</h5>'
 					+ '<h4>'
-					+ '<a class="btn" href="">'
+					+ '<a class="btn" href="javascript:void(0)" onClick="getDetal(this)" id="'+listGoodsManagerDTO[i].listGoodsPicDTO[j].info.goods_id+'">'
 					+ 'VIEW'
 					+ '</a>'
 					+ '<span class="pull-right">'
@@ -113,6 +113,76 @@ function putFourInfo(listGoodsManagerDTO) {
 	}
 	$("#cheapestGoods").html(strStart);
 }
+
+
+
+
+
+
+//得到user的ssession
+function getuser(){
+	alert("111")
+	$.ajax({
+		async : false,
+		type : 'POST',
+		url : '/fleaMarketSystem/loginRegister/loginRegister_getSes',
+		cache : false, // cache的作用就是第一次请求完毕之后，如果再次去请求，可以直接从缓存里面读取而不是再到服务器端读取。
+		processData : false, // 不序列化data
+		contentType : false,
+		success : function(result) {
+			alert("SESSION")
+			console.log("SESSION"+result)
+			var sessin = JSON.parse(result)
+		}
+	})
+
+}
+//跳转到详情页
+function getDetal(e){
+	var goodsId = e.id;
+	alert("RRRRRR"+goodsId)
+	console.log("!"+goodsId)
+	location.href="/fleaMarketSystem/skip/skip_intoGoodsDetals?data_id="+goodsId+"";
+//	putDetal(goodsId)
+	
+}
+//将详情页新信息放入
+function putDetal(goodsId){
+	console.log("a"+goodsId)
+//	$.ajax({
+//		async : false,
+//		type : 'POST',
+//		url : '/fleaMarketSystem/loginRegister/loginRegister_getSes',
+//		cache : false, // cache的作用就是第一次请求完毕之后，如果再次去请求，可以直接从缓存里面读取而不是再到服务器端读取。
+//		processData : false, // 不序列化data
+//		contentType : false,
+//		success : function(result) {
+//			alert("SESSION")
+//			console.log("SESSION"+result)
+//			var sessin = JSON.parse(result)
+//		}
+//		
+//	})
+	
+	var str = "";
+	str = '<a>'+'<img src="/fleaMarketSystem/carouselManager/carouselManager_IoReadImage?fileFileName=6b943f4b-c492-4972-89f8-f579974db5413.jpg" style="width:100%" />' +'1111111'+'</a>'
+	
+	
+	$("#gallery").html(str);
+	console.log("MMM"+$("#gallery").html())
+}
+
+
+
+
+
+
+
+
+
+
+
+
 ////登陆
 //$(document).on("click","#Sign",function() {
 //	var username = $("input[id='inputEmail']").val();

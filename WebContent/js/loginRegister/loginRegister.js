@@ -1,19 +1,30 @@
+$(document).ready(function() {
+	
+});
+
+////获取session
+//function getSession(){
+//	var session =session.getAttribute("user_session")
+//	console.log("ss"+session)
+//	
+//}
 //登陆
 $(document).on("click","#Sign",function() {
+	
 	var username = $("input[id='inputEmail']").val();
 	var password = $("input[id='inputPassword']").val();
+	console.log("1"+username)
+	console.log("2	"+password)
 	if(username==""||username==null||!(/^1[34578]\d{9}$/.test(username))){
 		toastr.error("请输入正确的手机号!");
 	}else if(password==""||password==null){
 		toastr.error("请填写密码!");}
 	console.log("点击了提交按钮");
 	login_ajax(); // 执行login的异步
-
 				})
 
 function login_ajax() {
 	console.log("此对话显示该js正在执行login_ajax");
-	
 	var username = $("input[id='inputEmail']").val();
 	var password = $("input[id='inputPassword']").val();
 	console.log("username===" + username);
@@ -35,12 +46,10 @@ function login_ajax() {
 //			var dd = JSON.parse(result); // 转换成json对象
 			console.log("result----" + result);
 			if (dd == "success") {
-				console.log("===="+username);
 				toastr.success("用户登陆成功!");
-				
-				
 				setTimeout(function() {
 					location.href="/fleaMarketSystem/skip/skip_intoIndex";
+					
 				}, 1000);
 			} else {
 				if (dd == "error") {
@@ -51,25 +60,40 @@ function login_ajax() {
 		}
 	})
 }
-//得到用户
-function getUser(username){
-	$.ajax({
-		type : "POST",
-		url : "/fleaMarketSystem/loginRegister/loginRegister_getUserByUserName",
-		
-		data : {'newUser.username':username},
-		cache : false,
-		success : function(result){
-			console.log("MMM"+result)
-			var user = JSON.parse(result);
-			console.log("MMM"+user)
-			$("strong").html(user.nickname);
-		}
-		
-	})
+
+function resale(){
+	var str ='<ul>';
+	str = str + '<li>'+'<a href="#register" role="button" data-toggle="modal" style="padding-right: 0">'+'<span>'+'一键转卖'+'</span>'+'</a>'+'</li>'
+	alert("str")
+	$("#topMenu").html(str)
 }
 
-$
+//点击一键转卖
+$(document).on("click",".reSale",function(){
+	alert("一键转卖")
+	location.href="/fleaMarketSystem/skip/skip_intoUpLoadPic";
+	
+})
+
+
+//得到用户
+//function getUser(username){
+//	$.ajax({
+//		type : "POST",
+//		url : "/fleaMarketSystem/loginRegister/loginRegister_getUserByUserName",
+//		
+//		data : {'newUser.username':username},
+//		cache : false,
+//		success : function(result){
+//			console.log("MMM"+result)
+//			var user = JSON.parse(result);
+//			console.log("MMM"+user)
+//			$("strong").html(user.nickname);
+//		}
+//		
+//	})
+//}
+
 
 
 

@@ -7,7 +7,9 @@
 		strict-method-invocation="false">
 		<action name="goodsInfoManager_*"
 			class="com.fleaMarket.goodsInfoManager.action.GoodsInfoManagerAction" method="{1}">
-			<result name="fd">/test.jsp</result>
+			<!-- <result name="getPicsByGoodsId">/GoodsDetals.jsp</result> -->
+		
+<!-- 		<result name="kkk">/GoodsDetals.jsp</result> -->
 		</action>
 	</package>
 	

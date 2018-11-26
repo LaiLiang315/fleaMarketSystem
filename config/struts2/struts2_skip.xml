@@ -8,7 +8,9 @@
 		<action name="skip_*"
 			class="com.fleaMarket.skip.action.SkipAction" method="{1}">
 		 <result name="intoIndex">/index.jsp</result>
-		 <result name="fail">/jj.jsp</result>
+<!-- 		 <result name="intoGoodsDetals" type="redirect">/goodsInfoManager/goodsInfoManager_getPicsByGoodsId?data_id=${data_id}</result> -->
+		<result name="intoGoodsDetals">/GoodsDetals.jsp</result>
+		 <result name="intoUpLoadPic">/UpLoadPic.jsp</result>
 		</action>
 	</package>
 

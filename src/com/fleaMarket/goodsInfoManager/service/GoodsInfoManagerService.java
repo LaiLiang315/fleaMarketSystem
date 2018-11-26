@@ -3,6 +3,7 @@ package com.fleaMarket.goodsInfoManager.service;
 import java.util.List;
 
 import com.fleaMarket.domain.goodsInfo;
+import com.fleaMarket.domain.picture;
 import com.fleaMarket.domain.type;
 import com.fleaMarket.domain.typeOne;
 import com.fleaMarket.goodsInfoManager.DTO.GoodsManagerDTO;
@@ -58,6 +59,21 @@ public interface GoodsInfoManagerService {
 	 * 跟据二级菜单id找一级菜单
 	 */
 	public type getTypeOneByTypeId(type typeId);
+
+	/**
+	 * 根基商品id查询商品信息
+	 * @param data_id 
+	 * @return
+	 */
+	public List<picture> getPicsByGoodsId(String data_id);
+
+	/**
+	 * 跟据信息id查询信息
+	 * @param data_id
+	 * @return
+	 */
+
+	public goodsInfo getgoodsInfoByGoodsId(String data_id);
 
 	
 

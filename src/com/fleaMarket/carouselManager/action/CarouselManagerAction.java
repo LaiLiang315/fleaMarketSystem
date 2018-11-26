@@ -9,13 +9,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.catalina.core.ApplicationContext;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
@@ -27,13 +25,10 @@ import com.fleaMarket.domain.goodsInfo;
 import com.fleaMarket.domain.picture;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import util.BuildUuid;
-import util.TimeUtil;
 /**
  * 轮播图管理的Action层
  */
@@ -407,7 +402,7 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 			System.out.println("给我输出这个对象" + picture);
 			System.out.println("输出下：" + idList);
 			
-			picture.setPicture_name(fileFileName);
+			carousel.setCarousel_picture(fileFileName);
 			System.out.println(picture);
 			carouselManagerService.addCarousel(carousel);
 			res = "{\"code\":\" " + code + " \",\"msg\":\"" + result + "\"}";
@@ -426,5 +421,13 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 
 		}
 		
-		
+		//查询所有轮播图
+		public void findCarousels() throws IOException {
+			GsonBuilder gsonBuilder = new GsonBuilder();
+			gsonBuilder.setPrettyPrinting();// 格式化json数据
+			Gson gson = gsonBuilder.create();
+			response.setContentType("text/html;charset=utf-8");
+			List<carousel> listCarousel = carouselManagerService.findCarousels();
+			response.getWriter().write(gson.toJson(listCarousel));
+		}
 }

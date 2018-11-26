@@ -126,16 +126,27 @@ public class CarouselManagerDaoImpl implements CarouselManagerDao {
 			Session session = getSession();
 			String hql = "from picture where picture_sequence='9999' and picture_name like '%"+pictrueName+"%'";
 			Query query = session.createQuery(hql);
-			List<picture> picture = (List<picture>) query.list();
-			return picture;
+			List<picture> listPicture = (List<picture>) query.list();
+			return listPicture;
 		}
 		//获取第一张图片
 		@Override
 		public picture getFirstPic(String goodsInfoId) {
+			
 			Session session = getSession();
 			String hql = "from picture where  is_delete='0' and picture_belong= '"+goodsInfoId+"'";
 			Query query = session.createQuery(hql);
 			picture firstPic = (picture) query.list().get(0);
 			return firstPic;
 		}
+
+//		/**
+//		 * 查询所有轮播图
+//		 */
+//		@Override
+//		public List<carousel> listCarousel() {
+//			Session session = getSession();
+//			String hql = "from carousel where"
+//			return null;
+//		}
 }

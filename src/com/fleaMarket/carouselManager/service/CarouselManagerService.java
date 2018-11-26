@@ -44,4 +44,10 @@ public interface CarouselManagerService {
 	 */
 	void addCarousel(carousel carousel);
 
+	/**
+	 * 查询所有轮播图
+	 * @return
+	 */
+	List<carousel> findCarousels();
+
 }

@@ -98,4 +98,11 @@ public interface GoodsInfoManagerDao {
 	 */
 	type getTypeOneByTypeId(String trim);
 
+	/**
+	 * 跟据信息id查询信息
+	 * @param data_id 
+	 * @return
+	 */
+	public goodsInfo getInfoByGoodsId(String data_id);
+
 }

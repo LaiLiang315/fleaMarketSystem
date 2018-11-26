@@ -25,6 +25,7 @@ public class LoginRegisterServiceImpl implements LoginRegisterService {
 		this.loginRegisterDao = loginRegisterDao;
 	}
 
+	//用户登陆
 	@Override
 	public user login(user newUser) {
 		if (newUser != null) {
