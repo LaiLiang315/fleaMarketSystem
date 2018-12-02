@@ -300,12 +300,12 @@ public class GoodsInfoManagerAction extends ActionSupport implements ServletResp
 //		return "kkk";
 	}
 	//跟据商品id得到商品
-	public void getgoodsInfoByGoodsId() {
+	public void getgoodsInfoByGoodsId() throws IOException {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
 		response.setContentType("text/html;charset=utf-8");
 		goodsInfo info = goodsInfoManagerService.getgoodsInfoByGoodsId(data_id);
-		
+		response.getWriter().write(gson.toJson(info));
 	}
 }

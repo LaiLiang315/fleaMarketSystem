@@ -77,6 +77,12 @@ public interface CarouselManagerDao {
 	 * @return
 	 */
 	picture getFirstPic(String goodsInfo);
+    /**
+     * 跟据图片id查询图片
+     * @param trim
+     * @return
+     */
+	picture getPicById(String trim);
 
 	/**
 	 * 查询所有轮播图

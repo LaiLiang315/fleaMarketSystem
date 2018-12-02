@@ -233,20 +233,21 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 			String code = "";  //0上传成功 1上传失败
 			String result = ""; //返回结果
 			String res = ""; // 将belongId传给前台
+			String picId = "";
 			try {
 				String folderpath = "D:/Aupload/test1";
 				if (file != null) {
 					if (file.length() <= 50 * 1024 * 1024) {
 						String scrol_id = java.util.UUID.randomUUID().toString(); // 采用时间+UUID的方式
 						String path = ServletActionContext.getServletContext().getRealPath("/WEB-INF/upload");
-						System.out.println("111:"+path);
-						System.out.println("222:"+scrol_id);
+//						System.out.println("111:"+path);
+//						System.out.println("222:"+scrol_id);
 						File uploadFile = new File(path);
 						if (!uploadFile.exists() && !uploadFile.isDirectory()) {
-							System.out.println("文件夹路径不存在，创建路径:" + folderpath);
+//							System.out.println("文件夹路径不存在，创建路径:" + folderpath);
 							uploadFile.mkdirs();
 						} else {
-							System.out.println("文件夹路径存在:" + uploadFile);
+//							System.out.println("文件夹路径存在:" + uploadFile);
 						}
 						String filename = path + File.separator + fileFileName;
 						fileFileName = scrol_id + fileFileName;
@@ -258,13 +259,13 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 							out.write(b, 0, len);
 						}
 						out.close();
-						System.out.println("filename==" + filename);
+//						System.out.println("filename==" + filename);
 						File folder = new File(folderpath);
 						if (!folder.exists() && !folder.isDirectory()) {
-							System.out.println("文件夹路径不存在，创建路径:" + folderpath);
+//							System.out.println("文件夹路径不存在，创建路径:" + folderpath);
 							folder.mkdirs();
 						} else {
-							System.out.println("文件夹路径存在:" + folderpath);
+//							System.out.println("文件夹路径存在:" + folderpath);
 						}
 						FileUtils.copyFile(file, new File(folderpath, fileFileName));
 						code = "0";
@@ -273,7 +274,7 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 				} else {
 					result = "uploaderror";
 					code = "1";
-					System.out.println("上传文件发生错误");
+//					System.out.println("上传文件发生错误");
 				}
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
@@ -283,8 +284,7 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 				e.printStackTrace();
 			}
 			String belongId = "";
-			System.out.println("给我输出这个对象" + picture);
-			System.out.println("输出下：" + idList);
+			
 			/*
 			 * //判断belongid是否为空
 			 * if(production_picture.getProduction_pictures_belong()==null||
@@ -298,7 +298,10 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 			picture.setPicture_name(fileFileName);
 			System.out.println(picture);
 			carouselManagerService.addPictrues(picture);
-			res = "{\"code\":\" " + code + " \",\"msg\":\"" + result + "\",\"belongId\":\" " + belongId + " \"}";
+			picId = picture.getPicture_id();
+			System.out.println("给我输出这个对象" + picture);
+			System.out.println("输出下：" + picId);
+			res = "{\"code\":\" " + code + " \",\"msg\":\"" + result + "\",\"belongId\":\" " + belongId + " \",\"picId\":\" " + picId + "\"}";
 			// 返回前端信息
 			GsonBuilder gsonBuilder = new GsonBuilder();
 			gsonBuilder.setPrettyPrinting();// 格式化json数据
@@ -315,28 +318,14 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 		}
 		// 添加和完善信息
 		public void addAndComplete() {
-			JSONArray json = JSONArray.fromObject(pictrueMap); // 使用net.sf.json.JSONObject对象来解析json
-			JSONObject jsonOne;
-			Map<String, Object> map = null;
-			List<Map<String, Object>> listMap = new ArrayList<Map<String, Object>>();
-			for (int i = 0; i < json.size(); i++) {
-				map = new HashMap<String, Object>();
-				jsonOne = json.getJSONObject(i);
-				map.put("key", (String) jsonOne.get("Key"));
-				map.put("value", (String) jsonOne.get("Value"));
-				// 只保留不为空的 键值对
-				if ((String) jsonOne.get("Value") != "" && !"".equals((String) jsonOne.get("Value"))) {
-					listMap.add(map);
-				}
-			}
 			GsonBuilder gsonBuilder = new GsonBuilder();
 			gsonBuilder.setPrettyPrinting();// 格式化json数据
 			Gson gson = gsonBuilder.create();
 			response.setContentType("text/html;charset=utf-8");
 			// 同时添加作品信息和补充图集信息
-			String result = carouselManagerService.addAndComplete(goodsInfo, listMap);
+			String result = carouselManagerService.addAndComplete(goodsInfo, pictrueMap);
 			try {
-				System.out.println("----------------------------------------------:"+result);
+//				System.out.println("----------------------------------------------:"+result);
 				response.getWriter().write(gson.toJson(result));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -356,14 +345,14 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 					if (file.length() <= 50 * 1024 * 1024) {
 						String scrol_id = java.util.UUID.randomUUID().toString(); // 采用时间+UUID的方式
 						String path = ServletActionContext.getServletContext().getRealPath("/WEB-INF/upload");
-						System.out.println("333:"+path);
-						System.out.println("444:"+scrol_id);
+//						System.out.println("333:"+path);
+//						System.out.println("444:"+scrol_id);
 						File uploadFile = new File(path);
 						if (!uploadFile.exists() && !uploadFile.isDirectory()) {
-							System.out.println("文件夹路径不存在，创建路径:" + folderpath);
+//							System.out.println("文件夹路径不存在，创建路径:" + folderpath);
 							uploadFile.mkdirs();
 						} else {
-							System.out.println("文件夹路径存在:" + uploadFile);
+//							System.out.println("文件夹路径存在:" + uploadFile);
 						}
 						String filename = path + File.separator + fileFileName;
 						fileFileName = scrol_id + fileFileName;
@@ -375,13 +364,13 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 							out.write(b, 0, len);
 						}
 						out.close();
-						System.out.println("filename==" + filename);
+//						System.out.println("filename==" + filename);
 						File folder = new File(folderpath);
 						if (!folder.exists() && !folder.isDirectory()) {
-							System.out.println("文件夹路径不存在，创建路径:" + folderpath);
+//							System.out.println("文件夹路径不存在，创建路径:" + folderpath);
 							folder.mkdirs();
 						} else {
-							System.out.println("文件夹路径存在:" + folderpath);
+//							System.out.println("文件夹路径存在:" + folderpath);
 						}
 						FileUtils.copyFile(file, new File(folderpath, fileFileName));
 						code = "0";
@@ -390,7 +379,7 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 				} else {
 					result = "uploaderror";
 					code = "1";
-					System.out.println("上传文件发生错误");
+//					System.out.println("上传文件发生错误");
 				}
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block

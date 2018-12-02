@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -27,14 +28,31 @@
 	<input id="hh" type="hidden" value="${data_id }"/>
 	<div id="header">
 		<div class="container">
-
 			<div id="welcomeLine" class="row">
-				<div class="span6" style="">
-					欢迎!<strong> ${user_session.nickname }</strong> <a href="#"><img
-						class="img-circle " style="width: 50px; height: 50px;"
-						src="${pageContext.request.contextPath}/themes/img/1.jpg" alt="" /></a>
-				</div>
+				<c:choose>
+					<c:when test="${user_session eq null}">
+						<div class="span6"></div>
+
+					</c:when>
+					<c:otherwise>
+						<div class="span6" style="">
+							欢迎!<strong> ${user_session.nickname }</strong>
+							 <span id="dropMenu1" data-toggle="dropdown" data-hover="dropdown"><a href="#"><img
+									class="img-circle " style="width: 50px; height: 50px;"
+									src="${pageContext.request.contextPath}/themes/img/1.jpg"
+									alt="" /></a></span>
+									<ul class="dropdown-menu" >
+        
+      </ul> 
+								
+						</div>
+
+					</c:otherwise>
+				</c:choose>
+
 			</div>
+
+
 			<!-- Navbar ================================================== -->
 			<div id="logoArea" class="navbar">
 				<a id="smallScreen" data-target="#topMenu" data-toggle="collapse"
@@ -43,51 +61,73 @@
 				</a>
 				<div class="navbar-inner">
 					<a class="brand" href="index.html"><img
-						src="themes/images/logo.png" alt="Bootsshop" /></a>
+						src="${pageContext.request.contextPath}/themes/images/logo.png"
+						alt="Bootsshop" /></a>
 					<form class="form-inline navbar-search" method="post"
 						action="products.html">
 						<input id="srchFld" class="srchTxt" type="text" /> <select
 							class="srchTxt">
-							<option>All</option>
-							<option>CLOTHES</option>
-							<option>FOOD AND BEVERAGES</option>
-							<option>HEALTH & BEAUTY</option>
-							<option>SPORTS & LEISURE</option>
-							<option>BOOKS & ENTERTAINMENTS</option>
+							<option>所有</option>
+							<option>手机数码</option>
+							<option>生活百货</option>
+							<option>书集资料</option>
+							<option>健身器材</option>
+							<option>美妆</option>
 						</select>
-						<button type="submit" id="submitButton" class="btn btn-primary">Go</button>
+						<button type="submit" id="submitButton" class="btn btn-primary">确定</button>
 					</form>
+					<!--================ 登陆   ==================== -->
 					<ul id="topMenu" class="nav pull-right">
-						<li class=""><a href="#login" role="button"
+
+						<c:choose>
+							<c:when test="${user_session eq null}">
+								<li class="login"><a href="#login" role="button"
+									data-toggle="modal" style=""><span
+										class="btn btn-large btn-success">登陆</span></a>
+									<div id="login" class="modal hide fade in" tabindex="-1"
+										role="dialog" aria-labelledby="login" aria-hidden="false">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal"
+												aria-hidden="true">×</button>
+											<h3>Login Block</h3>
+										</div>
+										<div class="modal-body">
+											<form class="form-horizontal loginFrm">
+												<div class="control-group">
+													<input type="text" id="inputEmail" placeholder="Email">
+												</div>
+												<div class="control-group">
+													<input type="password" id="inputPassword"
+														placeholder="Password">
+												</div>
+												<div class="control-group">
+													<label class="checkbox"> <input type="checkbox">
+														Remember me
+													</label>
+												</div>
+
+											</form>
+											<button id="Sign" type="submit" class="btn btn-success">Sign
+												in</button>
+											<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+										</div>
+									</div></li>
+
+								<li class="register"><a href="#register" role="button"
+									data-toggle="modal" style="padding-right: 0"><span
+										class="btn btn-large btn-success">注册</span></a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="reSale"><a  role="button"
+									 style="padding-right: 0"><span
+										class="btn btn-large btn-success">一键转卖</span></a></li>
+							</c:otherwise>
+						</c:choose>
+						<!-- <li class="resale"><a href="#resale" role="button"
 							data-toggle="modal" style="padding-right: 0"><span
-								class="btn btn-large btn-danger">退出登陆</span></a>
-							<div id="login" class="modal hide fade in" tabindex="-1"
-								role="dialog" aria-labelledby="login" aria-hidden="false">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal"
-										aria-hidden="true">×</button>
-									<h3>Login Block</h3>
-								</div>
-								<div class="modal-body">
-									<form class="form-horizontal loginFrm">
-										<div class="control-group">
-											<input type="text" id="inputEmail" placeholder="Email">
-										</div>
-										<div class="control-group">
-											<input type="password" id="inputPassword"
-												placeholder="Password">
-										</div>
-										<div class="control-group">
-											<label class="checkbox"> <input type="checkbox">
-												Remember me
-											</label>
-										</div>
-									</form>
-									<button type="submit" class="btn btn-success">Sign in</button>
-									<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-								</div>
-							</div></li>
+								class="btn btn-large btn-success">一键转卖</span></a></li> -->
 					</ul>
+					<!--================ 登陆结束   ==================== -->
 				</div>
 			</div>
 		</div>
@@ -135,7 +175,7 @@
 					</div>
 
 
-					<div class="warp" style="display: none;">
+					<div class="warp" >
 						<!-- Cheapest Goods ================================================================== -->
 						<div class="well well-small">
 							<h4>
@@ -176,6 +216,8 @@
 	<script
 		src="${pageContext.request.contextPath}/themes/js/bootstrap.min.js"
 		type="text/javascript"></script>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath }/js/toastr.js"></script>
 	<script src="${pageContext.request.contextPath}/js/menu/menu.js"
 		type="text/javascript"></script>
 	<script
@@ -184,7 +226,9 @@
 		<script
 		src="${pageContext.request.contextPath}/js/goodsDetals/goodsDetals.js"
 		type="text/javascript"></script>
-
+		<script
+		src="${pageContext.request.contextPath}/js/loginRegister/loginRegister.js"
+		type="text/javascript"></script>
 	<script
 		src="${pageContext.request.contextPath }/themes/js/jquery.lightbox-0.5.js"></script>
 

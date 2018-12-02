@@ -33,7 +33,7 @@
 	margin-right: 10px;
 	position: relative;
 }
-i.delete{
+i.layui-icon-delete{
 	color: #f40;
 	position: absolute;    
 	font-size: 24px;

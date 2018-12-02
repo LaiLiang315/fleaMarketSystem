@@ -326,7 +326,7 @@ function getuser(){
 		processData : false, // 不序列化data
 		contentType : false,
 		success : function(result) {
-			alert("SESSION")
+//			alert("SESSION")
 			console.log("SESSION"+result)
 			var sessin = JSON.parse(result)
 		}

@@ -36,7 +36,8 @@ public interface CarouselManagerService {
 	 * @param listMap
 	 * @return
 	 */
-	String addAndComplete(goodsInfo goodsInfo, List<Map<String, Object>> listMap);
+	String addAndComplete(goodsInfo goodsInfo, String pictrueMap);
+//	String addAndComplete(goodsInfo goodsInfo, List<Map<String, Object>> listMap);
 
 	/**
 	 * 用户添加轮播图
@@ -49,5 +50,7 @@ public interface CarouselManagerService {
 	 * @return
 	 */
 	List<carousel> findCarousels();
+
+	
 
 }

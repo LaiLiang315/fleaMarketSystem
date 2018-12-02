@@ -48,7 +48,6 @@ public class CarouselManagerDaoImpl implements CarouselManagerDao {
 		session.saveOrUpdate(obj);
 		session.flush();
 	}
-
 	/**
 	 * 分页获取对象，这里是获取一页中的数据
 	 * 
@@ -114,11 +113,25 @@ public class CarouselManagerDaoImpl implements CarouselManagerDao {
 	public carousel getCarouselById(String trim) {
 		carousel carousel = new carousel();
 		Session session = getSession();
-		String hql ="from carousel where carousel_isdelete='0' and carousel_id= :ID";
+		String hql ="from carousel where is_delete='0' and carousel_id= :ID";
 		Query query = session.createQuery(hql);
 		query.setParameter("ID", trim);
 		carousel =(carousel) query.uniqueResult();
 		 return carousel;
+	}
+	/**
+	 * 根据id获取图片
+	 */
+	@Override
+	public picture getPicById(String trim) {
+		picture picture = new picture();
+		Session session = getSession();
+		String hql ="from picture where is_delete='0' and picture_id= :ID";
+		Query query = session.createQuery(hql);
+		query.setParameter("ID", trim);
+		picture =(picture) query.uniqueResult();
+		System.out.println("MNMN"+picture);
+		 return picture;
 	}
 	// 获取带有特殊标记的图集信息
 		@Override

@@ -169,14 +169,11 @@
 						<h4>
 							Cheapest Goods <small class="pull-right"> </small>
 						</h4>
-						<div class="row-fluid">
+						 <div  class="row-fluid">
 							<div id="featured" class="carousel slide">
-								<div id="cheapestGoods" class="carousel-inner"></div>
-								<a class="left carousel-control" href="#featured"
-									data-slide="prev">‹</a> <a class="right carousel-control"
-									href="#featured" data-slide="next">›</a>
+								
 							</div>
-						</div>
+						</div> 
 					</div>
 					<!-- Latest Goods ================================================================== -->
 					<h4>Latest Goods</h4>
