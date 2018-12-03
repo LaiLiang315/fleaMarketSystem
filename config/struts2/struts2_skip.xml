@@ -11,6 +11,7 @@
 <!-- 		 <result name="intoGoodsDetals" type="redirect">/goodsInfoManager/goodsInfoManager_getPicsByGoodsId?data_id=${data_id}</result> -->
 		<result name="intoGoodsDetals">/GoodsDetals.jsp</result>
 		 <result name="intoUpLoadPic">/UpLoadPic.jsp</result>
+		 <result name="intoRegister">/register.jsp</result>
 		</action>
 	</package>
 

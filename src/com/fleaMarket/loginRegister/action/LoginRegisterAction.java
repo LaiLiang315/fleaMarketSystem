@@ -180,13 +180,13 @@ public class LoginRegisterAction extends ActionSupport implements ServletRespons
 		response.getWriter().write(gson.toJson(user));
 	}
 	//用户退出登录
-	public void logout() throws IOException {
+	public void loginOut() throws IOException {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setHeader("Access-Control-Allow-Origin", "*");
 		response.setHeader("Access-Control-Allow-Methods", "GET,POST");
 		response.setContentType("text/html;charset=utf-8");
-		HttpServletRequest request = ServletActionContext.getRequest();
-		HttpSession session = request.getSession();
+//		HttpServletRequest request = ServletActionContext.getRequest();
+//		HttpSession session = request.getSession();
 		PrintWriter pw = response.getWriter();
 		ActionContext.getContext().getSession().remove("user_session");
 		System.out.println("执行退出=------");

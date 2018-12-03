@@ -6,6 +6,7 @@ $(document).ready(function() {
 	
 	getuser();
 	
+	registerPage()
 	// 小轮播自动进行
 	$('#featured').carousel({
 		interval : 4000
@@ -60,8 +61,6 @@ function getTypeTwo(typeOne) {
 		// processData : false, // 不序列化data
 		// contentType : false,
 		success : function(result) {
-			// console.log("qqqq")
-			// console.log("result" + result)
 			var types = JSON.parse(result)
 			putTypeTwo(types) // 获取二级分类
 		}
@@ -79,7 +78,6 @@ function putTypeTwo(types) {
 				+ '<a>' + types[j].type_name + '</a>' + '</li>'
 	}
 	str = str + '</ul>'
-//	console.log("types[0].type_belong" + (types[0].type_belong))
 	$("#" + types[0].type_belong + "").append(str)
 }
 function getSubMenu(str) {
@@ -105,8 +103,6 @@ function getList(str){
     	} else {
 		$("#"+str.id+"").addClass('act');
 	}
-//	console.log(typeof (str))
-	alert("a");
 	$
 			.ajax({
 				type : 'POST',
@@ -315,6 +311,15 @@ function getCurPage(num) {
 	var pageNew = parseInt(num.id) 
 	getListGoodsInfo(str,pageNew)
 }
+
+//点击注册
+function registerPage(){
+	$(".register").on("click",function(){
+		location.href = "/fleaMarketSystem/skip/skip_intoRegister"
+	})
+	
+}
+
 
 //得到当前登陆的用户
 function getuser(){

@@ -284,17 +284,6 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 				e.printStackTrace();
 			}
 			String belongId = "";
-			
-			/*
-			 * //判断belongid是否为空
-			 * if(production_picture.getProduction_pictures_belong()==null||
-			 * production_picture.getProduction_pictures_belong()==""||production_picture.
-			 * getProduction_pictures_belong().trim().length()<=0) { belongId =
-			 * java.util.UUID.randomUUID().toString();
-			 * production_picture.setProduction_pictures_belong(belongId);
-			 * System.out.println("有没有重置belongId"); }else { belongId =
-			 * production_picture.getProduction_pictures_belong(); }
-			 */
 			picture.setPicture_name(fileFileName);
 			System.out.println(picture);
 			carouselManagerService.addPictrues(picture);
@@ -310,7 +299,6 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 			try {
 				response.getWriter().write(gson.toJson(res));
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			System.out.println("CcdmwcC:" + picture);

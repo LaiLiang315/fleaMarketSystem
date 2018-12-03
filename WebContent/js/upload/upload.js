@@ -1,18 +1,20 @@
 //筛选类型
 var typeId = null;
+var myArray=new Array();
+//当前登陆的用户
+var user = null;
 $(document).ready(function() {
 	// 获取分类信息
 	getTypeInfo();
 	//获取当前登陆的用户
 	getuser()
+	if(!user || typeof(user) =="undefined" || user == null){
+		toastr.error("非法登陆，正在退出");
+		setTimeout(function(){
+			window.location.href = "/fleaMarketSystem/skip/skip_intoIndex";
+		},1000);
+	}
 });
-var myArray=new Array();
-var session = null;
-// $("#qqq").on("click",function(){
-// alert("qqq")
-//	
-// })
-
 // 得到当前登陆的用户
 function getuser() {
 	$.ajax({
@@ -20,12 +22,10 @@ function getuser() {
 		type : 'POST',
 		url : '/fleaMarketSystem/loginRegister/loginRegister_getSes',
 		cache : false, // cache的作用就是第一次请求完毕之后，如果再次去请求，可以直接从缓存里面读取而不是再到服务器端读取。
-		processData : false, // 不序列化data
-		contentType : false,
+		dataType:"text",
 		success : function(result) {
-//			  alert("yu3212" + result) 
-//			  console.log("5555566666" + result)
-			 session = JSON.parse(result)
+			var jsonData = JSON.parse(result);
+			user = jsonData.session.attributes.user_session;
 		}
 	})
 }
@@ -36,34 +36,20 @@ function ObjData(key, value) {
 }
 // 添加作品
 function saveGoodsInfo() {
-//	alert("cccc")
-	console.log("BBVVC"+myArray)
 	var ROW = $(".uploaded").length;
-	console.log("66666:" + $(".uploaded").length)
-
-	// var ROW = table.rows.length;
-	// 遍历表格
-//	 for (var i = 1; i < ROW; i++) {
-	// console.log(table.rows[i].cells[0].innerHTML)
-//	 var value = $(".uploaded")[i].cells[0].innerHTML;// 将表格设置为值
-	// console.log(table.rows[i].cells[1].innerHTML)
-//	 var key = $(".uploaded")[i].cells[1].innerHTML;// 将文件名定义为键
-//	 var s = new ObjData(key, value);
-//	 array.push(s);
-//	 }
 	var pushData = myArray;// 将数组转为json字符串
 	var formData = new FormData();
 	// 放入商品信息
 	formData.append("goodsInfo.goods_name", $("input[name='goods_name']").val());
 	formData.append("goodsInfo.goods_price", $("input[name='goods_price']").val());
 	formData.append("goodsInfo.goods_describe", $("textarea[name='goods_describe']").val());
-	// formData.append("goodsInfo.goods_type",userId);
+	 formData.append("goodsInfo.goods_belong",user.user_id);
 	formData.append("goodsInfo.goods_type", typeId);
 	formData.append("goodsInfo.exchange_ways",$("input[type='radio']:checked").val());
 	formData.append("goodsInfo.exchange_adress", $("input[name='exchange_adress']").val())
 	formData.append("goodsInfo.user_qq", $("input[name='user_qq']").val())
 	formData.append("goodsInfo.user_weixin", $("input[name='user_weixin']").val())
-//	console.log("CCCC"+$("input[name='goods_name']").val())
+    // console.log("CCCC"+$("input[name='goods_name']").val())
 	formData.append("pictrueMap", pushData);
 	console.log("XXX:"+pushData)
 	$
@@ -130,29 +116,6 @@ function putType(listGoodsManagerDTO) {
 		var form = layui.form;
 		form.render();
 	});
-}
-// 判断表单按钮是否为空!$("input[name='sex1']").checked&&!$("input[name='sex2']").checked
-function isNull() {
-
-	// var table = $(".uploaded").length;
-	// console.log("yyy2yy:"+table)
-	// var table = document.getElementById("pictrues");
-	var ROW = $(".uploaded").length
-	if ($("input[name='goods_name']").val() == ""
-			|| $("input[name='goods_name']").val() == null) {
-		return false;
-		toastr.error("请填写商品名!");
-	} else if ($("input[name='goods_price']").val() == ""
-			|| $("input[name='goods_price']").val() == null) {
-		toastr.error("请填写价格!");
-	} else if (typeId == null || typeId == "") {
-		toastr.error("请选择作品类型!");
-	} else if ($("#goods_describe").val() == null
-			|| $("#goods_describe").val() == "") {
-		toastr.error("请填写作品描述!");
-	} else if (ROW <= 1) {
-		toastr.error("请上传作品图片!");
-	}
 }
 // 图片上传
 var i = 1;
@@ -248,7 +211,14 @@ layui
 								}
 							});
 				})
-
+//删除图片
 function deleteImage(e) {
 
 }
+
+//点击图标回到首页
+$(".brand").on("click",function(){
+	location.href="/fleaMarketSystem/skip/skip_intoIndex";
+	
+})
+

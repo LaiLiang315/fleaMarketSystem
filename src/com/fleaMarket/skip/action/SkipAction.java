@@ -28,6 +28,15 @@ public class SkipAction {
 	public String intoUpLoadPic() {
 		return "intoUpLoadPic";
 	}
+	
+	public String intoRegister() {
+		return "intoRegister";
+		
+		
+		
+	}
+	
+	
 	/*//跳转详情页
 	public String kkk() {
 		

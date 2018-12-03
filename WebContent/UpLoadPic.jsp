@@ -26,108 +26,69 @@
 <div id="header">
 		<div class="container">
 			<div id="welcomeLine" class="row">
-				<c:choose>
-					<c:when test="${user_session eq null}">
-						<div class="span6"></div>
-
-					</c:when>
-					<c:otherwise>
 						<div class="span6" >
-							欢迎!<strong> ${user_session.nickname }</strong>
-							 <span id="dropMenu1" data-toggle="dropdown" data-hover="dropdown"><a href="#"><img
-									class="img-circle " style="width: 50px; height: 50px;"
-									src="${pageContext.request.contextPath}/themes/img/1.jpg"
-									alt="" /></a></span>
-									<ul class="dropdown-menu" >
-        
-      </ul> 
 								
 						</div>
 
-					</c:otherwise>
-				</c:choose>
 
 			</div>
 
 
 			<!-- Navbar ================================================== -->
-			<div id="logoArea" class="navbar">
-				<a id="smallScreen" data-target="#topMenu" data-toggle="collapse"
-					class="btn btn-navbar"> <span class="icon-bar"></span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span>
-				</a>
-				<div class="navbar-inner">
-					<a class="brand" href="index.html"><img
-						src="${pageContext.request.contextPath}/themes/images/logo.png"
-						alt="Bootsshop" /></a>
-					<form class="form-inline navbar-search" method="post"
-						action="products.html">
-						<input id="srchFld" class="srchTxt" type="text" style="height: 30px" />
-						 <select class="srchTxt">
-							<option>所有</option>
-							<option>手机数码</option>
-							<option>生活百货</option>
-							<option>书集资料</option>
-							<option>健身器材</option>
-							<option>美妆</option>
-						</select>
-						<button type="submit" id="submitButton" class="btn btn-primary">确定</button>
-					</form>
-					<!--================ 登陆   ==================== -->
-					<ul id="topMenu" class="nav pull-right">
+		<div id="logoArea" class="navbar">
+			<a id="smallScreen" data-target="#topMenu" data-toggle="collapse"
+				class="btn btn-navbar"> <span class="icon-bar"></span> <span
+				class="icon-bar"></span> <span class="icon-bar"></span>
+			</a>
+			<div class="navbar-inner">
+				<a class="brand" href="#"><img
+					src="${pageContext.request.contextPath}/themes/images/logo.png"
+					alt="Bootsshop" /></a>
+				<form class="form-inline navbar-search" method="post"
+					action="products.html">
+					<input id="srchFld" class="srchTxt" type="text"
+						style="height: 30px" /> <select class="srchTxt">
+						<option>所有</option>
+						<option>手机数码</option>
+						<option>生活百货</option>
+						<option>书集资料</option>
+						<option>健身器材</option>
+						<option>美妆</option>
+					</select>
+					<button type="submit" id="submitButton" class="btn btn-primary">确定</button>
+				</form>
+				<!--================ 登陆   ==================== -->
+				<div style="position: relative;"class="dropdown">
+					<ul id="topMenu" class="nav pull-right ">
+						<li><label style="margin-top: 26px; color: white;">
+								欢迎! <strong style="color: white;">
+									${user_session.nickname }</strong>
+						</label></li>
 
-						<c:choose>
-							<c:when test="${user_session eq null}">
-								<li class="login"><a href="#login" role="button"
-									data-toggle="modal" style=""><span
-										class="btn btn-large btn-success">登陆</span></a>
-									<div id="login" class="modal hide fade in" tabindex="-1"
-										role="dialog" aria-labelledby="login" aria-hidden="false">
-										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal"
-												aria-hidden="true">×</button>
-											<h3>Login Block</h3>
-										</div>
-										<div class="modal-body">
-											<form class="form-horizontal loginFrm">
-												<div class="control-group">
-													<input type="text" id="inputEmail" placeholder="Email">
-												</div>
-												<div class="control-group">
-													<input type="password" id="inputPassword"
-														placeholder="Password">
-												</div>
-												<div class="control-group">
-													<label class="checkbox"> <input type="checkbox">
-														Remember me
-													</label>
-												</div>
-
-											</form>
-											<button id="Sign" type="submit" class="btn btn-success">Sign
-												in</button>
-											<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-										</div>
-									</div></li>
-
-								<li class="register"><a href="#register" role="button"
-									data-toggle="modal" style="padding-right: 0"><span
-										class="btn btn-large btn-success">注册</span></a></li>
-							</c:when>
-							<c:otherwise>
-								<li class="reSale"><a  role="button"
-									 style="padding-right: 0"><span
-										class="btn btn-large btn-success">一键转卖</span></a></li>
-							</c:otherwise>
-						</c:choose>
+						<li><a role="button" href="#" id="ss"><img
+								class="img-circle " style="width: 50px; height: 50px;"
+								src="${pageContext.request.contextPath}/themes/img/1.jpg" alt="" /></a>
+						</li>
 						<!-- <li class="resale"><a href="#resale" role="button"
 							data-toggle="modal" style="padding-right: 0"><span
 								class="btn btn-large btn-success">一键转卖</span></a></li> -->
 					</ul>
-					<!--================ 登陆结束   ==================== -->
-				</div>
+				<div style="position: absolute;">
+				<ul class="dropdown-menu"
+					style="z-index: 20;  display: ; left: 988.4px; top: 68px">
+					<li id="myPage"><a href="#">个人主页</a></li>
+					<li id=""><a href="#">历史订单</a></li>
+					<li id=""><a href="#">购 &nbsp;物&nbsp;车</a></li>
+					<li id="quite"><a href="#">注 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;销</a></li>
+
+				</ul>
 			</div>
+				</div>
+				<!--================ 登陆结束   ==================== -->
+			</div>
+			
 		</div>
+	</div>
 	</div>
 <div id="main" class="clearfix" style="width: 1170px">
 			<h2>发布 闲置</h2>
@@ -159,19 +120,6 @@
 						<select name="goodsInfo.goods_type" id="selectTypes" class="userGrade" lay-filter="userGrade">
 
 						</select>
-						<!--<div class="layui-unselect layui-form-select">
-							<div class="layui-select-title"><input type="text" placeholder="请选择分类" value="" readonly="" class="layui-input layui-unselect"><i class="layui-edge"></i></div>
-							<dl class="layui-anim layui-anim-upbit">
-								<dd lay-value="1" class="">手机</dd>
-								<dd lay-value="2" class="">电脑</dd>
-								<dd lay-value="4" class="">配件</dd>
-								<dd lay-value="5" class="">电器</dd>
-								<dd lay-value="6" class="">书籍</dd>
-								<dd lay-value="7" class="">娱乐</dd>
-								<dd lay-value="8" class="">运动</dd>
-								<dd lay-value="9" class="">代步</dd>
-							</dl>
-						</div>-->
 					</div>
 				</div>
 				<div class="layui-form-item input-line" id="price">
@@ -232,6 +180,43 @@
 				</div>
 			</div>
 		</div>
+		<!-- Footer ================================================================== -->
+	<div id="footerSection">
+		<div class="container">
+			<div class="row">
+				<div class="span3">
+					<h5>ACCOUNT</h5>
+					<a href="login.html">YOUR ACCOUNT</a> <a href="login.html">PERSONAL
+						INFORMATION</a> <a href="login.html">ADDRESSES</a> <a
+						href="login.html">DISCOUNT</a> <a href="login.html">ORDER
+						HISTORY</a>
+				</div>
+				<div class="span3">
+					<h5>INFORMATION</h5>
+					<a href="contact.html">CONTACT</a> <a href="register.html">REGISTRATION</a>
+					<a href="legal_notice.html">LEGAL NOTICE</a> <a href="tac.html">TERMS
+						AND CONDITIONS</a> <a href="faq.html">FAQ</a>
+				</div>
+				<div class="span3">
+					<h5>OUR OFFERS</h5>
+					<a href="#">NEW PRODUCTS</a> <a href="#">TOP SELLERS</a> <a
+						href="special_offer.html">SPECIAL OFFERS</a> <a href="#">MANUFACTURERS</a>
+					<a href="#">SUPPLIERS</a>
+				</div>
+				<div id="socialMedia" class="span3 pull-right">
+					<h5>SOCIAL MEDIA</h5>
+					<a href="#"><img width="60" height="60"
+						src="themes/images/facebook.png" title="facebook" alt="facebook" /></a>
+					<a href="#"><img width="60" height="60"
+						src="themes/images/twitter.png" title="twitter" alt="twitter" /></a>
+					<a href="#"><img width="60" height="60"
+						src="themes/images/youtube.png" title="youtube" alt="youtube" /></a>
+				</div>
+			</div>
+			<p class="pull-right">&copy; Bootshop</p>
+		</div>
+		<!-- Container End -->
+	</div>
 <body>
 	
 	</body>
@@ -240,4 +225,5 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath }/layui/layui.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/toastr.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/upload/upload.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/loginRegister/loginRegister.js" ></script>
 </html>

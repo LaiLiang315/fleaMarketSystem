@@ -117,7 +117,6 @@ public class GoodsInfoManagerServiceImpl implements GoodsInfoManagerService {
 		List<type> listType = new ArrayList<>();
 		listType = (List<type>) goodsInfoManagerDao
 				.listObject("from type where is_delete='0' order by type_modifytime desc");
-		System.out.println("listType"+listType);
 		if (!listType.isEmpty()) {
 			for (type type : listType) {
 				List<goodsInfo> ListInfo = new ArrayList<>();
@@ -150,7 +149,6 @@ public class GoodsInfoManagerServiceImpl implements GoodsInfoManagerService {
 			}
 			
 		}
-		System.out.println("listGoodsManagerDTO"+listGoodsManagerDTO);
 		return listGoodsManagerDTO;
 		
 	}

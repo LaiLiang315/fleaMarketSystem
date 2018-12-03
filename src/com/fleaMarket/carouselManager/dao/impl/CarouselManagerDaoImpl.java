@@ -130,7 +130,6 @@ public class CarouselManagerDaoImpl implements CarouselManagerDao {
 		Query query = session.createQuery(hql);
 		query.setParameter("ID", trim);
 		picture =(picture) query.uniqueResult();
-		System.out.println("MNMN"+picture);
 		 return picture;
 	}
 	// 获取带有特殊标记的图集信息

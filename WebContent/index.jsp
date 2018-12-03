@@ -36,7 +36,7 @@
 <body>
 	<div id="header">
 		<div class="container">
-			<div id="welcomeLine" class="row">
+			<%-- <div id="welcomeLine" class="row">
 				<c:choose>
 					<c:when test="${user_session eq null}">
 						<div class="span6"></div>
@@ -56,10 +56,18 @@
 						</div>
 
 					</c:otherwise>
-				</c:choose>
+				</c:choose> --%>
+
+<div id="welcomeLine" class="row">
+						<div class="span6" >
+									<ul class="dropdown-menu" >
+        
+      </ul> 
+								
+						</div>
+
 
 			</div>
-
 
 			<!-- Navbar ================================================== -->
 			<div id="logoArea" class="navbar">
@@ -68,7 +76,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span>
 				</a>
 				<div class="navbar-inner">
-					<a class="brand" href="index.html"><img
+					<a class="brand" href="#"><img
 						src="${pageContext.request.contextPath}/themes/images/logo.png"
 						alt="Bootsshop" /></a>
 					<form class="form-inline navbar-search" method="post"
@@ -85,33 +93,36 @@
 						<button type="submit" id="submitButton" class="btn btn-primary">确定</button>
 					</form>
 					<!--================ 登陆   ==================== -->
-					<ul id="topMenu" class="nav pull-right">
+					
 
 						<c:choose>
 							<c:when test="${user_session eq null}">
+							<ul id="topMenu" class="nav pull-right">
 								<li class="login"><a href="#login" role="button"
 									data-toggle="modal" style=""><span
-										class="btn btn-large btn-success">登陆</span></a>
-									<div id="login" class="modal hide fade in" tabindex="-1"
+										class="btn btn-large btn-success">发布闲置</span></a>
+									<div id="login" class="modal hide fade in" 
 										role="dialog" aria-labelledby="login" aria-hidden="false">
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal"
 												aria-hidden="true">×</button>
-											<h3>Login Block</h3>
+											<h3>登陆</h3>
 										</div>
 										<div class="modal-body">
 											<form class="form-horizontal loginFrm">
 												<div class="control-group">
-													<input type="text" id="inputEmail" placeholder="Email">
+													<input type="text" id="inputEmail" placeholder="请输入账号：">
 												</div>
 												<div class="control-group">
 													<input type="password" id="inputPassword"
-														placeholder="Password">
+														placeholder="请输入密码：">
 												</div>
 												<div class="control-group">
 													<label class="checkbox"> <input type="checkbox">
-														Remember me
-													</label>
+														记住我   
+													</label> <label style="float: left">没有账号? <a href="#register" 
+									data-toggle="modal" style="padding-right: 0"><span
+										class="register">注册</span></a></label>
 												</div>
 
 											</form>
@@ -120,21 +131,41 @@
 											<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
 										</div>
 									</div></li>
-
-								<li class="register"><a href="#register" role="button"
+</ul>
+								<!-- <li class="register"><a href="#register" role="button"
 									data-toggle="modal" style="padding-right: 0"><span
-										class="btn btn-large btn-success">注册</span></a></li>
+										class="btn btn-large btn-success">注册</span></a></li> -->
 							</c:when>
 							<c:otherwise>
-								<li class="reSale"><a  role="button"
+							<div style="position: relative;"class="dropdown">
+					<ul id="topMenu" class="nav pull-right ">
+						<li><label style="margin-top: 26px; color: white;">
+								欢迎! <strong style="color: white;">
+									${user_session.nickname }</strong>
+						</label></li>
+
+						<li><a role="button" href="#" id="ss"><img
+								class="img-circle " style="width: 50px; height: 50px;"
+								src="${pageContext.request.contextPath}/themes/img/1.jpg" alt="" /></a>
+						</li>
+					<li class="reSale"><a  role="button"
 									 style="padding-right: 0"><span
-										class="btn btn-large btn-success">一键转卖</span></a></li>
+										class="btn btn-large btn-success">发布闲置</span></a></li>
+					</ul>
+				<div style="position: absolute;">
+				<ul class="dropdown-menu"
+					style="z-index: 9999;  display:none ; left: 880px; top: 68px">
+					<li id="myPage"><a href="#">个人主页</a></li>
+					<li id=""><a href="#">历史订单</a></li>
+					<li id=""><a href="#">购 &nbsp;物&nbsp;车</a></li>
+					<li id="quite"><a href="#">注 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;销</a></li>
+				</ul>
+			</div>
+				</div>
+				
 							</c:otherwise>
 						</c:choose>
-						<!-- <li class="resale"><a href="#resale" role="button"
-							data-toggle="modal" style="padding-right: 0"><span
-								class="btn btn-large btn-success">一键转卖</span></a></li> -->
-					</ul>
+					
 					<!--================ 登陆结束   ==================== -->
 				</div>
 			</div>
@@ -160,8 +191,6 @@
 					<ul id="sideManu" class="nav nav-tabs nav-stacked">
 
 					</ul>
-					<br />
-					<div class="thumbnail" style="text-align: center"></div>
 				</div>
 				<!-- Sidebar end=============================================== -->
 				<div class="span9">
@@ -231,6 +260,7 @@
 	<script
 		src="${pageContext.request.contextPath}/themes/js/bootstrap.min.js"
 		type="text/javascript"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath }/layui/layui.js"></script>
 		<script
 		src="${pageContext.request.contextPath}/js/myCarousel/getMyCarousel.js"
 		type="text/javascript"></script>

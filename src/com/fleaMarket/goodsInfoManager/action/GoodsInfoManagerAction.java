@@ -217,13 +217,13 @@ public class GoodsInfoManagerAction extends ActionSupport implements ServletResp
 	 * 查询图集DTO
 	 * @throws IOException 
 	 */
-	public String qudsManagerDTO() throws IOException {
+	public void qudsManagerDTO() throws IOException {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
 		response.setContentType("text/html;charset=utf-8");
 		listGoodsManagerDTO = goodsInfoManagerService.queryGoodsManagerDTO();
-		return "fd";
+//		return "fd";
 //		response.getWriter().write(gson.toJson(listGoodsManagerDTO));
 	}
 	

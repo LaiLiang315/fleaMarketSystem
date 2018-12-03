@@ -14,6 +14,10 @@ public class goodsInfo {
 	private String goods_state; // 商品状态
 	private String goods_describe; // 商品描述
 	private String goods_type; // 商品类型
+	private String exchange_adress;
+	private String exchange_ways;
+	private String user_qq;
+	private String user_weixin;
 	private String goods_creationtime; // 创建时间
 	private String goods_modifytime; // 修改时间
 
@@ -73,6 +77,39 @@ public class goodsInfo {
 		this.goods_type = goods_type;
 	}
 
+	
+	public String getExchange_adress() {
+		return exchange_adress;
+	}
+
+	public void setExchange_adress(String exchange_adress) {
+		this.exchange_adress = exchange_adress;
+	}
+
+	public String getExchange_ways() {
+		return exchange_ways;
+	}
+
+	public void setExchange_ways(String exchange_ways) {
+		this.exchange_ways = exchange_ways;
+	}
+
+	public String getUser_qq() {
+		return user_qq;
+	}
+
+	public void setUser_qq(String user_qq) {
+		this.user_qq = user_qq;
+	}
+
+	public String getUser_weixin() {
+		return user_weixin;
+	}
+
+	public void setUser_weixin(String user_weixin) {
+		this.user_weixin = user_weixin;
+	}
+
 	public String getGoods_creationtime() {
 		return goods_creationtime;
 	}
@@ -93,8 +130,9 @@ public class goodsInfo {
 	public String toString() {
 		return "goodsInfo [goods_id=" + goods_id + ", goods_name=" + goods_name + ", goods_belong=" + goods_belong
 				+ ", goods_price=" + goods_price + ", goods_state=" + goods_state + ", goods_describe=" + goods_describe
-				+ ", goods_type=" + goods_type + ", goods_creationtime=" + goods_creationtime + ", goods_modifytime="
-				+ goods_modifytime + "]";
+				+ ", goods_type=" + goods_type + ", exchange_adress=" + exchange_adress + ", exchange_ways="
+				+ exchange_ways + ", user_qq=" + user_qq + ", user_weixin=" + user_weixin + ", goods_creationtime="
+				+ goods_creationtime + ", goods_modifytime=" + goods_modifytime + "]";
 	}
 
 }

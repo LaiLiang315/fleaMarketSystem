@@ -94,7 +94,6 @@ public class CarouselManagerServiceImpl implements CarouselManagerService {
 	 */
 	public void addPictrues(picture pic) {
 		pic.setPicture_id(BuildUuid.getUuid());
-		pic.setPicture_sequence(9999);
 		// 将图集顺序设置为特殊值，便去后面补充信息是重置
 		pic.setPicture_creationtime(TimeUtil.getStringSecond());
 		pic.setPicture_modifytime(TimeUtil.getStringSecond());
@@ -107,7 +106,6 @@ public class CarouselManagerServiceImpl implements CarouselManagerService {
 	 */
 	@Override
 	public String addAndComplete(goodsInfo goodsInfo, String pictrueMap) {
-		
 		String result = null;
 		// 首先添加作品信息
 		// 生成uuid
@@ -118,10 +116,12 @@ public class CarouselManagerServiceImpl implements CarouselManagerService {
 		goodsInfo.setGoods_modifytime(TimeUtil.getStringSecond());
 		carouselManageDao.saveOrUpdateObject(goodsInfo);
 		String[] picIds = pictrueMap.split(",");
+		int i=0;
 		for (String picId : picIds) {
-//			System.out.println("222"+picId.trim());
+			i=i+1;
 			picture pic = carouselManageDao.getPicById(picId.trim());
-//			System.out.println("CXCXCX"+pic);
+			//设置图片顺序
+			pic.setPicture_sequence(i);
 			if(pic!=null) {
 				pic.setPicture_belong(goodsInfoId);
 				carouselManageDao.saveOrUpdateObject(pic);
