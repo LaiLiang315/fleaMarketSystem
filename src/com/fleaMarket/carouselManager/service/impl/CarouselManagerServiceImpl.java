@@ -101,6 +101,7 @@ public class CarouselManagerServiceImpl implements CarouselManagerService {
 		carouselManageDao.saveOrUpdateObject(pic);
 	}
 
+	
 	/**
 	 * 添加并完善商品信息
 	 */
