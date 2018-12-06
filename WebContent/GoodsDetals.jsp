@@ -115,6 +115,11 @@
 										</ul>
 							</c:when>
 							<c:otherwise>
+							<ul id="topMenu" class="nav pull-right ">
+			<li class="reSale"><a  role="button"
+									 style="padding-right: 0"><span
+										class="btn btn-large btn-success">发布闲置</span></a></li>
+				</ul>
 							<div class="dropdown">
 					<ul id="topMenu" class="nav pull-right ">
 						<li><label style="margin-top: 26px; color: white;">
@@ -126,20 +131,20 @@
 								class="img-circle " style="width: 50px; height: 50px;"
 								src="${pageContext.request.contextPath}/themes/img/1.jpg" alt="" /></a>
 						</li>
-					<li class="reSale"><a  role="button"
-									 style="padding-right: 0"><span
-										class="btn btn-large btn-success">发布闲置</span></a></li>
+					
 					</ul>
 				<div style="position: absolute;">
 				<ul class="dropdown-menu"
-					style="z-index: 9999;  display:block ; left: 880px; top: 68px">
+					style="z-index: 9999;  display:none ; left: 880px; top: 68px">
 					<li id="myPage"><a href="#">个人主页</a></li>
 					<li id=""><a href="#">历史订单</a></li>
 					<li id=""><a href="#">购 &nbsp;物&nbsp;车</a></li>
 					<li id="quite"><a href="#">注 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;销</a></li>
 				</ul>
 			</div>
+			
 				</div>
+				
 							</c:otherwise>
 						</c:choose>
 						<!-- <li class="resale"><a href="#resale" role="button"

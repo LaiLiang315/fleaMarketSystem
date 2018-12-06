@@ -16,6 +16,7 @@ import com.fleaMarket.carouselManager.service.CarouselManagerService;
 import com.fleaMarket.domain.carousel;
 import com.fleaMarket.domain.goodsInfo;
 import com.fleaMarket.domain.picture;
+import com.fleaMarket.domain.user;
 
 import util.BuildUuid;
 import util.ImgCompress;
@@ -100,8 +101,6 @@ public class CarouselManagerServiceImpl implements CarouselManagerService {
 		pic.setIs_delete(0);
 		carouselManageDao.saveOrUpdateObject(pic);
 	}
-
-	
 	/**
 	 * 添加并完善商品信息
 	 */
@@ -157,6 +156,22 @@ public class CarouselManagerServiceImpl implements CarouselManagerService {
 			return listCarousel;
 		}
 		return null;
+	}
+
+	/**
+	 * 添加头像
+	 */
+	@Override
+	public void addHeadportrait(user user,String fileFileName) {
+		System.out.println("JJ"+fileFileName);
+		System.out.println("LL"+user);
+		user newUser = new user();
+		newUser = carouselManageDao.getUserById(user.getUser_id());
+		if(newUser!=null) {
+			newUser.setUser_modifytime(TimeUtil.getStringSecond());
+			newUser.setHeadportrait(fileFileName);
+			carouselManageDao.saveOrUpdateObject(newUser);
+		}
 	}
 
 

@@ -6,6 +6,7 @@ import java.util.Map;
 import com.fleaMarket.domain.carousel;
 import com.fleaMarket.domain.goodsInfo;
 import com.fleaMarket.domain.picture;
+import com.fleaMarket.domain.user;
 
 /**
  * 评论与回复的service层接口
@@ -50,6 +51,14 @@ public interface CarouselManagerService {
 	 * @return
 	 */
 	List<carousel> findCarousels();
+
+	/**
+	 * 上传头像
+	 * @param user
+	 * @param fileFileName 
+	 */
+	void addHeadportrait(user user, String fileFileName);
+
 
 	
 

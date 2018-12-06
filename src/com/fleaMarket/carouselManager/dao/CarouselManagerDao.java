@@ -5,6 +5,7 @@ import java.util.List;
 import com.fleaMarket.domain.carousel;
 import com.fleaMarket.domain.goodsInfo;
 import com.fleaMarket.domain.picture;
+import com.fleaMarket.domain.user;
 
 /**
  * 轮播图管理的DAO层接口
@@ -83,6 +84,9 @@ public interface CarouselManagerDao {
      * @return
      */
 	picture getPicById(String trim);
+
+
+	user getUserById(String trim);
 
 	/**
 	 * 查询所有轮播图

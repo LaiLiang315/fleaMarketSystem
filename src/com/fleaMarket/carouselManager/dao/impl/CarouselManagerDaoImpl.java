@@ -10,6 +10,7 @@ import org.hibernate.SessionFactory;
 import com.fleaMarket.carouselManager.dao.CarouselManagerDao;
 import com.fleaMarket.domain.carousel;
 import com.fleaMarket.domain.picture;
+import com.fleaMarket.domain.user;
 
 public class CarouselManagerDaoImpl implements CarouselManagerDao {
 
@@ -48,6 +49,7 @@ public class CarouselManagerDaoImpl implements CarouselManagerDao {
 		session.saveOrUpdate(obj);
 		session.flush();
 	}
+
 	/**
 	 * 分页获取对象，这里是获取一页中的数据
 	 * 
@@ -106,6 +108,7 @@ public class CarouselManagerDaoImpl implements CarouselManagerDao {
 		session.clear();
 		return list;
 	}
+
 	/**
 	 * 根据id获取图片
 	 */
@@ -113,12 +116,13 @@ public class CarouselManagerDaoImpl implements CarouselManagerDao {
 	public carousel getCarouselById(String trim) {
 		carousel carousel = new carousel();
 		Session session = getSession();
-		String hql ="from carousel where is_delete='0' and carousel_id= :ID";
+		String hql = "from carousel where is_delete='0' and carousel_id= :ID";
 		Query query = session.createQuery(hql);
 		query.setParameter("ID", trim);
-		carousel =(carousel) query.uniqueResult();
-		 return carousel;
+		carousel = (carousel) query.uniqueResult();
+		return carousel;
 	}
+
 	/**
 	 * 根据id获取图片
 	 */
@@ -126,39 +130,53 @@ public class CarouselManagerDaoImpl implements CarouselManagerDao {
 	public picture getPicById(String trim) {
 		picture picture = new picture();
 		Session session = getSession();
-		String hql ="from picture where is_delete='0' and picture_id= :ID";
+		String hql = "from picture where is_delete='0' and picture_id=:ID";
 		Query query = session.createQuery(hql);
 		query.setParameter("ID", trim);
-		picture =(picture) query.uniqueResult();
-		 return picture;
+		picture = (picture) query.uniqueResult();
+		return picture;
 	}
-	// 获取带有特殊标记的图集信息
-		@Override
-		public List<picture> getSpectialPic(String pictrueName) {
-			Session session = getSession();
-			String hql = "from picture where picture_sequence='9999' and picture_name like '%"+pictrueName+"%'";
-			Query query = session.createQuery(hql);
-			List<picture> listPicture = (List<picture>) query.list();
-			return listPicture;
-		}
-		//获取第一张图片
-		@Override
-		public picture getFirstPic(String goodsInfoId) {
-			
-			Session session = getSession();
-			String hql = "from picture where  is_delete='0' and picture_belong= '"+goodsInfoId+"'";
-			Query query = session.createQuery(hql);
-			picture firstPic = (picture) query.list().get(0);
-			return firstPic;
-		}
 
-//		/**
-//		 * 查询所有轮播图
-//		 */
-//		@Override
-//		public List<carousel> listCarousel() {
-//			Session session = getSession();
-//			String hql = "from carousel where"
-//			return null;
-//		}
+	// 获取带有特殊标记的图集信息
+	@Override
+	public List<picture> getSpectialPic(String pictrueName) {
+		Session session = getSession();
+		String hql = "from picture where picture_sequence='9999' and picture_name like '%" + pictrueName + "%'";
+		Query query = session.createQuery(hql);
+		List<picture> listPicture = (List<picture>) query.list();
+		return listPicture;
+	}
+
+	// 获取第一张图片
+	@Override
+	public picture getFirstPic(String goodsInfoId) {
+
+		Session session = getSession();
+		String hql = "from picture where  is_delete='0' and picture_belong= '" + goodsInfoId + "'";
+		Query query = session.createQuery(hql);
+		picture firstPic = (picture) query.list().get(0);
+		return firstPic;
+	}
+
+	@Override
+	public user getUserById(String trim) {
+		user user = new user();
+		Session session = getSession();
+		String hql = "from user where  is_delete='0' and user_id=:ID";
+		Query query = session.createQuery(hql);
+		query.setParameter("ID", trim);
+		 user =(user) query.uniqueResult();
+		// TODO Auto-generated method stub
+		return user;
+	}
+
+	// /**
+	// * 查询所有轮播图
+	// */
+	// @Override
+	// public List<carousel> listCarousel() {
+	// Session session = getSession();
+	// String hql = "from carousel where"
+	// return null;
+	// }
 }

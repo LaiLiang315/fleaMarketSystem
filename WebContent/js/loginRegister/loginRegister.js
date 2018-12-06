@@ -129,17 +129,22 @@ $("#ss").mouseover(function(){
 	
 	
 })
-//鼠标离开事件
+//鼠标离开头像事件
 $(".dropdown").mouseleave(function(){
 	$(".dropdown-menu").css('display','none')
 		
 	})
 
-//鼠标点退出登陆
+//鼠标点击退出登陆
 $("#quite").on("click",function(){
 	loginOut()
 })
 
+//鼠标点击个人主页
+$("#myPage").on("click",function(){
+	location.href="/fleaMarketSystem/skip/skip_intoUser";
+	
+})
 
 //用户注册
 function register_ajax(){

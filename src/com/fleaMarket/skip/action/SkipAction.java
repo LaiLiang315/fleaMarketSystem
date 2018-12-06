@@ -32,11 +32,17 @@ public class SkipAction {
 	public String intoRegister() {
 		return "intoRegister";
 		
+	}
+	public String intoUser() {
 		
+		return "intoUser";
 		
 	}
-	
-	
+	//跳转用户信息页
+	public String intoUserInfo() {
+		
+		return "intoUserInfo";
+	}
 	/*//跳转详情页
 	public String kkk() {
 		

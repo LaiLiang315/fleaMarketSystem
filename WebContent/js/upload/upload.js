@@ -178,7 +178,13 @@ layui
 													.val() == null) {
 										toastr.error("请填写价格!");
 										return false;
-									}
+									}else if ($("input[name='exchange_adress']")
+											.val() == ""
+												|| $("input[name='exchange_adress']")
+														.val() == null) {
+											toastr.error("请填写交易地址!");
+											return false;
+										}
 								},
 								done : function(res, index, upload) {
 									console.log("res====" + res.code);

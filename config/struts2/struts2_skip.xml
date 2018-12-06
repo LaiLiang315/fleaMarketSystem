@@ -12,6 +12,8 @@
 		<result name="intoGoodsDetals">/GoodsDetals.jsp</result>
 		 <result name="intoUpLoadPic">/UpLoadPic.jsp</result>
 		 <result name="intoRegister">/register.jsp</result>
+		 <result name="intoUser">/user/user.jsp</result>
+		 <result name="intoUserInfo">/user/userInfo.jsp</result>
 		</action>
 	</package>
 

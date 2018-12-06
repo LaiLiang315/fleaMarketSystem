@@ -138,6 +138,7 @@ public class LoginRegisterAction extends ActionSupport implements ServletRespons
 			gsonBuilder.setPrettyPrinting();// 格式化json数据
 			Gson gson = gsonBuilder.create();
 			response.setContentType("text/html;charset=utf-8");
+			System.out.println("HH"+session);
 			response.getWriter().write(gson.toJson(session));
 	}
 	

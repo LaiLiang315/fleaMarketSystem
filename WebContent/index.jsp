@@ -137,6 +137,11 @@
 										class="btn btn-large btn-success">注册</span></a></li> -->
 							</c:when>
 							<c:otherwise>
+							<ul id="topMenu" class="nav pull-right ">
+			<li class="reSale"><a  role="button"
+									 style="padding-right: 0"><span
+										class="btn btn-large btn-success">发布闲置</span></a></li>
+				</ul>
 							<div style="position: relative;"class="dropdown">
 					<ul id="topMenu" class="nav pull-right ">
 						<li><label style="margin-top: 26px; color: white;">
@@ -148,9 +153,6 @@
 								class="img-circle " style="width: 50px; height: 50px;"
 								src="${pageContext.request.contextPath}/themes/img/1.jpg" alt="" /></a>
 						</li>
-					<li class="reSale"><a  role="button"
-									 style="padding-right: 0"><span
-										class="btn btn-large btn-success">发布闲置</span></a></li>
 					</ul>
 				<div style="position: absolute;">
 				<ul class="dropdown-menu"

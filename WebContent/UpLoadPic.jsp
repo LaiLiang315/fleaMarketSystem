@@ -44,7 +44,7 @@
 				<a class="brand" href="#"><img
 					src="${pageContext.request.contextPath}/themes/images/logo.png"
 					alt="Bootsshop" /></a>
-				<form class="form-inline navbar-search" method="post"
+				<!-- <form class="form-inline navbar-search" method="post"
 					action="products.html">
 					<input id="srchFld" class="srchTxt" type="text"
 						style="height: 30px" /> <select class="srchTxt">
@@ -56,7 +56,7 @@
 						<option>美妆</option>
 					</select>
 					<button type="submit" id="submitButton" class="btn btn-primary">确定</button>
-				</form>
+				</form> -->
 				<!--================ 登陆   ==================== -->
 				<div style="position: relative;"class="dropdown">
 					<ul id="topMenu" class="nav pull-right ">
@@ -143,22 +143,22 @@
 				<div class="layui-form-item input-line" id="address">
 					<label class="layui-form-label">交易地址</label>
 					<div class="layui-input-block">
-						<input type="text" name="title" autocomplete="off" placeholder="请输入交易地址" class="layui-input goods-address">
+						<input type="text" name="exchange_adress" autocomplete="off" placeholder="请输入交易地址" class="layui-input goods-address">
 					</div>
 				</div>
 				<div class="layui-form-item input-line" id="phoneNumber">
 				
 					<label class="layui-form-label">手机号</label>
 					<div class="layui-input-inline">
-						<input type="text" name="title" autocomplete="off" placeholder="请输入手机号" class="layui-input phone-number" value="">
+						<input type="text" name="title" autocomplete="off" placeholder="请输入手机号" class="layui-input phone-number" value="${user_session.username}">
 					</div>
 					<label class="layui-form-label">QQ号</label>
 					<div class="layui-input-inline">
-						<input type="text" name="title" autocomplete="off" placeholder="请输入QQ号" class="layui-input qq-number">
+						<input type="text" name="user_qq" autocomplete="off" placeholder="请输入QQ号" class="layui-input qq-number">
 					</div>
 					<label class="layui-form-label">微信号</label>
 					<div class="layui-input-inline">
-						<input type="text" name="title" autocomplete="off" placeholder="请输入微信号" class="layui-input wx-number">
+						<input type="text" name="user_weixin" autocomplete="off" placeholder="请输入微信号" class="layui-input wx-number">
 					</div>
 				</div>
 				<!-- <div class="layui-form-item input-line" id="qqNumber">
