@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.fleaMarket.domain.goodsInfo;
 import com.fleaMarket.domain.picture;
 import com.fleaMarket.domain.type;
+import com.fleaMarket.domain.user;
 import com.fleaMarket.goodsInfoManager.DTO.GoodsManagerDTO;
 import com.fleaMarket.goodsInfoManager.DTO.GoodsPicDTO;
 import com.fleaMarket.goodsInfoManager.VO.GoodsManagerVO;
@@ -106,9 +107,19 @@ public class GoodsInfoTest {
 	 */
 	@Test
 	public void getInfoByGoodsIdTest() {
-		String data_id = "a2b6a69b-d618-4f47-9138-4a7b0dbb9f8f";
+		String data_id = "42271deb-b3a6-48fd-8aff-340a33107ba6";
 		goodsInfo info = new goodsInfo();
 		info = goodsInfoManagerService.getgoodsInfoByGoodsId(data_id);
 		System.out.println("SS:"+info);
+	}
+	/**
+	 * 跟据商品id查询用户信息
+	 */
+	@Test
+	public void getUserBygoodsIdTest() {
+		String data_id = "42271deb-b3a6-48fd-8aff-340a33107ba6";
+		user user = new user();
+		user= goodsInfoManagerService.getUserInfoByGoodsId(data_id);
+		System.out.println("SS:"+user);
 	}
 }

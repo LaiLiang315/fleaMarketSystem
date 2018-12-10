@@ -14,7 +14,6 @@ $(document).ready(function() {
 
 // 将详情页新信息放入
 function putDetal() {
-
 	var goodsId = $("#hh").val()
 	// 获取商品图片
 	$

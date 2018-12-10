@@ -6,6 +6,7 @@ import com.fleaMarket.domain.goodsInfo;
 import com.fleaMarket.domain.picture;
 import com.fleaMarket.domain.type;
 import com.fleaMarket.domain.typeOne;
+import com.fleaMarket.domain.user;
 import com.fleaMarket.goodsInfoManager.DTO.GoodsManagerDTO;
 import com.fleaMarket.goodsInfoManager.DTO.GoodsPicDTO;
 import com.fleaMarket.goodsInfoManager.DTO.GoodsPicsDTO;
@@ -74,6 +75,13 @@ public interface GoodsInfoManagerService {
 	 */
 
 	public goodsInfo getgoodsInfoByGoodsId(String data_id);
+
+	/**
+	 * 跟据商品Id查询用户信息
+	 * @param data_id
+	 * @return
+	 */
+	public user getUserInfoByGoodsId(String data_id);
 
 	
 

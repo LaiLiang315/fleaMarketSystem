@@ -1,13 +1,11 @@
 //筛选类型
 var typeId = null
+
+var username="";
+var newUser="";
+var user="";
 $(document).ready(function() {
-	// 获取六条分类信息
-	getTypeInfo();
 	
-	getuser();
-	
-	registerPage()
-	// 小轮播自动进行
 	$('#featured').carousel({
 		interval : 4000
 	})
@@ -16,7 +14,68 @@ $(document).ready(function() {
 		$('#gallery a').lightBox();
 	});
 	
+	// 获取六条分类信息
+	getTypeInfo();
+	
+	getuser1()
+	
+	registerPage();
+	// 小轮播自动进行
+	
 });
+//得到当前登陆的用户
+function getuser1(){
+	$.ajax({
+		async : false,
+		type : 'POST',
+		url : '/fleaMarketSystem/loginRegister/loginRegister_getSes',
+		cache : false, // cache的作用就是第一次请求完毕之后，如果再次去请求，可以直接从缓存里面读取而不是再到服务器端读取。
+		dataType : "text",
+		success : function(result) {
+			
+			var jsonData = JSON.parse(result);
+var sess = jsonData.session.attributes.user_session
+			if(typeof(sess) =="undefined"){
+		}else{
+//			alert("4")
+			user = jsonData.session.attributes.user_session
+			username = jsonData.session.attributes.user_session.username
+			getNewUser()
+		   }
+		}
+	})
+	
+}
+//得到头像
+function getheadPic1(){
+	var dd = newUser.headportrait;
+	console.log("nnn"+$("#ss").children("img").html())
+//	$("#headPic").attr("src","/fleaMarketSystem/carouselManager/carouselManager_IoReadImage?fileFileName="+dd);
+//	$(".user-info").children("img").attr("src","/fleaMarketSystem/carouselManager/carouselManager_IoReadImage?fileFileName="+dd);
+    $("#ss").children("img").attr("src","/fleaMarketSystem/carouselManager/carouselManager_IoReadImage?fileFileName="+dd);
+
+}
+
+
+
+//更新session
+function getNewUser() {
+	$.ajax({
+		async : false,
+		type : 'POST',
+		url : '/fleaMarketSystem/loginRegister/loginRegister_getNewSes',
+		data :{ 'newUser.username' : username}
+		,cache : false, // cache的作用就是第一次请求完毕之后，如果再次去请求，可以直接从缓存里面读取而不是再到服务器端读取。
+		dataType : "text",
+		success : function(result) {
+			var jsonData = JSON.parse(result);
+			newUser = jsonData.session.attributes.user_session
+//			userId = jsonData.session.attributes.user_session.user_id;
+			console.log("ddd:"+result)
+			getheadPic1();
+		}
+	})
+}
 // 获取分类信息
 function getTypeInfo() {
 	$.ajax({
@@ -97,9 +156,11 @@ function getSubMenu(str) {
 }
 // 获取每个分类所有商品的图片
 function getList(str){
+	alert("1：")
+	console.log("MM"+str.id)
 	$("#"+str.id).siblings().removeClass('act');
 	if ($("#"+str.id).hasClass('act')) {
-		$("#"+str.id).removeClass('act');
+//		$("#"+str.id).removeClass('act');
     	} else {
 		$("#"+str.id+"").addClass('act');
 	}
@@ -130,7 +191,7 @@ function getList(str){
 						strStart = strStart
 								+ '<li>'
 								+ '<div class="thumbnail">'
-								+ '<a>'
+								+ '<a id="'+typeInfoPicVO.listGoodsPicDTO[i].info.goods_id+'" class ="btn" onClick="getDetal1(this)">'
 								+ '<img style="width:160px;height:160px" src="/fleaMarketSystem/carouselManager/carouselManager_IoReadImage?fileFileName='
 								+ typeInfoPicVO.listGoodsPicDTO[i].pic.picture_name
 								+ '" />'
@@ -143,7 +204,7 @@ function getList(str){
 								+ typeInfoPicVO.listGoodsPicDTO[i].info.goods_name
 								+ '</p>'
 								+ '<h4 style="text-align:center">'
-								+ '<a href="javascript:void(0)" class ="btn" onClick="getDetal(this)" >'
+								+ '<a href="javascript:void(0)" id="'+typeInfoPicVO.listGoodsPicDTO[i].info.goods_id+'" class ="btn" onClick="getDetal1(this)" >'
 								+ '<i class="icon-zoom-in">'
 								+ '</i>'
 								+ '</a>'
@@ -190,7 +251,7 @@ function getListGoodsInfo(str,pageNew) {
 						strStart = strStart
 								+ '<li>'
 								+ '<div class="thumbnail">'
-								+ '<a>'
+								+ '<a id="'+typeInfoPicVO.listGoodsPicDTO[i].info.goods_id+'" class ="btn" onClick="getDetal1(this)">'
 								+ '<img style="width:160px;height:160px" src="/fleaMarketSystem/carouselManager/carouselManager_IoReadImage?fileFileName='
 								+ typeInfoPicVO.listGoodsPicDTO[i].pic.picture_name
 								+ '" />'
@@ -203,7 +264,7 @@ function getListGoodsInfo(str,pageNew) {
 								+ typeInfoPicVO.listGoodsPicDTO[i].info.goods_name
 								+ '</p>'
 								+ '<h4 style="text-align:center">'
-								+ '<a href="javascript:void(0)" class ="btn" onClick="getDetal(this)" >'
+								+ '<a href="javascript:void(0)" class ="btn" onClick="getDetal1(this)" >'
 								+ '<i class="icon-zoom-in">'
 								+ '</i>'
 								+ '</a>'
@@ -312,6 +373,17 @@ function getCurPage(num) {
 	getListGoodsInfo(str,pageNew)
 }
 
+//得到详情
+function getDetal1(e){
+	var goodsId = e.id;
+	 alert("zzzz" + goodsId)
+	console.log("!" + goodsId)
+	location.href = "/fleaMarketSystem/skip/skip_intoGoodsDetals?data_id="
+			+ goodsId + "";
+	
+	
+	
+}
 //点击注册
 function registerPage(){
 	$(".register").on("click",function(){
@@ -321,21 +393,5 @@ function registerPage(){
 }
 
 
-//得到当前登陆的用户
-function getuser(){
-	$.ajax({
-		async : false,
-		type : 'POST',
-		url : '/fleaMarketSystem/loginRegister/loginRegister_getSes',
-		cache : false, // cache的作用就是第一次请求完毕之后，如果再次去请求，可以直接从缓存里面读取而不是再到服务器端读取。
-		processData : false, // 不序列化data
-		contentType : false,
-		success : function(result) {
-//			alert("SESSION")
-			console.log("SESSION"+result)
-			var sessin = JSON.parse(result)
-		}
-	})
-	
-}
+
 //跳转到详情页

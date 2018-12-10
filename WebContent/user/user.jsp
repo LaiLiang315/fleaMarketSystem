@@ -80,9 +80,7 @@
 		<img src="/images/web/user/default.png" class="user-header">
 		<a href="${pageContext.request.contextPath }/user/userinfo.jsp" class="username"></a>
 		<div class="auth">
-			<a class="realname-auth" href="/user/auth"><i class="icon" title="未实名认证"></i></a>
 			<a class="phone-auth" href="/user/auth"><i class="icon" style="color:#f40;" title="已绑定手机"></i></a>
-			<a class="email-auth" href="/user/auth"><i class="icon" title="未绑定邮箱"></i></a>
 		</div>
 	</div>
 	<div class="sider-nav">
@@ -91,8 +89,6 @@
 			<li id="myWants"><a href="javaScript:;" class=""><i class="icon"></i>我想要的</a></li>
 			<li><a href="" class=""><i class="icon"></i>我的留言</a></li>
 			<li id="myInfo"><a href="javaScript:;" class=""><i class="icon"></i>个人信息</a></li>
-			<li><a href="" class=""><i class="icon"></i>实名认证</a></li>
-			<li><a href="" class=""><i class="icon"></i>意见反馈</a></li>
 		</ul>
 	</div>
 </div>

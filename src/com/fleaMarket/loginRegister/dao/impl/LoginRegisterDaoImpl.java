@@ -110,12 +110,12 @@ public class LoginRegisterDaoImpl implements LoginRegisterDao {
 	 * 跟据用户名查询用户
 	 */
 	@Override
-	public user getUserByUserName(String username) {
+	public user getUserByUserName(String trim) {
 		user user = new user();
 		Session session = getSession();
 		String hql = "from user where is_delete=0 and username= :ID ";
 		Query query = session.createQuery(hql);
-		query.setParameter("ID", username);
+		query.setParameter("ID", trim);
 		user = (user) query.uniqueResult();
 		if (user != null) {
 			return user;

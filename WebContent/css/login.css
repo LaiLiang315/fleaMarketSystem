@@ -15,7 +15,7 @@ body{ min-width: 1024px; min-height: 100%; }
 .layui-layer-hui .layui-layer-content{ color: #fff; }
 
 /*注册*/
-#register-main{ height: 270px; }
+#register-main{ height: 205px; }
 .reg-left{ width: 300px; padding-right: 30px; border-right: #eee solid 1px; }
 .phone{ position: relative; }
 .phoneCode,.captchaCode{ width: 160px; display: inline-block; }
@@ -42,7 +42,7 @@ body{ min-width: 1024px; min-height: 100%; }
 .check-wrap a{ color: #11cd6e; }
 .check-wrap a:hover{ text-decoration: underline; }
 .checkbox{ height: 16px; width: 16px; vertical-align: sub; margin-right: 5px; }
-.reg-right{ margin-top: 110px; }
+.reg-right{ margin-top: 80px; }
 
 /*登录*/
 #login-main{ height: 205px;}

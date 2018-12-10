@@ -11,6 +11,7 @@ import com.fleaMarket.domain.goodsInfo;
 import com.fleaMarket.domain.picture;
 import com.fleaMarket.domain.type;
 import com.fleaMarket.domain.typeOne;
+import com.fleaMarket.domain.user;
 import com.fleaMarket.goodsInfoManager.dao.GoodsInfoManagerDao;
 /**
  * 商品信息管理的dao层实现层
@@ -241,7 +242,6 @@ public class GoodsInfoManagerDaoImpl implements GoodsInfoManagerDao {
 	 */
 	@Override
 	public goodsInfo getInfoByGoodsId(String data_id) {
-		// TODO Auto-generated method stub
 		goodsInfo info = new goodsInfo();
 		Session session = getSession();
 		String hql ="from goodsInfo where goods_id= :ID ";
@@ -250,6 +250,23 @@ public class GoodsInfoManagerDaoImpl implements GoodsInfoManagerDao {
 		info = (goodsInfo)query.uniqueResult();
 		if(info!=null) {
 			return info;
+		}
+		return null;
+	}
+
+	/**
+	 * 获取用户信息通过商品id
+	 */
+	@Override
+	public user getUserByGoodsId(String trim) {
+		user user = new user();
+		Session session = getSession();
+		String hql ="from user where user_id= :ID ";
+		Query query = session.createQuery(hql);
+		query.setParameter("ID", trim);
+		user =(user)query.uniqueResult();
+		if(user!=null) {
+			return user;
 		}
 		return null;
 	}

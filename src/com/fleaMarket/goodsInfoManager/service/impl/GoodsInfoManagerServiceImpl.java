@@ -7,6 +7,7 @@ import com.fleaMarket.domain.goodsInfo;
 import com.fleaMarket.domain.picture;
 import com.fleaMarket.domain.type;
 import com.fleaMarket.domain.typeOne;
+import com.fleaMarket.domain.user;
 import com.fleaMarket.goodsInfoManager.DTO.GoodsManagerDTO;
 import com.fleaMarket.goodsInfoManager.DTO.GoodsPicDTO;
 import com.fleaMarket.goodsInfoManager.DTO.GoodsPicsDTO;
@@ -196,12 +197,10 @@ public class GoodsInfoManagerServiceImpl implements GoodsInfoManagerService {
 	 */
 	@Override
 	public List<GoodsManagerDTO> findFourInfoDTO() {
-		// TODO Auto-generated method stub
 		List<GoodsManagerDTO> listGoodsManagerDTO = new ArrayList<>();
 		List<type> listType = new ArrayList<>();
 		listType = (List<type>) goodsInfoManagerDao
 				.listObject("from type where is_delete='0' order by type_modifytime desc");
-		System.out.println("1:"+listType);
 		for (type type : listType) {
 			List<goodsInfo> ListInfo = new ArrayList<>();
 			List<GoodsPicDTO> listGoodsPicDTO = new ArrayList<>();
@@ -215,7 +214,6 @@ public class GoodsInfoManagerServiceImpl implements GoodsInfoManagerService {
 			 * 遍历listInfo
 			 * 跟据info_Id查询listPic
 			 */
-			System.out.println("2:"+ListInfo);
 			if (!ListInfo.isEmpty()) {
 				for (goodsInfo info : ListInfo) {
 					picture Pic = new picture();
@@ -230,7 +228,6 @@ public class GoodsInfoManagerServiceImpl implements GoodsInfoManagerService {
 				}
 				GoodsManagerDTO goodsManagerDTO = new GoodsManagerDTO();
 				goodsManagerDTO.setListGoodsPicDTO(listGoodsPicDTO);
-				System.out.println("goodsManagerDTO"+goodsManagerDTO);
 				goodsManagerDTO.setType(type);
 				listGoodsManagerDTO.add(goodsManagerDTO);
 			}
@@ -303,8 +300,6 @@ public class GoodsInfoManagerServiceImpl implements GoodsInfoManagerService {
 	 */
 	@Override
 	public List<picture> getPicsByGoodsId(String data_id) {
-		System.out.println("DF:"+data_id);
-		// TODO Auto-generated method stub
 		List<picture> listPics = new ArrayList<>();
 		listPics = goodsInfoManagerDao.getPicsByInfoId(data_id);
 		if(!listPics.isEmpty()) 
@@ -323,6 +318,24 @@ public class GoodsInfoManagerServiceImpl implements GoodsInfoManagerService {
 		info = goodsInfoManagerDao.getInfoByGoodsId(data_id);
 		if(info!=null) {
 			return info;
+		}
+		return null;
+	}
+
+	/**
+	 * 根据商品id查询用户信息
+	 * 
+	 */
+	@Override
+	public user getUserInfoByGoodsId(String data_id) {
+		goodsInfo info = new goodsInfo();
+		info = goodsInfoManagerDao.getInfoByGoodsId(data_id);
+		if(info!=null) {
+			user user = new user();
+		user =goodsInfoManagerDao.getUserByGoodsId(info.getGoods_belong());
+		if(user!=null) {
+			return user;
+		}
 		}
 		return null;
 	}

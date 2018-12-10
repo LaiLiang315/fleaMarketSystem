@@ -106,8 +106,8 @@ input[readonly] {
 					<li><a href="javaScript:;" class=""><i class="icon"></i>我的留言</a></li>
 					<li id="myInfo"><a href="javaScript:;" class="active"><i
 							class="icon"></i>个人信息</a></li>
-					<li><a href="" class="javaScript:;"><i class="icon"></i>实名认证</a></li>
-					<li><a href="" class="javaScript:;"><i class="icon"></i>意见反馈</a></li>
+					<!-- <li><a href="" class="javaScript:;"><i class="icon"></i>实名认证</a></li>
+					<li><a href="" class="javaScript:;"><i class="icon"></i>意见反馈</a></li> -->
 				</ul>
 			</div>
 		</div>
@@ -154,14 +154,14 @@ input[readonly] {
 						</div>
 					</div>
 				</div>
-				<div class="layui-form-item">
+				<!-- <div class="layui-form-item">
 					<label class="layui-form-label">生日</label>
 					<div class="layui-input-inline">
 						<input class="layui-input birthday" placeholder=""
 							onclick="layui.laydate({elem: this})" value="">
 					</div>
 					<div class="layui-form-mid layui-word-aux">（该信息其他人不可见）</div>
-				</div>
+				</div> -->
 				<div class="layui-form-item">
 					<label class="layui-form-label">地址</label>
 					<div class="layui-input-block">
@@ -224,6 +224,7 @@ input[readonly] {
 	src="${pageContext.request.contextPath }/layui/layui.js"></script>
 <%-- <script type="text/javascript"
 	src="${pageContext.request.contextPath }/layui/layui.all.js"></script> --%>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/layui/lay/modules/form.js" ></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath }/js/toastr.js"></script>
 <script type="text/javascript"

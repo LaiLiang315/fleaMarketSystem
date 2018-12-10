@@ -25,14 +25,21 @@ public class SkipAction {
 		return "intoGoodsDetals";
 	}
 
+	//发布商品页
 	public String intoUpLoadPic() {
 		return "intoUpLoadPic";
 	}
-	
+	//登录页
+    public String intoLogin() {
+		
+		return "intoLogin";
+	}
+	//注册页
 	public String intoRegister() {
 		return "intoRegister";
 		
 	}
+	//用户页
 	public String intoUser() {
 		
 		return "intoUser";
@@ -43,6 +50,9 @@ public class SkipAction {
 		
 		return "intoUserInfo";
 	}
+
+	
+	
 	/*//跳转详情页
 	public String kkk() {
 		

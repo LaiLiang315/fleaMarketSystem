@@ -118,9 +118,9 @@
 														placeholder="请输入密码：">
 												</div>
 												<div class="control-group">
-													<label class="checkbox"> <input type="checkbox">
+													<!-- <label class="checkbox"> <input type="checkbox">
 														记住我   
-													</label> <label style="float: left">没有账号? <a href="#register" 
+													</label> --> <label style="float: left">没有账号? <a href="#register" 
 									data-toggle="modal" style="padding-right: 0"><span
 										class="register">注册</span></a></label>
 												</div>

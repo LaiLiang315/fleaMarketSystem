@@ -13,6 +13,7 @@ import com.fleaMarket.domain.goodsInfo;
 import com.fleaMarket.domain.picture;
 import com.fleaMarket.domain.type;
 import com.fleaMarket.domain.typeOne;
+import com.fleaMarket.domain.user;
 import com.fleaMarket.goodsInfoManager.DTO.GoodsManagerDTO;
 import com.fleaMarket.goodsInfoManager.DTO.GoodsPicDTO;
 import com.fleaMarket.goodsInfoManager.DTO.GoodsPicsDTO;
@@ -307,5 +308,15 @@ public class GoodsInfoManagerAction extends ActionSupport implements ServletResp
 		response.setContentType("text/html;charset=utf-8");
 		goodsInfo info = goodsInfoManagerService.getgoodsInfoByGoodsId(data_id);
 		response.getWriter().write(gson.toJson(info));
+	}
+    //跟据商品id查询用户联系方式	
+	public void getUserInfoByGoodsId() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
+		user user = goodsInfoManagerService.getUserInfoByGoodsId(data_id);
+		response.getWriter().write(gson.toJson(user));
+		
 	}
 }

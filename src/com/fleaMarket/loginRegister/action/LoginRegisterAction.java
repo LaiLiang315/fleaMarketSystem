@@ -2,6 +2,7 @@ package com.fleaMarket.loginRegister.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -94,9 +95,7 @@ public class LoginRegisterAction extends ActionSupport implements ServletRespons
 	 * @throws IOException
 	 */
 	public String login() throws IOException {
-		System.out.println("222222"+newUser);
 		String result = "";
-		
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
@@ -111,7 +110,6 @@ public class LoginRegisterAction extends ActionSupport implements ServletRespons
 		user user = loginRegisterService.login(newUser);
 		if (user == null) {
 			result = "error";
-			System.out.println("B"+result);
 			response.getWriter().write(result);
 			response.getWriter().close();
 			
@@ -119,9 +117,7 @@ public class LoginRegisterAction extends ActionSupport implements ServletRespons
 		}
 		else {
 			session.setAttribute("user_session", user);
-			System.out.println("b");
 			result = "success";
-			System.out.println("A"+result);
 			response.getWriter().write(result);
 			response.getWriter().close();
 			 
@@ -134,41 +130,72 @@ public class LoginRegisterAction extends ActionSupport implements ServletRespons
 	//得到session的值
 	public void getSes() throws IOException {
 		 HttpSession session = ServletActionContext.getRequest().getSession();
+//		 user user = loginRegisterService.login(newUser);
+//		 System.out.println("KKJJ"+user);
+//		 session.setAttribute("user_session", user);
 		 GsonBuilder gsonBuilder = new GsonBuilder();
 			gsonBuilder.setPrettyPrinting();// 格式化json数据
 			Gson gson = gsonBuilder.create();
 			response.setContentType("text/html;charset=utf-8");
-			System.out.println("HH"+session);
-			response.getWriter().write(gson.toJson(session));
+//			System.out.println("JJ"+session);
+			// 获取session中所有的键值 
+						Enumeration<String> attrs = session.getAttributeNames(); 
+						// 遍历attrs中的 
+						while(attrs.hasMoreElements()){ 
+							// 获取session键值
+							String name = attrs.nextElement().toString(); 
+							// 根据键值取session中的值 
+							Object vakue = session.getAttribute(name); 
+							// 打印结果 
+//							System.out.println("------" + name + ":" + vakue +"--------\n");
+						}
+							response.getWriter().write(gson.toJson(session));
 	}
 	
+	// 更新session 
+	public void  getNewSes() throws IOException {
+		System.out.println("hhhrr:"+newUser);
+		 HttpSession session = ServletActionContext.getRequest().getSession();
+		 user user = loginRegisterService.updataSess(newUser);
+		 System.out.println("KKJJ:"+user);
+		 session.setAttribute("user_session", user);
+		 GsonBuilder gsonBuilder = new GsonBuilder();
+			gsonBuilder.setPrettyPrinting();// 格式化json数据
+			Gson gson = gsonBuilder.create();
+			response.setContentType("text/html;charset=utf-8");
+			// 获取session中所有的键值 
+			Enumeration<String> attrs = session.getAttributeNames(); 
+			// 遍历attrs中的 
+			while(attrs.hasMoreElements()){ 
+				// 获取session键值
+				String name = attrs.nextElement().toString(); 
+				// 根据键值取session中的值 
+				Object vakue = session.getAttribute(name); 
+				// 打印结果 
+				System.out.println("------" + name + ":" + vakue +"--------\n");
+			}
+			response.getWriter().write(gson.toJson(session));
+	}
 //用户注册
-	public String userRegister() {
-		System.out.println("fd"); 
+	public void userRegister() throws IOException {
+		System.out.println("fd"+newUser); 
 		String result = "";
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
 		response.setContentType("text/html;charset=utf-8");
 		user user = loginRegisterService.userRegister(newUser);
-		if(user==null) {
+		if(user!=null) {
 			result = "注册成功";
-			return "login";
-			
+//			return "login";
 		}else {
 			result ="该用户已存在";
+//			return "register";
 		}
-		return result;
+//		return result;
+		response.getWriter().write(gson.toJson(result));
 		
 		
-		
-		/*try {
-			response.getWriter().write("" + loginRegisterService.userRegister(newUser));
-		result = loginRegisterService.userRegister2(newUser);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
 	}
 
 	//跟据用户名得到用户

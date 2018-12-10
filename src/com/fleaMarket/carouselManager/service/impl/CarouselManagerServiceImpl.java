@@ -65,17 +65,17 @@ public class CarouselManagerServiceImpl implements CarouselManagerService {
 			 * 遍历数组String id : deleteIdList
 			 */
 			for (String id : deleteIdList) {
-				System.out.println("111111" + deleteIdList);
+//				System.out.println("111111" + deleteIdList);
 				carousel carousel = new carousel();
 				carousel = carouselManageDao.getCarouselById(id);
 
-				System.out.println("AAAAA" + carousel);
+//				System.out.println("AAAAA" + carousel);
 				if (carousel != null) {
 					carousel.setIs_delete(1);
 					carousel.setCarousel_modifytime(TimeUtil.getStringSecond());
-					System.out.println("DDDDDD" + carousel);
+//					System.out.println("DDDDDD" + carousel);
 					carouselManageDao.saveOrUpdateObject(carousel);
-					System.out.println("=======");
+//					System.out.println("=======");
 					result = "deleteSuccess";
 				} else {
 					result = "deleteFailed";

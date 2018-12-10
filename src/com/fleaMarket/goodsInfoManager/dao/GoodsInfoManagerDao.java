@@ -6,6 +6,7 @@ import com.fleaMarket.domain.goodsInfo;
 import com.fleaMarket.domain.picture;
 import com.fleaMarket.domain.type;
 import com.fleaMarket.domain.typeOne;
+import com.fleaMarket.domain.user;
 
 /**
  * 商品信息管理里的dao层
@@ -104,5 +105,11 @@ public interface GoodsInfoManagerDao {
 	 * @return
 	 */
 	public goodsInfo getInfoByGoodsId(String data_id);
+    /**
+     * 痛过商品id获取用户信息
+     * @param data_id
+     * @return
+     */
+	public user getUserByGoodsId(String data_id);
 
 }

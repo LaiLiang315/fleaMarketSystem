@@ -31,10 +31,10 @@ public class LoginRegisterServiceImpl implements LoginRegisterService {
 		if (newUser != null) {
 			user user = new user();
 			user = loginRegisterDao.getUserByUserName(newUser.getUsername());
-			System.out.println("1:" + newUser.getPassword());
+//			System.out.println("1:" + newUser.getPassword());
 			if (user != null) {
 				if (user.getPassword().equals(newUser.getPassword())) {
-					System.out.println("ioioioio");
+//					System.out.println("ioioioio");
 					return user;
 				}
 				return null;
@@ -44,16 +44,34 @@ public class LoginRegisterServiceImpl implements LoginRegisterService {
 	}
 
 	/**
+	 * 更新session
+	 */
+		@Override
+		public user updataSess(user newUser) {
+			System.out.println("1:"+newUser);
+			if (newUser != null) {
+				user user = new user();
+				user = loginRegisterDao.getUserByUserName(newUser.getUsername());
+//				System.out.println("2:" + newUser.getPassword());
+						return user;
+					}
+			return null;
+		}
+	/**
 	 * 注册
 	 */
 	@Override
 	public user userRegister(user newUser) {
 		user user = new user();
+		//判断是否手机号是一样的
 		user = loginRegisterDao.getUserByUserName(newUser.getUsername());
 		if (user == null) {
-			user.setUser_id(BuildUuid.getUuid());
-			user.setUser_creationtime(TimeUtil.getStringSecond());
-			return user;
+			newUser.setUser_id(BuildUuid.getUuid());
+			newUser.setUser_creationtime(TimeUtil.getStringSecond());
+			newUser.setUser_modifytime(TimeUtil.getStringSecond());
+			newUser.setIs_delete(0);
+			loginRegisterDao.saveOrUpdateObject(newUser);
+			return newUser;
 		}
 
 		return null;

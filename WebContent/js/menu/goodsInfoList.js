@@ -24,9 +24,9 @@ function getSixGoods() {
 				}
 			})
 };
-
+//放入六条商品信息
 function putInfo(listGoodsPicDTO) {
-	console.log("HHHH" + listGoodsPicDTO);
+//	console.log("HHHH" + listGoodsPicDTO);
 
 	var length = listGoodsPicDTO.length;
 	var strStart = '';
@@ -96,7 +96,7 @@ function putFourInfo(listGoodsManagerDTO) {
 		strStart = strStart + '"><ul>';
 
 		for (j = 0; j < listGoodsManagerDTO[i].listGoodsPicDTO.length; j++) {
-			str = strStart
+			strStart = strStart
 					+ '<li class="span3">'
 					+ '<div class="thumbnail">'
 					+ '<i class="tag">'
@@ -121,7 +121,7 @@ function putFourInfo(listGoodsManagerDTO) {
 					+ listGoodsManagerDTO[i].listGoodsPicDTO[j].info.goods_price
 					+ '</span>' + '</h4>' + '</div>' + '</div>'
 		}
-		strStart = str + '</li></ul></div>'
+		strStart = strStart + '</li></ul></div>'
 	}
 	strStart ='<div id="cheapestGoods" class="carousel-inner">'
 	+ strStart
@@ -131,7 +131,6 @@ function putFourInfo(listGoodsManagerDTO) {
 	+ '</a>'
 	+ '<a class="right carousel-control" href="#featured" data-slide="next">'
 	+ '›' + '</a>'
-	console.log("JJJJ"+strStart)
 	$("#featured").html(strStart);
 }
 // 得到user的ssession
@@ -146,7 +145,7 @@ function getuser() {
 		contentType : false,
 		success : function(result) {
 			// alert("SESSION")
-			console.log("SESSION" + result)
+//			console.log("SESSION" + result)
 			var sessin = JSON.parse(result)
 		}
 	})
@@ -155,30 +154,15 @@ function getuser() {
 // 跳转到详情页
 function getDetal(e) {
 	var goodsId = e.id;
-	// alert("RRRRRR" + goodsId)
-	console.log("!" + goodsId)
+	 alert("RRRRRR" + goodsId)
+//	console.log("!" + goodsId)
 	location.href = "/fleaMarketSystem/skip/skip_intoGoodsDetals?data_id="
 			+ goodsId + "";
 	// putDetal(goodsId)
-
 }
 // 将详情页新信息放入
 function putDetal(goodsId) {
 	console.log("a" + goodsId)
-	// $.ajax({
-	// async : false,
-	// type : 'POST',
-	// url : '/fleaMarketSystem/loginRegister/loginRegister_getSes',
-	// cache : false, // cache的作用就是第一次请求完毕之后，如果再次去请求，可以直接从缓存里面读取而不是再到服务器端读取。
-	// processData : false, // 不序列化data
-	// contentType : false,
-	// success : function(result) {
-	// alert("SESSION")
-	// console.log("SESSION"+result)
-	// var sessin = JSON.parse(result)
-	// }
-	//		
-	// })
 
 	var str = "";
 	str = '<a>'
@@ -189,79 +173,4 @@ function putDetal(goodsId) {
 	console.log("MMM" + $("#gallery").html())
 }
 
-// //登陆
-// $(document).on("click","#Sign",function() {
-// var username = $("input[id='inputEmail']").val();
-// var password = $("input[id='inputPassword']").val();
-// if(username==""||username==null||!(/^1[34578]\d{9}$/.test(username))){
-// toastr.error("请输入正确的手机号!");
-// }else if(password==""||password==null){
-// toastr.error("请填写密码!");}
-// console.log("点击了提交按钮");
-// login_ajax(); // 执行login的异步
-//
-// })
-//
-// function login_ajax() {
-// console.log("此对话显示该js正在执行login_ajax");
-//	
-// var username = $("input[id='inputEmail']").val();
-// var password = $("input[id='inputPassword']").val();
-// console.log("username===" + username);
-// console.log("username===" + password);
-// var formData = new FormData();
-// formData.append("newUser.username", username);
-// formData.append("newUser.password", password);
-// $.ajax({
-// url : "/fleaMarketSystem/loginRegister/loginRegister_login",
-// type : "post",
-// data : formData, // 前台传给后台的数据
-// // 报错请加入以下三行，则ajax提交无问题
-// cache : false,
-// processData : false,
-// contentType : false,
-// success : function(result) {
-// alert("---")
-// var dd = result;
-// // var dd = JSON.parse(result); // 转换成json对象
-// console.log("result----" + result);
-// if (dd == "success") {
-// console.log("===="+username);
-// toastr.success("用户登陆成功!");
-// getUser(username)
-// getSixGoods();
-// setTimeout(function() {
-// location.href="/fleaMarketSystem/skip/skip_intoIndex";
-// }, 1000);
-// } else {
-// if (dd == "error") {
-// toastr.error("用户账户或密码输入错误!");
-// $("input[id='inputPassword']").val('')
-// }
-// }
-// }
-// })
-// }
-// //得到用户
-// function getUser(username){
-// $.ajax({
-// type : "POST",
-// url : "/fleaMarketSystem/loginRegister/loginRegister_getUserByUserName",
-//		
-// data : {'newUser.username':username},
-// cache : false,
-// success : function(result){
-// console.log("MMM"+result)
-// var user = JSON.parse(result);
-// console.log("MMM"+user)
-// $("strong").html(user.nickname);
-// }
-//		
-// })
-//	
-// function loginOut(){
-//		
-//		
-// }
-//	
-// }
+

@@ -186,5 +186,5 @@ input[readonly] {
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/loginRegister/loginRegister.js"></script>
 <script type="text/javascript"
-	src="${pageContext.request.contextPath }/js/user/userInfo.js"></script>
+	src="${pageContext.request.contextPath }/js/user/userWants.js"></script>
 </html>

@@ -1,5 +1,4 @@
 $(document).ready(function() {
-	
 });
 
 ////获取session
@@ -123,7 +122,7 @@ function loginOut(){
 	
 }
 
-//鼠标悬停显示
+//鼠标悬停头像显示下拉
 $("#ss").mouseover(function(){
 	$(".dropdown-menu").css('display','block')
 	
@@ -145,6 +144,17 @@ $("#myPage").on("click",function(){
 	location.href="/fleaMarketSystem/skip/skip_intoUser";
 	
 })
+//注册页面点击登陆按钮
+$("#loginIn").on("click",function(){
+	location.href="/fleaMarketSystem/skip/skip_intoIndex";
+	
+})
+function register(){
+	alert("qqq")
+	var username1 = $("input[name='phoneNum']").val();
+	var password2 = $("input[name='password']").val();
+	
+}
 
 //用户注册
 function register_ajax(){

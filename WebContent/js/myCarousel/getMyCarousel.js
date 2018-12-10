@@ -21,7 +21,7 @@ function getCarousel() {
 				processData : false, // 不序列化data
 				contentType : false,
 				success : function(result) {
-					console.log("GH" + result)
+//					console.log("GH" + result)
 					var myCarousels = JSON.parse(result)
 					putCarousels(myCarousels)
 				}
@@ -31,7 +31,7 @@ function getCarousel() {
 function putCarousels(myCarousels) {
 	var str = '<div class="carousel-inner">';
 	var length = myCarousels.length
-	console.log("1+++++" + myCarousels[0].carousel_picture)
+//	console.log("1+++++" + myCarousels[0].carousel_picture)
 	for (i = 0; i < length; i++) {
 		str = str
 				+ '<div class="item">'
@@ -75,8 +75,8 @@ function getuser(){
 		processData : false, // 不序列化data
 		contentType : false,
 		success : function(result) {
-			alert("SESSION")
-			console.log("SESSION"+result)
+//			alert("SESSION")
+//			console.log("SESSION"+result)
 			var sessin = JSON.parse(result)
 		}
 	})

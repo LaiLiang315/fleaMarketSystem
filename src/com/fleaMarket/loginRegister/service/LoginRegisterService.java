@@ -27,5 +27,6 @@ public interface LoginRegisterService {
 	 * @return
 	 */
 	public user getUserByUserName(user newUser);
+	public user updataSess(user newUser);
 
 }

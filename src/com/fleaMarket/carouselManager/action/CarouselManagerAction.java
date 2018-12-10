@@ -223,7 +223,7 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 	 * @throws IOException
 	 */
 	public String IoReadImage() throws IOException {
-		System.out.println("====ppp");
+//		System.out.println("====ppp");
 		fileFileName = new String(fileFileName.getBytes("ISO8859-1"), "UTF-8");// 解决图片中文路径乱码
 		String linkurl = "D:\\Aupload\\test1\\" + fileFileName;
 		FileInputStream in = new FileInputStream(linkurl);
@@ -297,10 +297,8 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 				// System.out.println("上传文件发生错误");
 			}
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		String belongId = "";
@@ -338,7 +336,6 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 			// System.out.println("----------------------------------------------:"+result);
 			response.getWriter().write(gson.toJson(result));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -391,10 +388,8 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 				// System.out.println("上传文件发生错误");
 			}
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println("给我输出这个对象" + picture);
@@ -412,7 +407,6 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 		try {
 			response.getWriter().write(gson.toJson(res));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println("CcdmwcC:" + carousel);
@@ -477,10 +471,8 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 				// System.out.println("上传文件发生错误");
 			}
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 //		user.setHeadportrait(fileFileName);
@@ -491,11 +483,10 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
 		response.setContentType("text/html;charset=utf-8");
-		System.out.println("SSSS"+res);
+//		System.out.println("SSSS"+res);
 		try {
 			response.getWriter().write(gson.toJson(res));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
