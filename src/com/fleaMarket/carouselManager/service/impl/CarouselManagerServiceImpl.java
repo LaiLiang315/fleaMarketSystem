@@ -163,8 +163,6 @@ public class CarouselManagerServiceImpl implements CarouselManagerService {
 	 */
 	@Override
 	public void addHeadportrait(user user,String fileFileName) {
-		System.out.println("JJ"+fileFileName);
-		System.out.println("LL"+user);
 		user newUser = new user();
 		newUser = carouselManageDao.getUserById(user.getUser_id());
 		if(newUser!=null) {
@@ -172,6 +170,25 @@ public class CarouselManagerServiceImpl implements CarouselManagerService {
 			newUser.setHeadportrait(fileFileName);
 			carouselManageDao.saveOrUpdateObject(newUser);
 		}
+	}
+
+	/**
+	 * 保存个人信息
+	 */
+	@Override
+	public user savePersonalInfo(user user) {
+		System.out.println("JJ"+user);
+		
+		user newUser = new user();
+		newUser = carouselManageDao.getUserById(user.getUser_id());
+		if(newUser!=null) {
+			newUser.setUser_modifytime(TimeUtil.getStringSecond());
+			newUser.setAddress(user.getAddress());
+			newUser.setNickname(user.getNickname());
+			newUser.setSex(user.getSex());
+			carouselManageDao.saveOrUpdateObject(newUser);
+		}
+		return user;
 	}
 
 

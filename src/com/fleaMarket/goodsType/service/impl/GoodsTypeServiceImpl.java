@@ -105,7 +105,7 @@ public class GoodsTypeServiceImpl implements GoodsTypeService {
 		List<typeOne> typeOnes = new ArrayList<>();
 		List<type> types = new ArrayList<>();
 		typeOnes = (List<typeOne>) goodsTypeDao.listObject("from typeOne where is_delete='0' order by typeOne_modifytime desc");
-		System.out.println("1111"+typeOnes);
+//		System.out.println("1111"+typeOnes);
 		if(!typeOnes.isEmpty()) {
 			for (typeOne typeOne : typeOnes) {
 				types = goodsTypeDao.getTypeByTypeOneId(typeOne.getTypeOne_id());
@@ -129,9 +129,9 @@ public class GoodsTypeServiceImpl implements GoodsTypeService {
 	@Override
 	public List<type> getListType(typeOne typeOne) {
 		List<type> types = new ArrayList<>();
-		System.out.println("hhh"+typeOne);
+//		System.out.println("hhh"+typeOne);
 		types = goodsTypeDao.getTypeByTypeOneId(typeOne.getTypeOne_id());
-		System.out.println("qqqq"+types);
+//		System.out.println("qqqq"+types);
 		if(!types.isEmpty()) {
 			
 			return types;

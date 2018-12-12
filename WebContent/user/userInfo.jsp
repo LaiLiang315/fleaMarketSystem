@@ -89,8 +89,8 @@ input[readonly] {
 	<div id="main" class="clearfix">
 		<div class="user-sider fl">
 			<div class="user-info">
-				<img src="/images/web/user/default.png" class="user-header"> <a
-					href="/user/userinfo" class="username">${user_session.nickname }</a>
+				<img src="${pageContext.request.contextPath}/themes/img/1.jpg" class="user-header"> <a
+					href="javaScript:;" class="username">${user_session.nickname }</a>
 				<div class="auth">
 					<a class="realname-auth" href="/user/auth"><i class="icon"
 						title="未实名认证"></i></a> <a class="phone-auth" href="/user/auth"><i
@@ -116,7 +116,7 @@ input[readonly] {
 				<div class="layui-form-item">
 					<label class="layui-form-label picture-para">头像</label>
 					<div class="layui-input-block">
-						<img id="headPic" src="" class="user-info-picture"style="float:left">
+						<img id="headPic" src="${pageContext.request.contextPath}/themes/img/1.jpg" class="user-info-picture"style="float:left">
 						<div class="layui-box layui-upload-button"style="position:relative">
 								<input id="dddd" type="file" name="avatar" lay-type="images"
 									class="change-picture" value="修改头像" style="display:none;">
@@ -150,18 +150,10 @@ input[readonly] {
 						</div>
 						<input type="radio" name="sex" value="女" title="女">
 						<div class="layui-unselect layui-form-radio">
-							<i class="layui-anim layui-icon layui-anim-scaleSpring"></i><span>女</span>
+							<i class="layui-anim layui-icon "></i><span>女</span>
 						</div>
 					</div>
 				</div>
-				<!-- <div class="layui-form-item">
-					<label class="layui-form-label">生日</label>
-					<div class="layui-input-inline">
-						<input class="layui-input birthday" placeholder=""
-							onclick="layui.laydate({elem: this})" value="">
-					</div>
-					<div class="layui-form-mid layui-word-aux">（该信息其他人不可见）</div>
-				</div> -->
 				<div class="layui-form-item">
 					<label class="layui-form-label">地址</label>
 					<div class="layui-input-block">

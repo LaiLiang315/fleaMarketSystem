@@ -112,4 +112,11 @@ public interface GoodsInfoManagerDao {
      */
 	public user getUserByGoodsId(String data_id);
 
+	/**
+	 * 跟据用户id查询商品信息
+	 * @param user_id
+	 * @return
+	 */
+	public List<goodsInfo> getInfoByUserId(String user_id);
+
 }

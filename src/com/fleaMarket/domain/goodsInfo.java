@@ -14,6 +14,7 @@ public class goodsInfo {
 	private String goods_state; // 商品状态
 	private String goods_describe; // 商品描述
 	private String goods_type; // 商品类型
+	private String goods_userWants; // 用户想要购买的商品
 	private String exchange_adress;
 	private String exchange_ways;
 	private String user_qq;
@@ -78,6 +79,14 @@ public class goodsInfo {
 	}
 
 	
+	public String getGoods_userWants() {
+		return goods_userWants;
+	}
+
+	public void setGoods_userWants(String goods_userWants) {
+		this.goods_userWants = goods_userWants;
+	}
+
 	public String getExchange_adress() {
 		return exchange_adress;
 	}
@@ -130,9 +139,10 @@ public class goodsInfo {
 	public String toString() {
 		return "goodsInfo [goods_id=" + goods_id + ", goods_name=" + goods_name + ", goods_belong=" + goods_belong
 				+ ", goods_price=" + goods_price + ", goods_state=" + goods_state + ", goods_describe=" + goods_describe
-				+ ", goods_type=" + goods_type + ", exchange_adress=" + exchange_adress + ", exchange_ways="
-				+ exchange_ways + ", user_qq=" + user_qq + ", user_weixin=" + user_weixin + ", goods_creationtime="
-				+ goods_creationtime + ", goods_modifytime=" + goods_modifytime + "]";
+				+ ", goods_type=" + goods_type + ", goods_userWants=" + goods_userWants + ", exchange_adress="
+				+ exchange_adress + ", exchange_ways=" + exchange_ways + ", user_qq=" + user_qq + ", user_weixin="
+				+ user_weixin + ", goods_creationtime=" + goods_creationtime + ", goods_modifytime=" + goods_modifytime
+				+ "]";
 	}
 
 }

@@ -17,6 +17,7 @@ import com.fleaMarket.domain.user;
 import com.fleaMarket.goodsInfoManager.DTO.GoodsManagerDTO;
 import com.fleaMarket.goodsInfoManager.DTO.GoodsPicDTO;
 import com.fleaMarket.goodsInfoManager.VO.GoodsManagerVO;
+import com.fleaMarket.goodsInfoManager.VO.GoodsPicVO;
 import com.fleaMarket.goodsInfoManager.VO.TypeInfoPicVO;
 import com.fleaMarket.goodsInfoManager.service.GoodsInfoManagerService;
 
@@ -121,5 +122,25 @@ public class GoodsInfoTest {
 		user user = new user();
 		user= goodsInfoManagerService.getUserInfoByGoodsId(data_id);
 		System.out.println("SS:"+user);
+	}
+	/**
+	 * 跟据用户id查询商品信息
+	 */
+	@Test
+	public void getPublishedGoodsTest() {
+		GoodsPicVO goodsPicVO = new GoodsPicVO();
+		List<GoodsPicDTO> listGoodsPicDTO = new ArrayList<>();
+		user newUser = new user();
+		newUser.setUser_id("6301e8ac-12b8-4b95-b6e5-854d56b94156");
+		goodsPicVO = goodsInfoManagerService.getPublishedGoodsVO(newUser);
+		System.out.println("SS:"+goodsPicVO);
+	}
+	/**
+	 * 删除商品并删除图片
+	 */
+	@Test
+	public void deleteGoodsTest() {
+		String data_id = "56c7e056-a981-4786-b0fd-69ea6526484d";
+		goodsInfoManagerService.deleteGoods(data_id);
 	}
 }

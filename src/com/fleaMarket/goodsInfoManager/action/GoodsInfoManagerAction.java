@@ -12,17 +12,15 @@ import org.apache.struts2.interceptor.ServletResponseAware;
 import com.fleaMarket.domain.goodsInfo;
 import com.fleaMarket.domain.picture;
 import com.fleaMarket.domain.type;
-import com.fleaMarket.domain.typeOne;
 import com.fleaMarket.domain.user;
 import com.fleaMarket.goodsInfoManager.DTO.GoodsManagerDTO;
 import com.fleaMarket.goodsInfoManager.DTO.GoodsPicDTO;
-import com.fleaMarket.goodsInfoManager.DTO.GoodsPicsDTO;
 import com.fleaMarket.goodsInfoManager.VO.GoodsManagerVO;
+import com.fleaMarket.goodsInfoManager.VO.GoodsPicVO;
 import com.fleaMarket.goodsInfoManager.VO.TypeInfoPicVO;
 import com.fleaMarket.goodsInfoManager.service.GoodsInfoManagerService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 /**
  * 商品信息管理的Action层
@@ -56,7 +54,10 @@ public class GoodsInfoManagerAction extends ActionSupport implements ServletResp
 	 * 商品信息
 	 */
 	private goodsInfo info;
-	
+	/**
+	 * 当前登陆的session
+	 */
+	private user newUser;
 	/**
 	 * 类型id
 	 */
@@ -77,6 +78,13 @@ public class GoodsInfoManagerAction extends ActionSupport implements ServletResp
 		this.typeId = typeId;
 	}
 
+	public user getNewUser() {
+		return newUser;
+	}
+
+	public void setNewUser(user newUser) {
+		this.newUser = newUser;
+	}
 
 	private List<GoodsManagerDTO> listGoodsManagerDTO;
 	
@@ -174,7 +182,6 @@ public class GoodsInfoManagerAction extends ActionSupport implements ServletResp
 		try {
 			response.getWriter().write(gson.toJson(goodsManagerVO));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -194,7 +201,6 @@ public class GoodsInfoManagerAction extends ActionSupport implements ServletResp
 		try {
 			response.getWriter().write(gson.toJson(typeInfoPicVO));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -300,7 +306,10 @@ public class GoodsInfoManagerAction extends ActionSupport implements ServletResp
 		response.getWriter().write(gson.toJson(listPic));
 //		return "kkk";
 	}
-	//跟据商品id得到商品
+	/**
+	 * 跟据商品id得到商品
+	 * @throws IOException
+	 */
 	public void getgoodsInfoByGoodsId() throws IOException {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
@@ -309,7 +318,10 @@ public class GoodsInfoManagerAction extends ActionSupport implements ServletResp
 		goodsInfo info = goodsInfoManagerService.getgoodsInfoByGoodsId(data_id);
 		response.getWriter().write(gson.toJson(info));
 	}
-    //跟据商品id查询用户联系方式	
+    /**	
+     * 跟据商品id查询用户联系方式
+     * @throws IOException
+     */
 	public void getUserInfoByGoodsId() throws IOException {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
@@ -318,5 +330,29 @@ public class GoodsInfoManagerAction extends ActionSupport implements ServletResp
 		user user = goodsInfoManagerService.getUserInfoByGoodsId(data_id);
 		response.getWriter().write(gson.toJson(user));
 		
+	}
+	/**
+	 * 查询用户发布的商品
+	 * @throws IOException
+	 */
+	public void getPublishedGoodsVO() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
+		GoodsPicVO goodsPicVO  = goodsInfoManagerService.getPublishedGoodsVO(newUser);
+		response.getWriter().write(gson.toJson(goodsPicVO));
+	}
+	/**
+	 * 删除商品信息和图片
+	 * @throws IOException 
+	 */
+	public void deleteGoods() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
+		String delete = goodsInfoManagerService.deleteGoods(data_id);
+		response.getWriter().write(gson.toJson(delete));
 	}
 }

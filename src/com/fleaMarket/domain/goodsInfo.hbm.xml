@@ -26,6 +26,9 @@
         <property name="goods_type" type="java.lang.String">
             <column name="goods_type" />
         </property>
+        <property name="goods_userWants" type="java.lang.String">
+            <column name="goods_userWants" />
+        </property>
         <property name="exchange_adress" type="java.lang.String">
             <column name="exchange_adress" />
         </property>

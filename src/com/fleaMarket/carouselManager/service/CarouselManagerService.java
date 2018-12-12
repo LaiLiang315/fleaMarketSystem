@@ -59,6 +59,13 @@ public interface CarouselManagerService {
 	 */
 	void addHeadportrait(user user, String fileFileName);
 
+	/**
+	 * 保存个人信息
+	 * @param user
+	 * @return
+	 */
+	user savePersonalInfo(user user);
+
 
 	
 

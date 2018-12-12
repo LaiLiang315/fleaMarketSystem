@@ -5,10 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -28,8 +25,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.opensymphony.xwork2.ActionSupport;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 
 /**
  * 轮播图管理的Action层
@@ -72,7 +67,7 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 	 */
 	private carousel carousel;
 
-	private user user;//当前用户
+	private user user;
 	
 	public String getIdList() {
 		return idList;
@@ -489,5 +484,17 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	/**
+	 * 保存个人信息
+	 * @throws IOException 
+	 */
+	public void savePersonalInfo() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
+		user newUser = carouselManagerService.savePersonalInfo(user);
+		response.getWriter().write(gson.toJson(newUser));
 	}
 }

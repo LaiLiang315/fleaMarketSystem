@@ -6,12 +6,12 @@ import java.util.List;
 import com.fleaMarket.domain.goodsInfo;
 import com.fleaMarket.domain.picture;
 import com.fleaMarket.domain.type;
-import com.fleaMarket.domain.typeOne;
 import com.fleaMarket.domain.user;
 import com.fleaMarket.goodsInfoManager.DTO.GoodsManagerDTO;
 import com.fleaMarket.goodsInfoManager.DTO.GoodsPicDTO;
 import com.fleaMarket.goodsInfoManager.DTO.GoodsPicsDTO;
 import com.fleaMarket.goodsInfoManager.VO.GoodsManagerVO;
+import com.fleaMarket.goodsInfoManager.VO.GoodsPicVO;
 import com.fleaMarket.goodsInfoManager.VO.TypeInfoPicVO;
 import com.fleaMarket.goodsInfoManager.dao.GoodsInfoManagerDao;
 import com.fleaMarket.goodsInfoManager.service.GoodsInfoManagerService;
@@ -80,8 +80,7 @@ public class GoodsInfoManagerServiceImpl implements GoodsInfoManagerService {
 				listGoodsInfo = new ArrayList<>();
 				List<GoodsPicDTO> listGoodsPicDTO = new ArrayList<>();
 				listGoodsInfo = goodsInfoManagerDao.getSixGoodsInfoByTypeId(type.getType_id());
-				
-				if(!listGoodsInfo.isEmpty()) {
+				if (!listGoodsInfo.isEmpty()) {
 					/**
 					 * 遍历信息集合
 					 */
@@ -127,31 +126,28 @@ public class GoodsInfoManagerServiceImpl implements GoodsInfoManagerService {
 				 * 把类型set进dto
 				 */
 				/**
-				 * 遍历所有类型
-				 * 跟据类型id查询listInfo
-				 * 遍历listInfo
-				 * 跟据info_Id查询listPic
+				 * 遍历所有类型 跟据类型id查询listInfo 遍历listInfo 跟据info_Id查询listPic
 				 */
-					for (goodsInfo info : ListInfo) {
-						List<picture> listPics = new ArrayList<>();
-						GoodsPicsDTO goodsPicsDTO = new GoodsPicsDTO();
-						goodsPicsDTO.setInfo(info);
-						listPics = goodsInfoManagerDao.getPicsByInfoId(info.getGoods_id());
-						
-						if (!listPics.isEmpty()) {
-							goodsPicsDTO.setListpic(listPics);
-							listGoodsPicsDTO.add(goodsPicsDTO);
-						}
+				for (goodsInfo info : ListInfo) {
+					List<picture> listPics = new ArrayList<>();
+					GoodsPicsDTO goodsPicsDTO = new GoodsPicsDTO();
+					goodsPicsDTO.setInfo(info);
+					listPics = goodsInfoManagerDao.getPicsByInfoId(info.getGoods_id());
+
+					if (!listPics.isEmpty()) {
+						goodsPicsDTO.setListpic(listPics);
+						listGoodsPicsDTO.add(goodsPicsDTO);
 					}
-					GoodsManagerDTO goodsManagerDTO = new GoodsManagerDTO();
-					goodsManagerDTO.setListGoodsPicsDTO(listGoodsPicsDTO);
-					goodsManagerDTO.setType(type);
-					listGoodsManagerDTO.add(goodsManagerDTO);
+				}
+				GoodsManagerDTO goodsManagerDTO = new GoodsManagerDTO();
+				goodsManagerDTO.setListGoodsPicsDTO(listGoodsPicsDTO);
+				goodsManagerDTO.setType(type);
+				listGoodsManagerDTO.add(goodsManagerDTO);
 			}
-			
+
 		}
 		return listGoodsManagerDTO;
-		
+
 	}
 
 	/**
@@ -169,6 +165,7 @@ public class GoodsInfoManagerServiceImpl implements GoodsInfoManagerService {
 
 	/**
 	 * 查询最新六条信息和第一张图片
+	 * 
 	 * @return
 	 */
 	@Override
@@ -176,18 +173,18 @@ public class GoodsInfoManagerServiceImpl implements GoodsInfoManagerService {
 		List<GoodsPicDTO> listGoodsPicDTO = new ArrayList<>();
 		List<goodsInfo> ListInfo = new ArrayList<>();
 		ListInfo = goodsInfoManagerDao.getSixInfoBytime();
-		if(!ListInfo.isEmpty()) {
+		if (!ListInfo.isEmpty()) {
 			for (goodsInfo info : ListInfo) {
 				GoodsPicDTO goodsPicDTO = new GoodsPicDTO();
 				picture pic = new picture();
 				pic = goodsInfoManagerDao.getFirstPicByInfoId(info.getGoods_id());
-				if(pic!=null) {
+				if (pic != null) {
 					goodsPicDTO.setPic(pic);
 				}
 				goodsPicDTO.setInfo(info);
 				listGoodsPicDTO.add(goodsPicDTO);
 			}
-			
+
 		}
 		return listGoodsPicDTO;
 	}
@@ -209,10 +206,7 @@ public class GoodsInfoManagerServiceImpl implements GoodsInfoManagerService {
 			 * 把类型set进dto
 			 */
 			/**
-			 * 遍历所有类型
-			 * 跟据类型id查询listInfo
-			 * 遍历listInfo
-			 * 跟据info_Id查询listPic
+			 * 遍历所有类型 跟据类型id查询listInfo 遍历listInfo 跟据info_Id查询listPic
 			 */
 			if (!ListInfo.isEmpty()) {
 				for (goodsInfo info : ListInfo) {
@@ -220,7 +214,7 @@ public class GoodsInfoManagerServiceImpl implements GoodsInfoManagerService {
 					GoodsPicDTO goodsPicDTO = new GoodsPicDTO();
 					goodsPicDTO.setInfo(info);
 					Pic = goodsInfoManagerDao.getFirstPicByInfoId(info.getGoods_id());
-					
+
 					if (Pic != null) {
 						goodsPicDTO.setPic(Pic);
 						listGoodsPicDTO.add(goodsPicDTO);
@@ -242,9 +236,9 @@ public class GoodsInfoManagerServiceImpl implements GoodsInfoManagerService {
 	public TypeInfoPicVO findAllGoodsByTypeVO(TypeInfoPicVO typeInfoPicVO, type typeId) {
 		List<GoodsPicDTO> listGoodsPicDTO = new ArrayList<>();
 		List<goodsInfo> listGoodsInfo = new ArrayList<>();
-		
-		String listGoodsInfoHql = "from goodsInfo where goods_type='"+typeId.getType_id()+"'";
-		String goodsInfoCountHql = "select count(*) from goodsInfo where goods_type='"+typeId.getType_id()+"'";
+
+		String listGoodsInfoHql = "from goodsInfo where goods_type='" + typeId.getType_id() + "'";
+		String goodsInfoCountHql = "select count(*) from goodsInfo where goods_type='" + typeId.getType_id() + "'";
 		// 这里如果不加desc表示正序，如果加上desc表示倒序
 		goodsInfoCountHql = goodsInfoCountHql + " order by goods_creationtime desc";
 		int goodsInfoCount = goodsInfoManagerDao.getCount(goodsInfoCountHql);
@@ -266,14 +260,14 @@ public class GoodsInfoManagerServiceImpl implements GoodsInfoManagerService {
 			typeInfoPicVO.setHaveNextPage(true);
 		}
 		listGoodsInfo = (List<goodsInfo>) goodsInfoManagerDao.queryForPage(
-				"from goodsInfo where goods_type='"+typeId.getType_id()+"' order by goods_creationtime desc", typeInfoPicVO.getPageIndex(),
-				typeInfoPicVO.getPageSize());
-		if(!listGoodsInfo.isEmpty()) {
+				"from goodsInfo where goods_type='" + typeId.getType_id() + "' order by goods_creationtime desc",
+				typeInfoPicVO.getPageIndex(), typeInfoPicVO.getPageSize());
+		if (!listGoodsInfo.isEmpty()) {
 			for (goodsInfo info : listGoodsInfo) {
 				GoodsPicDTO goodsPicDTO = new GoodsPicDTO();
 				picture pic = new picture();
 				pic = goodsInfoManagerDao.getFirstPicByInfoId(info.getGoods_id());
-				if(pic!=null) {
+				if (pic != null) {
 					goodsPicDTO.setPic(pic);
 				}
 				goodsPicDTO.setInfo(info);
@@ -291,7 +285,7 @@ public class GoodsInfoManagerServiceImpl implements GoodsInfoManagerService {
 	public type getTypeOneByTypeId(type typeId) {
 		type type = new type();
 		type = goodsInfoManagerDao.getTypeOneByTypeId(typeId.getType_id());
-		
+
 		return type;
 	}
 
@@ -302,8 +296,7 @@ public class GoodsInfoManagerServiceImpl implements GoodsInfoManagerService {
 	public List<picture> getPicsByGoodsId(String data_id) {
 		List<picture> listPics = new ArrayList<>();
 		listPics = goodsInfoManagerDao.getPicsByInfoId(data_id);
-		if(!listPics.isEmpty()) 
-		{
+		if (!listPics.isEmpty()) {
 			return listPics;
 		}
 		return null;
@@ -316,7 +309,7 @@ public class GoodsInfoManagerServiceImpl implements GoodsInfoManagerService {
 	public goodsInfo getgoodsInfoByGoodsId(String data_id) {
 		goodsInfo info = new goodsInfo();
 		info = goodsInfoManagerDao.getInfoByGoodsId(data_id);
-		if(info!=null) {
+		if (info != null) {
 			return info;
 		}
 		return null;
@@ -330,12 +323,85 @@ public class GoodsInfoManagerServiceImpl implements GoodsInfoManagerService {
 	public user getUserInfoByGoodsId(String data_id) {
 		goodsInfo info = new goodsInfo();
 		info = goodsInfoManagerDao.getInfoByGoodsId(data_id);
-		if(info!=null) {
+		if (info != null) {
 			user user = new user();
-		user =goodsInfoManagerDao.getUserByGoodsId(info.getGoods_belong());
-		if(user!=null) {
-			return user;
+			user = goodsInfoManagerDao.getUserByGoodsId(info.getGoods_belong());
+			if (user != null) {
+				return user;
+			}
 		}
+		return null;
+	}
+
+	/**
+	 * 查询用户发布的商品
+	 */
+	@Override
+	public GoodsPicVO getPublishedGoodsVO(user newUser) {
+		GoodsPicVO goodsPicVO = new GoodsPicVO();
+		List<GoodsPicDTO> listGoodsPicDTO = new ArrayList<>();
+		List<goodsInfo> listInfo = new ArrayList<>();
+		String listGoodsInfoHql = "from goodsInfo where 1=1";
+		String goodsInfoCountHql = "select count(*) from goodsInfo where 1=1";
+		// 这里如果不加desc表示正序，如果加上desc表示倒序
+		goodsInfoCountHql = goodsInfoCountHql + " order by goods_creationtime desc";
+		int goodsInfoCount = goodsInfoManagerDao.getCount(goodsInfoCountHql);
+		// 设置总数量
+		goodsPicVO.setTotalRecords(goodsInfoCount);
+		// 设置总页数
+		goodsPicVO.setTotalPages(((goodsInfoCount - 1) / goodsPicVO.getPageSize()) + 1);
+		// 判断是否拥有上一页
+		if (goodsPicVO.getPageIndex() <= 1) {
+			goodsPicVO.setHavePrePage(false);
+		} else {
+			goodsPicVO.setHavePrePage(true);
+		}
+		// 判断是否拥有下一页
+		if (goodsPicVO.getPageIndex() >= goodsPicVO.getTotalPages()) {
+
+			goodsPicVO.setHaveNextPage(false);
+		} else {
+			goodsPicVO.setHaveNextPage(true);
+		}
+		listInfo = goodsInfoManagerDao.getInfoByUserId(newUser.getUser_id());
+		if (listInfo!=null) {
+			for (goodsInfo info : listInfo) {
+				picture pic = new picture();
+				pic = goodsInfoManagerDao.getFirstPicByInfoId(info.getGoods_id());
+				if(pic!=null) {
+					GoodsPicDTO goodsPicDTO = new GoodsPicDTO();
+					goodsPicDTO.setPic(pic);
+					goodsPicDTO.setInfo(info);
+					listGoodsPicDTO.add(goodsPicDTO);
+				}
+			}
+			goodsPicVO.setListGoodsPicDTO(listGoodsPicDTO);
+		}
+		System.out.println("JJJ"+goodsPicVO);
+		return goodsPicVO;
+	}
+
+	/**
+	 * 跟据id删除商品和图片
+	 */
+	@Override
+	public String deleteGoods(String data_id) {
+		goodsInfo info = new goodsInfo();
+		info = goodsInfoManagerDao.getInfoByGoodsId(data_id);
+		System.out.println("11:"+info);
+		goodsInfoManagerDao.removeObject(info);
+		if(info!=null) {
+			List<picture> listPic = new ArrayList<>();
+			listPic =goodsInfoManagerDao.getPicsByInfoId(data_id);
+			for (picture pic : listPic) {
+				System.out.println("22:"+pic);
+				goodsInfoManagerDao.removeObject(pic);
+			}
+			
+			
+			/*for (picture pic : listPic) {
+				
+			}*/
 		}
 		return null;
 	}

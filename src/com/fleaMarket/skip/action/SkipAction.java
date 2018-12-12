@@ -51,7 +51,10 @@ public class SkipAction {
 		return "intoUserInfo";
 	}
 
-	
+	public String intoUserWants() {
+		
+		return "intoUserWants";
+	}
 	
 	/*//跳转详情页
 	public String kkk() {

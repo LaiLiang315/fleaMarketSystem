@@ -77,10 +77,12 @@
 		<div id="main" class="clearfix" style="width: 1170px">
 		<div class="user-sider fl">
 	<div class="user-info">
-		<img src="/images/web/user/default.png" class="user-header">
-		<a href="${pageContext.request.contextPath }/user/userinfo.jsp" class="username"></a>
+		<img src="${pageContext.request.contextPath}/themes/img/1.jpg" class="user-header">
+		<a href="javaScript:;" class="username">${user_session.nickname }</a>
 		<div class="auth">
+			<a class="realname-auth" href="/user/auth"><i class="icon" title="未实名认证"></i></a>
 			<a class="phone-auth" href="/user/auth"><i class="icon" style="color:#f40;" title="已绑定手机"></i></a>
+			<a class="email-auth" href="/user/auth"><i class="icon" title="未绑定邮箱"></i></a>
 		</div>
 	</div>
 	<div class="sider-nav">
@@ -111,9 +113,9 @@
 					</div>
 				</li> -->
 			
-			<div class="no-data">
-				<p>您没有发布任何二货哦~</p>
-			</div>
+<!-- 			<div class="no-data"> -->
+<!-- 				<p>您没有发布任何二货哦~</p> -->
+<!-- 			</div> -->
 			
 			</ul>
 			<div id="page"></div>

@@ -91,8 +91,8 @@ input[readonly] {
     	<div id="main" class="clearfix">
 		<div class="user-sider fl">
 	<div class="user-info">
-		<img src="/upload/avatar/201812/upload_251f03b5e11346d689f6c2ebf63d5821.jpg" class="user-header">
-		<a href="/user/userinfo" class="username">用户7292</a>
+		<img src="${pageContext.request.contextPath}/themes/img/1.jpg" class="user-header">
+		<a href="javaScript:;" class="username">${user_session.nickname }</a>
 		<div class="auth">
 			<a class="realname-auth" href="/user/auth"><i class="icon" title="未实名认证"></i></a>
 			<a class="phone-auth" href="/user/auth"><i class="icon" style="color:#f40;" title="已绑定手机"></i></a>
@@ -100,15 +100,14 @@ input[readonly] {
 		</div>
 	</div>
 	<div class="sider-nav">
-		<ul>
-			<li><a href="/user/index" class=""><i class="icon"></i>我发布的</a></li>
-			<li><a href="/user/want" class="active"><i class="icon"></i>我想要的</a></li>
-			<li><a href="/user/message" class=""><i class="icon"></i>我的留言</a></li>
-			<li><a href="/user/userinfo" class=""><i class="icon"></i>个人信息</a></li>
-			<li><a href="/user/auth" class=""><i class="icon"></i>实名认证</a></li>
-			<li><a href="/user/help" class=""><i class="icon"></i>意见反馈</a></li>
-		</ul>
-	</div>
+				<ul>
+					<li id="myPublish"><a href="javaScript:;" class=""><i class="icon"></i>我发布的</a></li>
+					<li id="myWants"><a href="javaScript:;" class="active"><i class="icon"></i>我想要的</a></li>
+					<li><a href="javaScript:;" class=""><i class="icon"></i>我的留言</a></li>
+					<li id="myInfo"><a href="javaScript:;" class=""><i
+							class="icon"></i>个人信息</a></li>
+				</ul>
+			</div>
 </div>
 		<div class="user-main fr">
 			<ul>
@@ -178,13 +177,9 @@ input[readonly] {
 <script type="text/javascript"
 	src="${pageContext.request.contextPath }/js/jquery.1.8.2.min.js"></script>
 <script type="text/javascript"
-	src="${pageContext.request.contextPath }/js/jquery.plugin.min.js"></script>
-<script type="text/javascript"
 	src="${pageContext.request.contextPath }/layui/layui.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath }/js/toastr.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/js/loginRegister/loginRegister.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath }/js/user/userWants.js"></script>
 </html>

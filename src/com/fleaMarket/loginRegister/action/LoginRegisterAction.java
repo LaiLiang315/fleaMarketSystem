@@ -154,10 +154,8 @@ public class LoginRegisterAction extends ActionSupport implements ServletRespons
 	
 	// 更新session 
 	public void  getNewSes() throws IOException {
-		System.out.println("hhhrr:"+newUser);
 		 HttpSession session = ServletActionContext.getRequest().getSession();
 		 user user = loginRegisterService.updataSess(newUser);
-		 System.out.println("KKJJ:"+user);
 		 session.setAttribute("user_session", user);
 		 GsonBuilder gsonBuilder = new GsonBuilder();
 			gsonBuilder.setPrettyPrinting();// 格式化json数据
@@ -172,7 +170,7 @@ public class LoginRegisterAction extends ActionSupport implements ServletRespons
 				// 根据键值取session中的值 
 				Object vakue = session.getAttribute(name); 
 				// 打印结果 
-				System.out.println("------" + name + ":" + vakue +"--------\n");
+//				System.out.println("------" + name + ":" + vakue +"--------\n");
 			}
 			response.getWriter().write(gson.toJson(session));
 	}
