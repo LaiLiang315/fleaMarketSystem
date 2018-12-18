@@ -11,6 +11,12 @@
         <property name="carousel_picture" type="java.lang.String">
             <column name="carousel_picture" />
         </property>
+        <property name="carousel_name" type="java.lang.String">
+            <column name="carousel_name" />
+        </property>
+        <property name="carousel_sequence" type="java.lang.Integer">
+            <column name="carousel_sequence" />
+        </property>
         <property name="carousel_creationtime" type="java.lang.String">
             <column name="carousel_creationtime" />
         </property>

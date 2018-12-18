@@ -12,8 +12,12 @@
 <link id="callCss" rel="stylesheet"
 	href="${pageContext.request.contextPath }/themes/bootshop/bootstrap.min.css"
 	media="screen" />
+	<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/layui/css/layui.css" />
 <link href="${pageContext.request.contextPath }/themes/css/base.css"
 	rel="stylesheet" media="screen" />
+	<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/css/public.css" />
 <!-- Bootstrap style responsive -->
 <link
 	href="${pageContext.request.contextPath }/themes/css/bootstrap-responsive.min.css"
@@ -58,25 +62,18 @@
 					<a class="brand" href="index.html"><img
 						src="${pageContext.request.contextPath}/themes/images/logo.png"
 						alt="Bootsshop" /></a>
-					<form class="form-inline navbar-search" method="post"
-						action="products.html">
-						<input id="srchFld" class="srchTxt" type="text" /> <select
-							class="srchTxt">
-							<option>所有</option>
-							<option>手机数码</option>
-							<option>生活百货</option>
-							<option>书集资料</option>
-							<option>健身器材</option>
-							<option>美妆</option>
-						</select>
-						<button type="submit" id="submitButton" class="btn btn-primary">确定</button>
-					</form>
 					<!--================ 登陆   ==================== -->
 					
 
 						<c:choose>
 							<c:when test="${user_session eq null}">
+							<ul id="" class="nav pull-left " style="margin-left: 60px">
+							<li id="homePage" class=""><a href="JavaScript:;">首&nbsp;&nbsp;页</a></li>
+							<li class=""><a href="https://www.taobao.com/">淘&nbsp;宝&nbsp;网</a></li>
+							<li class=""><a href="https://www.jd.com/">京&nbsp;东&nbsp;网</a></li>
+						</ul>
 							<ul id="topMenu" class="nav pull-right">
+							
 								<li class="login"><a href="#login" role="button"
 									data-toggle="modal" style=""><span
 										class="btn btn-large btn-success">发布闲置</span></a>
@@ -97,9 +94,9 @@
 														placeholder="Password">
 												</div>
 												<div class="control-group">
-													<label class="checkbox"> <input type="checkbox">
-														记住我
-													</label>
+													<label style="float: left">没有账号? <a href="#register" 
+									data-toggle="modal" style="padding-right: 0"><span
+										class="register">注册</span></a></label>
 												</div>
 
 											</form>
@@ -109,9 +106,9 @@
 										</div>
 									</div></li>
 
-								<li class="register"><a href="#register" role="button"
+								<!-- <li class="register"><a href="#register" role="button"
 									data-toggle="modal" style="padding-right: 0"><span
-										class="btn btn-large btn-success">注册</span></a></li>
+										class="btn btn-large btn-success">注册</span></a></li> -->
 										</ul>
 							</c:when>
 							<c:otherwise>
@@ -231,6 +228,8 @@
 					</div>
 				</div>
 			</div>
+		</div>
+		<div id="message">
 		</div>
 	</div>
 	<!-- Footer ================================================================== -->

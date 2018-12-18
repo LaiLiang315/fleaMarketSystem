@@ -287,4 +287,23 @@ public class GoodsInfoManagerDaoImpl implements GoodsInfoManagerDao {
 		}
 		return null;
 	}
+
+	/**
+	 * 跟据用户id查询商品信息
+	 * @param user_id
+	 * @return
+	 */
+	@Override
+	public List<goodsInfo> getUserWangtsByUserId(String trim) {
+		List<goodsInfo> listGoodsInfo = new ArrayList<>();
+		Session session = getSession();
+		String hql ="from goodsInfo where goods_userWants= :ID ";
+		Query query = session.createQuery(hql);
+		query.setParameter("ID", trim);
+		listGoodsInfo =(List<goodsInfo>)query.list();
+		if(!listGoodsInfo.isEmpty()) {
+			return listGoodsInfo;
+		}
+		return null;
+	}
 }

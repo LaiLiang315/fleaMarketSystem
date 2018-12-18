@@ -10,8 +10,10 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.fleaMarket.carouselManager.VO.CarouselVO;
 import com.fleaMarket.carouselManager.service.CarouselManagerService;
 import com.fleaMarket.domain.carousel;
+import com.fleaMarket.loginRegister.VO.UserVO;
 
 /**
  * 轮播图测试类
@@ -42,6 +44,12 @@ public class CarouselTest {
 		
 		System.out.println("listCarousel"+listCarousel);
 	}
-	
+	//测试跟据username查询用户
+	@Test 
+	public void getCarouselVOTest() {
+		CarouselVO carouselVO = new CarouselVO();
+		carouselVO=carouselManagerService.getCarouselVO();
+		System.out.println("JJSS"+carouselVO);
+	}
 	
 }

@@ -141,8 +141,10 @@ function getMyPublish(userId) {
 									+ '删除' + '</a>' + '</div>' + '</div>'
 									+ '</li>'
 						}
-						str = str + '</ul>'
+						str = str + '</ul>'+'<div id="pagination" class="pagination">'+'</div>'
 						$(".fr").html(str);
+						//得到我发布的商品分页
+						getMyPublishPage(goodsPicVO)
 					}
 				}
 			})
@@ -163,12 +165,44 @@ function deleteGoods(e){
 					toastr.success("删除成功!");
 					setTimeout(function() {
 						location.href="/fleaMarketSystem/skip/skip_intoUser";
-						
 					}, 1000);
 			   }
               })
 }
 
+//得到我发布的商品分页
+function getMyPublishPage(goodsPicVO){
+	console.log("0" + goodsPicVO)
+	var totalRecords = goodsPicVO.totalRecords;
+	console.log("1?" + totalRecords)
+	var pageIndex = goodsPicVO.pageIndex;
+	console.log("2?" + goodsPicVO)
+	var pageSize = goodsPicVO.pageSize;
+	console.log("3?" + pageSize)
+	var totalPages = goodsPicVO.totalPages;
+	console.log("4?" + totalPages)
+	var havePrePage = goodsPicVO.havePrePage;
+	console.log("5?" + havePrePage)
+	var haveNextPage = goodsPicVO.haveNextPage;
+	console.log("6?" + haveNextPage)
+	var str = '<ul >' + '<li class="prev">' + "上一页" + '</li>'
+	var strStart = '';
+	for (i = 0; i < totalPages; i++) {
+		if (i === 0) {
+			str = str + '<li id="' + (i + 1)
+					+ '" class="nav active" onClick="getCurPage(this)">' + (i + 1)
+					+ '</li>'
+
+		} else {
+			str = str + '<li id="' + (i + 1) + '" class="nav" onClick="getCurPage(this)">'
+					+ (i + 1) + '</li>'
+		}
+
+	}
+	str = str + '<li class="next">' + "下一页" + '</li>' + '</ul>'
+	$(".pagination").html(str);
+	
+}
 $("#myInfo").click(function() {
 
 	location.href = "/fleaMarketSystem/skip/skip_intoUserInfo";
@@ -182,4 +216,14 @@ $("#myPublish").click(function() {
 $("#myWants").click(function() {
 
 	 location.href="/fleaMarketSystem/skip/skip_intoUserWants";
+})
+//跳转首页
+$("#homePage").click(function() {
+
+	 location.href="/fleaMarketSystem/skip/skip_intoIndex";
+})
+//跳转首页
+$(".brand").click(function() {
+
+	 location.href="/fleaMarketSystem/skip/skip_intoIndex";
 })

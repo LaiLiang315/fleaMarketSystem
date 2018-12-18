@@ -156,7 +156,6 @@ function getSubMenu(str) {
 }
 // 获取每个分类所有商品的图片
 function getList(str){
-	alert("1：")
 	console.log("MM"+str.id)
 	$("#"+str.id).siblings().removeClass('act');
 	if ($("#"+str.id).hasClass('act')) {
@@ -376,7 +375,6 @@ function getCurPage(num) {
 //得到详情
 function getDetal1(e){
 	var goodsId = e.id;
-	 alert("zzzz" + goodsId)
 	console.log("!" + goodsId)
 	location.href = "/fleaMarketSystem/skip/skip_intoGoodsDetals?data_id="
 			+ goodsId + "";
@@ -393,5 +391,9 @@ function registerPage(){
 }
 
 
+//跳转首页
+$(".brand").click(function() {
 
+	 location.href="/fleaMarketSystem/skip/skip_intoIndex";
+})
 //跳转到详情页

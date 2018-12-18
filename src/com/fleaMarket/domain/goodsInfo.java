@@ -19,6 +19,7 @@ public class goodsInfo {
 	private String exchange_ways;
 	private String user_qq;
 	private String user_weixin;
+	private String user_phoneNum;
 	private String goods_creationtime; // 创建时间
 	private String goods_modifytime; // 修改时间
 
@@ -119,6 +120,14 @@ public class goodsInfo {
 		this.user_weixin = user_weixin;
 	}
 
+	public String getUser_phoneNum() {
+		return user_phoneNum;
+	}
+
+	public void setUser_phoneNum(String user_phoneNum) {
+		this.user_phoneNum = user_phoneNum;
+	}
+
 	public String getGoods_creationtime() {
 		return goods_creationtime;
 	}
@@ -141,8 +150,7 @@ public class goodsInfo {
 				+ ", goods_price=" + goods_price + ", goods_state=" + goods_state + ", goods_describe=" + goods_describe
 				+ ", goods_type=" + goods_type + ", goods_userWants=" + goods_userWants + ", exchange_adress="
 				+ exchange_adress + ", exchange_ways=" + exchange_ways + ", user_qq=" + user_qq + ", user_weixin="
-				+ user_weixin + ", goods_creationtime=" + goods_creationtime + ", goods_modifytime=" + goods_modifytime
-				+ "]";
+				+ user_weixin + ", user_phoneNum=" + user_phoneNum + ", goods_creationtime=" + goods_creationtime
+				+ ", goods_modifytime=" + goods_modifytime + "]";
 	}
-
 }

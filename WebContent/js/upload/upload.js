@@ -89,6 +89,7 @@ function saveGoodsInfo() {
 	formData.append("goodsInfo.exchange_adress", $("input[name='exchange_adress']").val())
 	formData.append("goodsInfo.user_qq", $("input[name='user_qq']").val())
 	formData.append("goodsInfo.user_weixin", $("input[name='user_weixin']").val())
+	formData.append("goodsInfo.user_phoneNum", $("input[name='user_phoneNum']").val())
     // console.log("CCCC"+$("input[name='goods_name']").val())
 	formData.append("pictrueMap", pushData);
 	console.log("XXX:"+pushData)
@@ -262,9 +263,9 @@ function deleteImage(e) {
 
 }
 
-//点击图标回到首页
-$(".brand").on("click",function(){
-	location.href="/fleaMarketSystem/skip/skip_intoIndex";
-	
+//跳转首页
+$("#homePage").click(function() {
+
+	 location.href="/fleaMarketSystem/skip/skip_intoIndex";
 })
 

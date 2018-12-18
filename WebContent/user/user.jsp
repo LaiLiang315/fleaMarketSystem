@@ -1,99 +1,112 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>用户信息</title>
 </head>
-<link  rel="stylesheet"
-	href="${pageContext.request.contextPath }/themes/bootshop/bootstrap.min.css"
-	 />
-	<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/layui/css/layui.css"  />
-	<link href="${pageContext.request.contextPath }/themes/css/base.css"
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/themes/bootshop/bootstrap.min.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/layui/css/layui.css" />
+<link href="${pageContext.request.contextPath }/themes/css/base.css"
 	rel="stylesheet" media="screen" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/css/publish.css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/css/public.css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/css/user.css" />
-	<link rel="stylesheet"
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/css/publish.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/css/public.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/css/user.css" />
+<link rel="stylesheet"
 	href="${pageContext.request.contextPath }/css/toastr.css">
+	<link href="${pageContext.request.contextPath }/css/page.css"
+	rel="stylesheet" type="text/css" />
 <body>
-<div id="header">
+	<div id="header">
 		<div class="container">
 			<div id="welcomeLine" class="row">
-						<div class="span6" >
-								
-						</div>
+				<div class="span6"></div>
 
 
 			</div>
 
 
 			<!-- Navbar ================================================== -->
-		<div id="logoArea" class="navbar">
-			<a id="smallScreen" data-target="#topMenu" data-toggle="collapse"
-				class="btn btn-navbar"> <span class="icon-bar"></span> <span
-				class="icon-bar"></span> <span class="icon-bar"></span>
-			</a>
-			<div class="navbar-inner">
-				<a class="brand" href="#"><img
-					src="${pageContext.request.contextPath}/themes/images/logo.png"
-					alt="Bootsshop" /></a>
-			
-				<!--================ 登陆   ==================== -->
-				<div style="position: relative;"class="dropdown">
-					<ul id="topMenu" class="nav pull-right ">
-						<li><label style="margin-top: 26px; color: white;">
-								欢迎! <strong style="color: white;">
-									${user_session.nickname }</strong>
-						</label></li>
+			<div id="logoArea" class="navbar">
+				<a id="smallScreen" data-target="#topMenu" data-toggle="collapse"
+					class="btn btn-navbar"> <span class="icon-bar"></span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span>
+				</a>
+				<div class="navbar-inner">
+					<a class="brand" href="#"><img
+						src="${pageContext.request.contextPath}/themes/images/logo.png"
+						alt="Bootsshop" /></a>
 
-						<li><a role="button" href="#" id="ss"><img
-								class="img-circle " style="width: 50px; height: 50px;"
-								src="${pageContext.request.contextPath}/themes/img/1.jpg" alt="" /></a>
-						</li>
-						<!-- <li class="resale"><a href="#resale" role="button"
+					<!--================ 登陆   ==================== -->
+					<div style="position: relative;" class="dropdown">
+						<ul id="" class="nav pull-left " style="margin-left: 60px">
+							<li id="homePage" class=""><a href="JavaScript:;">首&nbsp;&nbsp;页</a></li>
+							<li class=""><a href="https://www.taobao.com/">淘&nbsp;宝&nbsp;网</a></li>
+							<li class=""><a href="https://www.jd.com/">京&nbsp;东&nbsp;网</a></li>
+						</ul>
+						<ul id="topMenu" class="nav pull-right ">
+							<li><label style="margin-top: 26px; color: white;">
+									欢迎! <strong style="color: white;">
+										${user_session.nickname }</strong>
+							</label></li>
+
+							<li><a role="button" href="#" id="ss"><img
+									class="img-circle " style="width: 50px; height: 50px;"
+									src="${pageContext.request.contextPath}/themes/img/1.jpg"
+									alt="" /></a></li>
+							<!-- <li class="resale"><a href="#resale" role="button"
 							data-toggle="modal" style="padding-right: 0"><span
 								class="btn btn-large btn-success">一键转卖</span></a></li> -->
-					</ul>
-				<div style="position: absolute;">
-				<ul class="dropdown-menu"
-					style="z-index: 20;  display: ; left: 988.4px; top: 68px">
-					<li id="myPage"><a href="#">个人主页</a></li>
-					<li id=""><a href="#">历史订单</a></li>
-					<li id=""><a href="#">购 &nbsp;物&nbsp;车</a></li>
-					<li id="quite"><a href="#">注 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;销</a></li>
+						</ul>
+						<div style="position: absolute;">
+							<ul class="dropdown-menu"
+								style="z-index: 20; display:; left: 988.4px; top: 68px">
+								<li id="myPage"><a href="#">个人主页</a></li>
+								<li id=""><a href="#">历史订单</a></li>
+								<li id=""><a href="#">购 &nbsp;物&nbsp;车</a></li>
+								<li id="quite"><a href="#">注
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;销</a></li>
 
+							</ul>
+						</div>
+					</div>
+					<!--================ 登陆结束   ==================== -->
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div id="main" class="clearfix" style="width: 1170px">
+		<div class="user-sider fl">
+			<div class="user-info">
+				<img src="${pageContext.request.contextPath}/themes/img/1.jpg"
+					class="user-header"> <a href="javaScript:;" class="username">${user_session.nickname }</a>
+				<div class="auth">
+					<a class="realname-auth" href="/user/auth"><i class="icon"
+						title="未实名认证"></i></a> <a class="phone-auth" href="/user/auth"><i
+						class="icon" style="color: #f40;" title="已绑定手机"></i></a> <a
+						class="email-auth" href="/user/auth"><i class="icon"
+						title="未绑定邮箱"></i></a>
+				</div>
+			</div>
+			<div class="sider-nav">
+				<ul>
+					<li id="myPublish"><a href="javaScript:;" class="active"><i
+							class="icon"></i>我发布的</a></li>
+					<li id="myWants"><a href="javaScript:;" class=""><i
+							class="icon"></i>我想要的</a></li>
+					<li><a href="" class=""><i class="icon"></i>我的留言</a></li>
+					<li id="myInfo"><a href="javaScript:;" class=""><i
+							class="icon"></i>个人信息</a></li>
 				</ul>
 			</div>
-				</div>
-				<!--================ 登陆结束   ==================== -->
-			</div>
-			
 		</div>
-	</div>
-	</div>
-		<div id="main" class="clearfix" style="width: 1170px">
-		<div class="user-sider fl">
-	<div class="user-info">
-		<img src="${pageContext.request.contextPath}/themes/img/1.jpg" class="user-header">
-		<a href="javaScript:;" class="username">${user_session.nickname }</a>
-		<div class="auth">
-			<a class="realname-auth" href="/user/auth"><i class="icon" title="未实名认证"></i></a>
-			<a class="phone-auth" href="/user/auth"><i class="icon" style="color:#f40;" title="已绑定手机"></i></a>
-			<a class="email-auth" href="/user/auth"><i class="icon" title="未绑定邮箱"></i></a>
-		</div>
-	</div>
-	<div class="sider-nav">
-		<ul>
-			<li id="myPublish"><a href="javaScript:;" class="active"><i class="icon"></i>我发布的</a></li>
-			<li id="myWants"><a href="javaScript:;" class=""><i class="icon"></i>我想要的</a></li>
-			<li><a href="" class=""><i class="icon"></i>我的留言</a></li>
-			<li id="myInfo"><a href="javaScript:;" class=""><i class="icon"></i>个人信息</a></li>
-		</ul>
-	</div>
-</div>
 		<div class="user-main fr">
 			<ul>
 				<!-- <li>
@@ -112,13 +125,13 @@
 						</div>
 					</div>
 				</li> -->
-			
-<!-- 			<div class="no-data"> -->
-<!-- 				<p>您没有发布任何二货哦~</p> -->
-<!-- 			</div> -->
-			
+
+				<!-- 			<div class="no-data"> -->
+				<!-- 				<p>您没有发布任何二货哦~</p> -->
+				<!-- 			</div> -->
+
 			</ul>
-			<div id="page"></div>
+			<div id="pagination" class="pagination"></div>
 		</div>
 	</div>
 	<!-- Footer ================================================================== -->
@@ -159,10 +172,16 @@
 		<!-- Container End -->
 	</div>
 </body>
-    <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery.1.8.2.min.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery.plugin.min.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/layui/layui.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/toastr.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/loginRegister/loginRegister.js" ></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/user/user.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/js/jquery.1.8.2.min.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/js/jquery.plugin.min.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/layui/layui.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/js/toastr.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/loginRegister/loginRegister.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/js/user/user.js"></script>
 </html>

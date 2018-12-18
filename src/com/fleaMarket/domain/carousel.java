@@ -9,6 +9,8 @@ package com.fleaMarket.domain;
 public class carousel {
 	private String carousel_id; // 轮播图id
 	private String carousel_picture; // 轮播图图片
+	private String carousel_name;
+	private Integer carousel_sequence;
 	private String carousel_creationtime; // 创建时间
 	private String carousel_modifytime; // 修改时间
 	private Integer is_delete; // 是否删除
@@ -27,6 +29,22 @@ public class carousel {
 
 	public void setCarousel_picture(String carousel_picture) {
 		this.carousel_picture = carousel_picture;
+	}
+
+	public String getCarousel_name() {
+		return carousel_name;
+	}
+
+	public void setCarousel_name(String carousel_name) {
+		this.carousel_name = carousel_name;
+	}
+
+	public Integer getCarousel_sequence() {
+		return carousel_sequence;
+	}
+
+	public void setCarousel_sequence(Integer carousel_sequence) {
+		this.carousel_sequence = carousel_sequence;
 	}
 
 	public String getCarousel_creationtime() {
@@ -55,9 +73,10 @@ public class carousel {
 
 	@Override
 	public String toString() {
-		return "carousel [carousel_id=" + carousel_id + ", carousel_picture=" + carousel_picture
-				+ ", carousel_creationtime=" + carousel_creationtime + ", carousel_modifytime=" + carousel_modifytime
-				+ ", is_delete=" + is_delete + "]";
+		return "carousel [carousel_id=" + carousel_id + ", carousel_picture=" + carousel_picture + ", carousel_name="
+				+ carousel_name + ", carousel_sequence=" + carousel_sequence + ", carousel_creationtime="
+				+ carousel_creationtime + ", carousel_modifytime=" + carousel_modifytime + ", is_delete=" + is_delete
+				+ "]";
 	}
 
 }

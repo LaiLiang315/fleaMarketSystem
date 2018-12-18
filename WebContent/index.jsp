@@ -78,7 +78,7 @@
 				<div class="navbar-inner">
 					<a class="brand" href="#"><img
 						src="${pageContext.request.contextPath}/themes/images/logo.png"
-						alt="Bootsshop" /></a>
+						 /></a>
 					<form class="form-inline navbar-search" method="post"
 						action="products.html">
 						<input id="srchFld" class="srchTxt" type="text" /> <select
@@ -118,9 +118,7 @@
 														placeholder="请输入密码：">
 												</div>
 												<div class="control-group">
-													<!-- <label class="checkbox"> <input type="checkbox">
-														记住我   
-													</label> --> <label style="float: left">没有账号? <a href="#register" 
+													 <label style="float: left">没有账号? <a href="#register" 
 									data-toggle="modal" style="padding-right: 0"><span
 										class="register">注册</span></a></label>
 												</div>

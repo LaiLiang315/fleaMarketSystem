@@ -13,6 +13,7 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.fleaMarket.domain.user;
+import com.fleaMarket.loginRegister.VO.UserVO;
 import com.fleaMarket.loginRegister.service.LoginRegisterService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -43,6 +44,7 @@ public class LoginRegisterAction extends ActionSupport implements ServletRespons
 
 	private user newUser;
 	
+	private String idList;
 
 	public user getNewUser() {
 		return newUser;
@@ -52,6 +54,13 @@ public class LoginRegisterAction extends ActionSupport implements ServletRespons
 		this.newUser = newUser;
 	}
 
+	public String getIdList() {
+		return idList;
+	}
+
+	public void setIdList(String idList) {
+		this.idList = idList;
+	}
 
 	/**
 	 * 实现request和response
@@ -219,4 +228,32 @@ public class LoginRegisterAction extends ActionSupport implements ServletRespons
 		pw.write("logoutSuccess");
 		
 	}
+	
+	//用户列表分页
+	public void getUserVO() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
+		UserVO userVO = loginRegisterService.getUserVO();
+		response.getWriter().write(gson.toJson(userVO));
+	}
+	//封禁用户
+	public void deleteUser() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
+		String result = loginRegisterService.deleteUser(idList);
+		response.getWriter().write(gson.toJson(result));
+	}
+	//解除封禁用户
+		public void unDeleteUser() throws IOException {
+			GsonBuilder gsonBuilder = new GsonBuilder();
+			gsonBuilder.setPrettyPrinting();// 格式化json数据
+			Gson gson = gsonBuilder.create();
+			response.setContentType("text/html;charset=utf-8");
+			String result = loginRegisterService.unDeleteUser(idList);
+			response.getWriter().write(gson.toJson(result));
+		}
 }

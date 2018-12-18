@@ -3,6 +3,7 @@ package com.fleaMarket.carouselManager.service;
 import java.util.List;
 import java.util.Map;
 
+import com.fleaMarket.carouselManager.VO.CarouselVO;
 import com.fleaMarket.domain.carousel;
 import com.fleaMarket.domain.goodsInfo;
 import com.fleaMarket.domain.picture;
@@ -65,6 +66,12 @@ public interface CarouselManagerService {
 	 * @return
 	 */
 	user savePersonalInfo(user user);
+
+	/**
+	 * 轮播图列表分页
+	 * @return
+	 */
+	CarouselVO getCarouselVO();
 
 
 	

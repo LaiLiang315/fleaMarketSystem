@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.fleaMarket.domain.type;
 import com.fleaMarket.domain.typeOne;
+import com.fleaMarket.goodsType.DTO.TypeDTO;
+import com.fleaMarket.goodsType.VO.TypeVO;
 import com.fleaMarket.goodsType.dao.DTO.GoodsTypeDTO;
 
 /**
@@ -17,9 +19,10 @@ public interface GoodsTypeService {
 	/**
 	 * 添加类型
 	 * @param newType
+	 * @param typeOne 
 	 * @return
 	 */
-	public String addType(type newType);
+	public String addType(type newType, typeOne typeOne);
 
 	/**
 	 * 删除类型
@@ -43,5 +46,24 @@ public interface GoodsTypeService {
 	 * @throws IOException 
 	 */
 	public List<type> getListType(typeOne typeOne);
+
+	/**
+	 * 得到类型的分页
+	 * @return
+	 */
+	public TypeVO getTypeVO();
+
+	/**
+	 * 得到类型的DTO
+	 * @return
+	 */
+	public List<TypeDTO> getTypeDTO();
+
+	/**
+	 *添加一级类型
+	 * @param typeOne
+	 * @return
+	 */
+	public String addTypeOne(typeOne typeOne);
 
 }

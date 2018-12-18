@@ -61,6 +61,12 @@ public interface LoginRegisterDao {
 	 * @return
 	 */
 	public user getUserByUserName(String username);
+/**
+ * 跟据用户id查询用户
+ * @param id
+ * @return
+ */
+	public user getUserById(String id);
 
 //	public user getUserByUserName(user username);
 

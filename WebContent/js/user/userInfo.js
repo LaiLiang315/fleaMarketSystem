@@ -13,21 +13,6 @@ $(document).ready(function() {
 
 });
 
-//页面跳转
-$("#myInfo").click(function() {
-
-	location.href = "/fleaMarketSystem/skip/skip_intoUserInfo";
-})
-
-$("#myPublish").click(function() {
-
-	location.href = "/fleaMarketSystem/skip/skip_intoUser";
-})
-
-$("#myWants").click(function() {
-
-	 location.href="/fleaMarketSystem/skip/skip_intoUserWants";
-})
 
 // 更新session
 function getNewUser() {
@@ -46,12 +31,18 @@ function getNewUser() {
 			userId = jsonData.session.attributes.user_session.user_id;
 			userSex = jsonData.session.attributes.user_session.sex;
 			$("input[name='sex'][value='"+userSex+"']").attr("checked",true);
-			console.log("ddd:"+userSex)
+//			console.log("ddd:"+$("input[name='sex'][value='"+userSex+"']").val())
 			// 得到头像
 			getheadPic()
 		}
 	})
 }
+
+//刷新radio显示性别
+layui.use('form',function(){
+    var form = layui.form;
+        form.render("radio");
+});
 // 得到头像
 function getheadPic() {
 	var dd = newUser.headportrait;
@@ -131,10 +122,13 @@ $('.userinfo-submit').click(function() {
 		type : "post",
 		data : formData, // 前台传给后台的数据
 		// 报错请加入以下三行，则ajax提交无问题
-		cache : false,
+		processData : false,
+		contentType : false,
 		success : function(result) {
+			console.log("vv"+$('input[name=sex]:checked').length)
 			if ($('input[name=sex]:checked').length != 1) {
 				 layer.tips('请选择性别', '.sex-wrap')
+				 return false;
 			}else{
 			toastr.success("修改信息成功!")
 			}
@@ -166,7 +160,6 @@ layui.use('upload', function() {
 		bindAction : '#testListAction' // 指向一个按钮触发上传
 		,
 		auto : false // 不自动上传
-		// ,dataType : "josn"
 		,
 		choose : function(obj) {
 			var files = this.files = obj.pushFile(); // 将每次选择的文件追加到文件队列
@@ -193,3 +186,30 @@ layui.use('upload', function() {
 		}
 	});
 });
+
+
+//页面跳转
+$("#myInfo").click(function() {
+
+	location.href = "/fleaMarketSystem/skip/skip_intoUserInfo";
+})
+
+$("#myPublish").click(function() {
+
+	location.href = "/fleaMarketSystem/skip/skip_intoUser";
+})
+
+$("#myWants").click(function() {
+
+	 location.href="/fleaMarketSystem/skip/skip_intoUserWants";
+})
+//跳转首页
+$("#homePage").click(function() {
+
+	 location.href="/fleaMarketSystem/skip/skip_intoIndex";
+})
+//跳转首页
+$(".brand").click(function() {
+
+	 location.href="/fleaMarketSystem/skip/skip_intoIndex";
+})

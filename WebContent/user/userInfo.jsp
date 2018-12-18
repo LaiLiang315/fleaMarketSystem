@@ -54,7 +54,14 @@ input[readonly] {
 
 					<!--================ 登陆   ==================== -->
 					<div style="position: relative;" class="dropdown">
+						<ul id="" class="nav pull-left " style="margin-left: 60px">
+							<li id="homePage" class=""><a href="JavaScript:;">首&nbsp;&nbsp;页</a></li>
+							<li class=""><a href="https://www.taobao.com/">淘&nbsp;宝&nbsp;网</a></li>
+							<li class=""><a href="https://www.jd.com/">京&nbsp;东&nbsp;网</a></li>
+						</ul>
 						<ul id="topMenu" class="nav pull-right ">
+							
+							
 							<li><label style="margin-top: 26px; color: white;">
 									欢迎! <strong style="color: white;">
 										${user_session.nickname }</strong>

@@ -11,12 +11,14 @@ import javax.persistence.SecondaryTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fleaMarket.carouselManager.VO.CarouselVO;
 import com.fleaMarket.carouselManager.dao.CarouselManagerDao;
 import com.fleaMarket.carouselManager.service.CarouselManagerService;
 import com.fleaMarket.domain.carousel;
 import com.fleaMarket.domain.goodsInfo;
 import com.fleaMarket.domain.picture;
 import com.fleaMarket.domain.user;
+import com.fleaMarket.loginRegister.VO.UserVO;
 
 import util.BuildUuid;
 import util.ImgCompress;
@@ -65,17 +67,17 @@ public class CarouselManagerServiceImpl implements CarouselManagerService {
 			 * 遍历数组String id : deleteIdList
 			 */
 			for (String id : deleteIdList) {
-//				System.out.println("111111" + deleteIdList);
+				// System.out.println("111111" + deleteIdList);
 				carousel carousel = new carousel();
 				carousel = carouselManageDao.getCarouselById(id);
 
-//				System.out.println("AAAAA" + carousel);
+				// System.out.println("AAAAA" + carousel);
 				if (carousel != null) {
 					carousel.setIs_delete(1);
 					carousel.setCarousel_modifytime(TimeUtil.getStringSecond());
-//					System.out.println("DDDDDD" + carousel);
+					// System.out.println("DDDDDD" + carousel);
 					carouselManageDao.saveOrUpdateObject(carousel);
-//					System.out.println("=======");
+					// System.out.println("=======");
 					result = "deleteSuccess";
 				} else {
 					result = "deleteFailed";
@@ -101,6 +103,7 @@ public class CarouselManagerServiceImpl implements CarouselManagerService {
 		pic.setIs_delete(0);
 		carouselManageDao.saveOrUpdateObject(pic);
 	}
+
 	/**
 	 * 添加并完善商品信息
 	 */
@@ -116,17 +119,17 @@ public class CarouselManagerServiceImpl implements CarouselManagerService {
 		goodsInfo.setGoods_modifytime(TimeUtil.getStringSecond());
 		carouselManageDao.saveOrUpdateObject(goodsInfo);
 		String[] picIds = pictrueMap.split(",");
-		int i=0;
+		int i = 0;
 		for (String picId : picIds) {
-			i=i+1;
+			i = i + 1;
 			picture pic = carouselManageDao.getPicById(picId.trim());
-			//设置图片顺序
+			// 设置图片顺序
 			pic.setPicture_sequence(i);
-			if(pic!=null) {
+			if (pic != null) {
 				pic.setPicture_belong(goodsInfoId);
 				carouselManageDao.saveOrUpdateObject(pic);
 				result = "success";
-			}else {
+			} else {
 				result = "error";
 			}
 		}
@@ -143,16 +146,18 @@ public class CarouselManagerServiceImpl implements CarouselManagerService {
 		// 将图集顺序设置为特殊值，便去后面补充信息是重置
 		carousel.setCarousel_creationtime(TimeUtil.getStringSecond());
 		carousel.setCarousel_modifytime(TimeUtil.getStringSecond());
-		carousel.setIs_delete(0);;
+		carousel.setIs_delete(0);
+		;
 		carouselManageDao.saveOrUpdateObject(carousel);
 	}
 
-	//查询所有轮播图
+	// 查询所有轮播图
 	@Override
 	public List<carousel> findCarousels() {
 		List<carousel> listCarousel = new ArrayList<>();
-		listCarousel = (List<carousel>) carouselManageDao.listObject("from carousel where is_delete='0' order by carousel_creationtime desc");
-		if(!listCarousel.isEmpty()) {
+		listCarousel = (List<carousel>) carouselManageDao
+				.listObject("from carousel where is_delete='0' order by carousel_creationtime desc");
+		if (!listCarousel.isEmpty()) {
 			return listCarousel;
 		}
 		return null;
@@ -162,10 +167,10 @@ public class CarouselManagerServiceImpl implements CarouselManagerService {
 	 * 添加头像
 	 */
 	@Override
-	public void addHeadportrait(user user,String fileFileName) {
+	public void addHeadportrait(user user, String fileFileName) {
 		user newUser = new user();
 		newUser = carouselManageDao.getUserById(user.getUser_id());
-		if(newUser!=null) {
+		if (newUser != null) {
 			newUser.setUser_modifytime(TimeUtil.getStringSecond());
 			newUser.setHeadportrait(fileFileName);
 			carouselManageDao.saveOrUpdateObject(newUser);
@@ -177,11 +182,11 @@ public class CarouselManagerServiceImpl implements CarouselManagerService {
 	 */
 	@Override
 	public user savePersonalInfo(user user) {
-		System.out.println("JJ"+user);
-		
+		System.out.println("JJ" + user);
+
 		user newUser = new user();
 		newUser = carouselManageDao.getUserById(user.getUser_id());
-		if(newUser!=null) {
+		if (newUser != null) {
 			newUser.setUser_modifytime(TimeUtil.getStringSecond());
 			newUser.setAddress(user.getAddress());
 			newUser.setNickname(user.getNickname());
@@ -191,5 +196,41 @@ public class CarouselManagerServiceImpl implements CarouselManagerService {
 		return user;
 	}
 
+	/**
+	 * 轮播图列表分页
+	 */
+	@Override
+	public CarouselVO getCarouselVO() {
+		CarouselVO carouselVO = new CarouselVO();
+		List<carousel> listCarousel = new ArrayList<carousel>();
+		String listUserHql = "from carousel where 1=1";
+		String userCountHql = "select count(*) from carousel where 1=1";
+		
+		// 这里如果不加desc表示正序，如果加上desc表示倒序
+		userCountHql = userCountHql + "order by carousel_creationtime desc";
+				int userCount = carouselManageDao.getCount(userCountHql);
+				// 设置总数量
+				carouselVO.setTotalRecords(userCount);
+				// 设置总页数
+				carouselVO.setTotalPages(((userCount - 1) / carouselVO.getPageSize()) + 1);
+				// 判断是否拥有上一页
+				if (carouselVO.getPageIndex() <= 1) {
+					carouselVO.setHavePrePage(false);
+				} else {
+					carouselVO.setHavePrePage(true);
+				}
+				// 判断是否拥有下一页
+				if (carouselVO.getPageIndex() >= carouselVO.getTotalPages()) {
+
+					carouselVO.setHaveNextPage(false);
+				} else {
+					carouselVO.setHaveNextPage(true);
+				}
+				listCarousel = (List<carousel>) carouselManageDao.queryForPage(
+						"from carousel order by carousel_creationtime desc", carouselVO.getPageIndex(),
+						carouselVO.getPageSize());
+				carouselVO.setListCarousel(listCarousel);;
+				return carouselVO;
+	}
 
 }

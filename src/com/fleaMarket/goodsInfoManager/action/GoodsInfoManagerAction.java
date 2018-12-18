@@ -344,7 +344,7 @@ public class GoodsInfoManagerAction extends ActionSupport implements ServletResp
 		response.getWriter().write(gson.toJson(goodsPicVO));
 	}
 	/**
-	 * 删除商品信息和图片
+	 * 删除发布的商品信息和图片
 	 * @throws IOException 
 	 */
 	public void deleteGoods() throws IOException {
@@ -353,6 +353,31 @@ public class GoodsInfoManagerAction extends ActionSupport implements ServletResp
 		Gson gson = gsonBuilder.create();
 		response.setContentType("text/html;charset=utf-8");
 		String delete = goodsInfoManagerService.deleteGoods(data_id);
+		response.getWriter().write(gson.toJson(delete));
+	}
+	/**
+	 * 跟据用户id查询商品信息
+	 * @throws IOException 
+	 */
+	public void getUserWangtsVO() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
+		GoodsPicVO goodsPicVO= goodsInfoManagerService.getUserWangtsVO(newUser);
+		response.getWriter().write(gson.toJson(goodsPicVO));
+	}
+	
+	/**
+	 * 删除收藏的商品信息和图片
+	 * @throws IOException 
+	 */
+	public void deleteGoodsUserWant() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
+		String delete = goodsInfoManagerService.deleteGoodsUserWant(data_id);
 		response.getWriter().write(gson.toJson(delete));
 	}
 }

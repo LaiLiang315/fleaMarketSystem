@@ -122,4 +122,21 @@ public class LoginRegisterDaoImpl implements LoginRegisterDao {
 		}
 		return null;
 	}
+
+	/**
+	 * 根据用户id查询用户
+	 */
+	@Override
+	public user getUserById(String id) {
+		user user = new user();
+		Session session = getSession();
+		String hql = "from user where user_id= :ID ";
+		Query query = session.createQuery(hql);
+		query.setParameter("ID", id);
+		user = (user) query.uniqueResult();
+		if (user != null) {
+			return user;
+		}
+		return null;
+	}
 }

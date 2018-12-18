@@ -11,6 +11,8 @@ import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.fleaMarket.domain.type;
 import com.fleaMarket.domain.typeOne;
+import com.fleaMarket.goodsType.DTO.TypeDTO;
+import com.fleaMarket.goodsType.VO.TypeVO;
 import com.fleaMarket.goodsType.dao.DTO.GoodsTypeDTO;
 import com.fleaMarket.goodsType.service.GoodsTypeService;
 import com.google.gson.Gson;
@@ -106,30 +108,36 @@ public class GoodsTypeAction extends ActionSupport implements ServletResponseAwa
 	 */
 	/**
 	 * 添加类型
+	 * @throws IOException 
 	 */
-	public void addType() {
+	public void addType() throws IOException {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
 		response.setContentType("text/html;charset=utf-8");
-		String type = goodsTypeService.addType(newType);
-		try {
-			response.getWriter().write(gson.toJson(type));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		String result = goodsTypeService.addType(newType,typeOne);
+			response.getWriter().write(gson.toJson(result));
 		}
 
-	}
 
+	//添加一级类型
+	public void addTypeOne() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
+		String result = goodsTypeService.addTypeOne(typeOne);
+		response.getWriter().write(gson.toJson(result));
+	}
 	/**
 	 * 删除类型
 	 */
 	public void deleteType() {
-		/*GsonBuilder gsonBuilder = new GsonBuilder();
+		System.out.println("idList"+idList);
+		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
-		response.setContentType("text/html;charset=utf-8");*/
+		response.setContentType("text/html;charset=utf-8");
 		try {
 			response.getWriter().write("" + (goodsTypeService.deleteType(idList)));
 		} catch (IOException e) {
@@ -180,5 +188,30 @@ public class GoodsTypeAction extends ActionSupport implements ServletResponseAwa
 		System.out.println("ssss");
 		List<type> types = goodsTypeService.getListType(typeOne);
 		response.getWriter().write(gson.toJson(types));
+	}
+	/**
+	 * 分页显示类型
+	 * @throws IOException 
+	 */
+	public void getTypeVO() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
+		TypeVO typeVO = goodsTypeService.getTypeVO();
+		response.getWriter().write(gson.toJson(typeVO));
+	}
+	/**
+	 * 类型的DTO
+	 * @throws IOException 
+	 */
+	public void getTypeDTO() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
+		List<TypeDTO> listTypeDTO = goodsTypeService.getTypeDTO();
+		response.getWriter().write(gson.toJson(listTypeDTO));
+		
 	}
 }

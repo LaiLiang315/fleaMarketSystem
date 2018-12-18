@@ -41,6 +41,9 @@
         <property name="user_weixin" type="java.lang.String">
             <column name="user_weixin" />
         </property>
+        <property name="user_phoneNum" type="java.lang.String">
+            <column name="user_phoneNum" />
+        </property>
         <property name="goods_creationtime" type="java.lang.String">
             <column name="goods_creationtime" />
         </property>

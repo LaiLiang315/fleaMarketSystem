@@ -122,7 +122,7 @@ public class GoodsTypeDaoImpl implements GoodsTypeDao {
 	public type getTypeByTypeName(Object trim) {
 		type type = new type();
 		Session session = getSession();
-		String hql ="from type where type_name= :ID ";
+		String hql ="from type where is_delete='0' and type_name= :ID ";
 		Query query = session.createQuery(hql);
 		query.setParameter("ID", trim);
 		type = (type)query.uniqueResult();
@@ -156,28 +156,25 @@ public class GoodsTypeDaoImpl implements GoodsTypeDao {
 	public List<type> getTypeByTypeOneId(Object trim) {
 		List<type> types = new ArrayList<>();
 		Session session = getSession();
-		String hql ="from type where type_belong= :ID ";
+		String hql ="from type where is_delete='0' and type_belong= :ID ";
 		Query query = session.createQuery(hql);
 		query.setParameter("ID", trim);
 		types = (List<type>)query.list();
-		if(!types.isEmpty()) {
-			return types;
-		}
-		return null;
+		return types;
 	}
 	/**
 	 * 跟据一级栏目的name得到二级栏目
 	 */
 	@Override
 	public typeOne getTypeOneByTypeOneName(Object trim) {
-		typeOne type = new typeOne();
+		typeOne type1 = new typeOne();
 		Session session = getSession();
-		String hql ="from typeOne where typeOne_name= :ID ";
+		String hql ="from typeOne where is_delete='0' and typeOne_name= :ID ";
 		Query query = session.createQuery(hql);
 		query.setParameter("ID", trim);
-		type = (typeOne)query.uniqueResult();
-		if(type!=null) {
-			return type;
+		type1 = (typeOne)query.uniqueResult();
+		if(type1!=null) {
+			return type1;
 		}
 		return null;
 	}

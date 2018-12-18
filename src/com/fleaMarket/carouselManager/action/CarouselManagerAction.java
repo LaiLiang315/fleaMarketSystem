@@ -16,6 +16,7 @@ import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
+import com.fleaMarket.carouselManager.VO.CarouselVO;
 import com.fleaMarket.carouselManager.service.CarouselManagerService;
 import com.fleaMarket.domain.carousel;
 import com.fleaMarket.domain.goodsInfo;
@@ -184,6 +185,18 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 	}
 
 	/**
+	 * 查询轮播图列表
+	 * @throws IOException 
+	 */
+	public void getCarouselVO() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		response.setContentType("text/html;charset=utf-8");
+		CarouselVO carouselVO = carouselManagerService.getCarouselVO();
+		response.getWriter().write(gson.toJson(carouselVO));
+	}
+	/**
 	 * 添加轮播图
 	 * 
 	 * @throws IOException
@@ -328,7 +341,6 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 		// 同时添加作品信息和补充图集信息
 		String result = carouselManagerService.addAndComplete(goodsInfo, pictrueMap);
 		try {
-			// System.out.println("----------------------------------------------:"+result);
 			response.getWriter().write(gson.toJson(result));
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -424,7 +436,6 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 		String code = ""; // 0上传成功 1上传失败
 		String res = "";
 		String result = "";
-		System.out.println("---------------------------------");
 		try {
 			String folderpath = "D:/Aupload/test1";
 			if (file != null) {
@@ -433,10 +444,8 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 					String path = ServletActionContext.getServletContext().getRealPath("/WEB-INF/upload");
 					File uploadFile = new File(path);
 					if (!uploadFile.exists() && !uploadFile.isDirectory()) {
-						// System.out.println("文件夹路径不存在，创建路径:" + folderpath);
 						uploadFile.mkdirs();
 					} else {
-						// System.out.println("文件夹路径存在:" + uploadFile);
 					}
 					String filename = path + File.separator + fileFileName;
 					fileFileName = scrol_id + fileFileName;
@@ -451,10 +460,8 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 					 System.out.println("filename==" + filename);
 					File folder = new File(folderpath);
 					if (!folder.exists() && !folder.isDirectory()) {
-						 System.out.println("文件夹路径不存在，创建路径:" + folderpath);
 						folder.mkdirs();
 					} else {
-						 System.out.println("文件夹路径存在:" + folderpath);
 					}
 					FileUtils.copyFile(file, new File(folderpath, fileFileName));
 					code = "0";
@@ -463,14 +470,12 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 			} else {
 				result = "uploaderror";
 				code = "1";
-				// System.out.println("上传文件发生错误");
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-//		user.setHeadportrait(fileFileName);
 		carouselManagerService.addHeadportrait(user,fileFileName);
 		res = "{\"code\":\" " + code + " \",\"msg\":\"" + result + "\",\"fileFileName\":\"" + fileFileName + " \"}";
 		// 返回前端信息
@@ -478,7 +483,6 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
 		response.setContentType("text/html;charset=utf-8");
-//		System.out.println("SSSS"+res);
 		try {
 			response.getWriter().write(gson.toJson(res));
 		} catch (IOException e) {

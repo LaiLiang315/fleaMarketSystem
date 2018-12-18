@@ -2,21 +2,28 @@
 <!DOCTYPE struts PUBLIC
 	"-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
 	"http://struts.apache.org/dtds/struts-2.5.dtd">
-	<struts>
-<package name="skip" namespace="/skip" extends="struts-default"
+<struts>
+	<package name="skip" namespace="/skip" extends="struts-default"
 		strict-method-invocation="false">
 		<action name="skip_*"
 			class="com.fleaMarket.skip.action.SkipAction" method="{1}">
-		 <result name="intoIndex">/index.jsp</result>
-<!-- 		 <result name="intoGoodsDetals" type="redirect">/goodsInfoManager/goodsInfoManager_getPicsByGoodsId?data_id=${data_id}</result> -->
-		<result name="intoGoodsDetals">/GoodsDetals.jsp</result>
-		 <result name="intoUpLoadPic">/UpLoadPic.jsp</result>
-		 <result name="intoRegister">/register.jsp</result>
-		 <result name="intoUser">/user/user.jsp</result>
-		 <result name="intoUserInfo">/user/userInfo.jsp</result>
-		 <result name="intoLogin">/login.jsp</result>
-		 <result name="intoRegister">/register.jsp</result>
-		 <result name="intoUserWants">/user/userWants.jsp</result>
+			<result name="intoIndex">/index.jsp</result>
+			<!-- <result name="intoGoodsDetals" type="redirect">/goodsInfoManager/goodsInfoManager_getPicsByGoodsId?data_id=${data_id}</result> -->
+			<result name="intoGoodsDetals">/GoodsDetals.jsp</result>
+			<result name="intoUpLoadPic">/UpLoadPic.jsp</result>
+			<result name="intoRegister">/register.jsp</result>
+			<result name="intoUser">/user/user.jsp</result>
+			<result name="intoUserInfo">/user/userInfo.jsp</result>
+			<result name="intoLogin">/login.jsp</result>
+			<result name="intoRegister">/register.jsp</result>
+			<result name="intoUserWants">/user/userWants.jsp</result>
+			<result name="intoCategoryAdd">/category/CategoryAdd.jsp</result>
+			<result name="intoCategoryList">/category/CategoryList.jsp</result>
+			<result name="intoUserList">/userManagement/UserList.jsp</result>
+			<result name="intoTransactionList">/transactionManagement/TransactionList.jsp</result>
+			<result name="intoCarouselAdd">/carouselManagement/CarouselAdd.jsp</result>
+			<result name="intoCarouselList">/carouselManagement/CarouselList.jsp</result>
+		    <result name="intoCategoryEdit">/category/CategoryEdit.jsp</result>
 		</action>
 	</package>
 

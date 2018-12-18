@@ -397,11 +397,66 @@ public class GoodsInfoManagerServiceImpl implements GoodsInfoManagerService {
 				System.out.println("22:"+pic);
 				goodsInfoManagerDao.removeObject(pic);
 			}
-			
-			
-			/*for (picture pic : listPic) {
-				
-			}*/
+		}
+		return null;
+	}
+
+	//跟据用户id查询用户收藏的信息
+	@Override
+	public GoodsPicVO getUserWangtsVO(user newUser) {
+		if(newUser!=null && newUser.getUser_id().trim().length()>0) {GoodsPicVO goodsPicVO = new GoodsPicVO();
+		List<GoodsPicDTO> listGoodsPicDTO = new ArrayList<>();
+		List<goodsInfo> listInfo = new ArrayList<>();
+		String listGoodsInfoHql = "from goodsInfo where 1=1";
+		String goodsInfoCountHql = "select count(*) from goodsInfo where 1=1";
+		// 这里如果不加desc表示正序，如果加上desc表示倒序
+		goodsInfoCountHql = goodsInfoCountHql + " order by goods_creationtime desc";
+		int goodsInfoCount = goodsInfoManagerDao.getCount(goodsInfoCountHql);
+		// 设置总数量
+		goodsPicVO.setTotalRecords(goodsInfoCount);
+		// 设置总页数
+		goodsPicVO.setTotalPages(((goodsInfoCount - 1) / goodsPicVO.getPageSize()) + 1);
+		// 判断是否拥有上一页
+		if (goodsPicVO.getPageIndex() <= 1) {
+			goodsPicVO.setHavePrePage(false);
+		} else {
+			goodsPicVO.setHavePrePage(true);
+		}
+		// 判断是否拥有下一页
+		if (goodsPicVO.getPageIndex() >= goodsPicVO.getTotalPages()) {
+
+			goodsPicVO.setHaveNextPage(false);
+		} else {
+			goodsPicVO.setHaveNextPage(true);
+		}
+		listInfo = goodsInfoManagerDao.getUserWangtsByUserId(newUser.getUser_id());
+		if (listInfo!=null) {
+			for (goodsInfo info : listInfo) {
+				picture pic = new picture();
+				pic = goodsInfoManagerDao.getFirstPicByInfoId(info.getGoods_id());
+				if(pic!=null) {
+					GoodsPicDTO goodsPicDTO = new GoodsPicDTO();
+					goodsPicDTO.setPic(pic);
+					goodsPicDTO.setInfo(info);
+					listGoodsPicDTO.add(goodsPicDTO);
+				}
+			}
+			goodsPicVO.setListGoodsPicDTO(listGoodsPicDTO);
+		}
+		return goodsPicVO;
+		}
+		return null;
+	}
+	/**
+	 * 跟据id删除收藏商品和图片
+	 */
+	@Override
+	public String deleteGoodsUserWant(String data_id) {
+		 goodsInfo info = new goodsInfo();
+		info = goodsInfoManagerDao.getInfoByGoodsId(data_id);
+		if(info!=null) {
+			info.setGoods_userWants(null);
+			goodsInfoManagerDao.saveOrUpdateObject(info);
 		}
 		return null;
 	}

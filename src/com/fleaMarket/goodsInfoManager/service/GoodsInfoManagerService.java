@@ -98,11 +98,25 @@ public interface GoodsInfoManagerService {
 	public GoodsPicVO getPublishedGoodsVO(user newUser);
 
 	/**
-	 * 跟据id删除商品西信息和图片
+	 * 跟据id删除发布的商品西信息和图片
 	 * 
 	 * @param data_id
 	 * @return
 	 */
 	public String deleteGoods(String data_id);
+
+	/**
+	 * 跟据用户id查询商品信息
+	 * @param newUser
+	 * @return
+	 */
+	public GoodsPicVO getUserWangtsVO(user newUser);
+	/**
+	 * 跟据id删除收藏的商品西信息和图片
+	 * 
+	 * @param data_id
+	 * @return
+	 */
+	public String deleteGoodsUserWant(String data_id);
 
 }
