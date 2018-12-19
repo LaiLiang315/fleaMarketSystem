@@ -37,12 +37,9 @@ public class CarouselTest {
 	 * 查询轮播图测试
 	 */
 	@Test
-	public void findCarouselsTest() {
-		List<carousel> listCarousel = new ArrayList<>();
+	public void findCarouselTest() {
 		
-		listCarousel = carouselManagerService.findCarousels();
 		
-		System.out.println("listCarousel"+listCarousel);
 	}
 	//测试跟据username查询用户
 	@Test 

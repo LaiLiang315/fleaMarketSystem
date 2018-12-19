@@ -91,6 +91,11 @@ public class SkipAction {
 		return "intoCarouselAdd";
 	}
 
+	// 进入轮播图列表
+	public String intoCarouselEdit() {
+		return "intoCarouselEdit";
+	}
+
 	// 进入类型编辑页
 	public String intoCategoryEdit() {
 		return "intoCategoryEdit";

@@ -16,8 +16,11 @@ import com.fleaMarket.domain.user;
  */
 public interface CarouselManagerService {
 
-
-	String addCarousel();
+	/**
+	 * 用户添加轮播图
+	 * @param carousel
+	 */
+	String addCarousel(String fileFileName, String data_id);
 
 	/**
 	 * 删除轮播图的数组
@@ -41,17 +44,17 @@ public interface CarouselManagerService {
 	String addAndComplete(goodsInfo goodsInfo, String pictrueMap);
 //	String addAndComplete(goodsInfo goodsInfo, List<Map<String, Object>> listMap);
 
-	/**
-	 * 用户添加轮播图
-	 * @param carousel
-	 */
-	void addCarousel(carousel carousel);
+//	/**
+//	 * 用户添加轮播图
+//	 * @param carousel
+//	 */
+//	void addCarousel(carousel carousel);
 
 	/**
 	 * 查询所有轮播图
 	 * @return
 	 */
-	List<carousel> findCarousels();
+	carousel findCarousel(carousel carousel);
 
 	/**
 	 * 上传头像
@@ -72,6 +75,8 @@ public interface CarouselManagerService {
 	 * @return
 	 */
 	CarouselVO getCarouselVO();
+
+	
 
 
 	

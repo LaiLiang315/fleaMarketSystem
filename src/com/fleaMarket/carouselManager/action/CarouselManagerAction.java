@@ -26,7 +26,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.opensymphony.xwork2.ActionSupport;
 
-
 /**
  * 轮播图管理的Action层
  */
@@ -69,6 +68,8 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 	private carousel carousel;
 
 	private user user;
+
+	private String data_id;
 	
 	public String getIdList() {
 		return idList;
@@ -134,13 +135,21 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 		this.carousel = carousel;
 	}
 
-	
 	public user getUser() {
 		return user;
 	}
 
 	public void setUser(user user) {
 		this.user = user;
+	}
+
+	
+	public String getData_id() {
+		return data_id;
+	}
+
+	public void setData_id(String data_id) {
+		this.data_id = data_id;
 	}
 
 	/**
@@ -186,7 +195,8 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 
 	/**
 	 * 查询轮播图列表
-	 * @throws IOException 
+	 * 
+	 * @throws IOException
 	 */
 	public void getCarouselVO() throws IOException {
 		GsonBuilder gsonBuilder = new GsonBuilder();
@@ -196,6 +206,7 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 		CarouselVO carouselVO = carouselManagerService.getCarouselVO();
 		response.getWriter().write(gson.toJson(carouselVO));
 	}
+
 	/**
 	 * 添加轮播图
 	 * 
@@ -206,8 +217,6 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
 		response.setContentType("text/html;charset=utf-8");
-		String add = carouselManagerService.addCarousel();
-		response.getWriter().write(gson.toJson(add));
 	}
 
 	/**
@@ -231,7 +240,7 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 	 * @throws IOException
 	 */
 	public String IoReadImage() throws IOException {
-//		System.out.println("====ppp");
+		// System.out.println("====ppp");
 		fileFileName = new String(fileFileName.getBytes("ISO8859-1"), "UTF-8");// 解决图片中文路径乱码
 		String linkurl = "D:\\Aupload\\test1\\" + fileFileName;
 		FileInputStream in = new FileInputStream(linkurl);
@@ -358,14 +367,13 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 				if (file.length() <= 50 * 1024 * 1024) {
 					String scrol_id = java.util.UUID.randomUUID().toString(); // 采用时间+UUID的方式
 					String path = ServletActionContext.getServletContext().getRealPath("/WEB-INF/upload");
-					// System.out.println("333:"+path);
-					// System.out.println("444:"+scrol_id);
+//					System.out.println("333:" + path);
+//					System.out.println("444:" + scrol_id);
 					File uploadFile = new File(path);
 					if (!uploadFile.exists() && !uploadFile.isDirectory()) {
-						// System.out.println("文件夹路径不存在，创建路径:" + folderpath);
+						System.out.println("文件夹路径不存在，创建路径:" + folderpath);
 						uploadFile.mkdirs();
 					} else {
-						// System.out.println("文件夹路径存在:" + uploadFile);
 					}
 					String filename = path + File.separator + fileFileName;
 					fileFileName = scrol_id + fileFileName;
@@ -377,13 +385,13 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 						out.write(b, 0, len);
 					}
 					out.close();
-					// System.out.println("filename==" + filename);
+//					System.out.println("filename==" + filename);
 					File folder = new File(folderpath);
 					if (!folder.exists() && !folder.isDirectory()) {
-						// System.out.println("文件夹路径不存在，创建路径:" + folderpath);
+//						System.out.println("文件夹路径不存在，创建路径:" + folderpath);
 						folder.mkdirs();
 					} else {
-						// System.out.println("文件夹路径存在:" + folderpath);
+//						System.out.println("文件夹路径存在:" + folderpath);
 					}
 					FileUtils.copyFile(file, new File(folderpath, fileFileName));
 					code = "0";
@@ -392,20 +400,20 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 			} else {
 				result = "uploaderror";
 				code = "1";
-				// System.out.println("上传文件发生错误");
+				System.out.println("上传文件发生错误");
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println("给我输出这个对象" + picture);
-		System.out.println("输出下：" + idList);
 
-		carousel.setCarousel_picture(fileFileName);
-		System.out.println(picture);
-		carouselManagerService.addCarousel(carousel);
-		res = "{\"code\":\" " + code + " \",\"msg\":\"" + result + "\"}";
+		System.out.println("JJJ" + fileFileName);
+//		carousel carousel1 = new carousel();
+//		carousel1.setCarousel_picture(fileFileName);
+		carouselManagerService.addCarousel(fileFileName,data_id);
+//		System.out.println("给我输出这个对象" + carousel1);
+		res = "{\"code\":\" " + code + " \",\"msg\":\"" + result + "\",\"fileFileName\":\" " + fileFileName + "\"}";
 		// 返回前端信息
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
@@ -416,23 +424,22 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println("CcdmwcC:" + carousel);
 
 	}
 
-	// 查询所有轮播图
-	public void findCarousels() throws IOException {
+	// 查询轮播图
+	public void findCarousel() throws IOException {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
 		response.setContentType("text/html;charset=utf-8");
-		List<carousel> listCarousel = carouselManagerService.findCarousels();
-		response.getWriter().write(gson.toJson(listCarousel));
+		carousel carousel1 = carouselManagerService.findCarousel(carousel);
+		response.getWriter().write(gson.toJson(carousel1));
 	}
 
+	
 	// 用户上传头像
-	public void uploadPic()  {
-		System.out.println("????<><><"+ user);
+	public void uploadPic() {
 		String code = ""; // 0上传成功 1上传失败
 		String res = "";
 		String result = "";
@@ -457,7 +464,7 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 						out.write(b, 0, len);
 					}
 					out.close();
-					 System.out.println("filename==" + filename);
+					System.out.println("filename==" + filename);
 					File folder = new File(folderpath);
 					if (!folder.exists() && !folder.isDirectory()) {
 						folder.mkdirs();
@@ -476,7 +483,7 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		carouselManagerService.addHeadportrait(user,fileFileName);
+		carouselManagerService.addHeadportrait(user, fileFileName);
 		res = "{\"code\":\" " + code + " \",\"msg\":\"" + result + "\",\"fileFileName\":\"" + fileFileName + " \"}";
 		// 返回前端信息
 		GsonBuilder gsonBuilder = new GsonBuilder();
@@ -489,9 +496,11 @@ public class CarouselManagerAction extends ActionSupport implements ServletRespo
 			e.printStackTrace();
 		}
 	}
+
 	/**
 	 * 保存个人信息
-	 * @throws IOException 
+	 * 
+	 * @throws IOException
 	 */
 	public void savePersonalInfo() throws IOException {
 		GsonBuilder gsonBuilder = new GsonBuilder();

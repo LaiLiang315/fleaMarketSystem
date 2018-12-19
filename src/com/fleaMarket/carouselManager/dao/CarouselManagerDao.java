@@ -89,6 +89,14 @@ public interface CarouselManagerDao {
 	user getUserById(String trim);
 
 	/**
+	 * 得到最大顺序
+	 * @param carousel_sequence
+	 * @return
+	 */
+
+	public String getMaxSequenceNum(Integer carousel_sequence);
+
+	/**
 	 * 查询所有轮播图
 	 */
 //	List<carousel> listCarousel(); 

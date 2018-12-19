@@ -24,6 +24,7 @@
 			<result name="intoCarouselAdd">/carouselManagement/CarouselAdd.jsp</result>
 			<result name="intoCarouselList">/carouselManagement/CarouselList.jsp</result>
 		    <result name="intoCategoryEdit">/category/CategoryEdit.jsp</result>
+		    <result name="intoCarouselEdit">/carouselManagement/CarouselEdit.jsp</result>
 		</action>
 	</package>
 

@@ -46,8 +46,29 @@ public class CarouselManagerServiceImpl implements CarouselManagerService {
 	 * 添加轮播图
 	 */
 	@Override
-	public String addCarousel() {
-		// TODO Auto-generated method stub
+	public String addCarousel(String fileFileName, String data_id) {
+		//更换轮播图片
+		if(data_id!=null) {
+			System.out.println("111");
+			carousel carousel = new carousel();
+			carousel = carouselManageDao.getCarouselById(data_id);
+			carousel.setCarousel_picture(fileFileName);
+			carousel.setCarousel_modifytime(TimeUtil.getStringSecond());
+			carouselManageDao.saveOrUpdateObject(carousel);
+		}
+		//新增轮播图
+		else if(data_id==null) 
+		{
+			System.out.println("222");
+			carousel carousel = new carousel();
+			carousel.setCarousel_id(BuildUuid.getUuid());
+			carousel.setCarousel_picture(fileFileName);
+			carousel.setCarousel_creationtime(TimeUtil.getStringSecond());
+			carousel.setCarousel_modifytime(TimeUtil.getStringSecond());
+			carousel.setIs_delete(0);
+			carouselManageDao.saveOrUpdateObject(carousel);
+			
+		}
 		return null;
 	}
 
@@ -62,22 +83,22 @@ public class CarouselManagerServiceImpl implements CarouselManagerService {
 			 * 将多个对象id去掉分隔符转化为数组
 			 */
 			String[] deleteIdList = idList.split(",");
-			System.out.println(Arrays.toString(deleteIdList) + "uuuu" + deleteIdList[1]);
+			System.out.println(Arrays.toString(deleteIdList) + "uuuu" + deleteIdList);
 			/**
 			 * 遍历数组String id : deleteIdList
 			 */
 			for (String id : deleteIdList) {
-				// System.out.println("111111" + deleteIdList);
+				 System.out.println("111111" + id);
 				carousel carousel = new carousel();
 				carousel = carouselManageDao.getCarouselById(id);
 
-				// System.out.println("AAAAA" + carousel);
+				 System.out.println("AAAAA" + carousel);
 				if (carousel != null) {
 					carousel.setIs_delete(1);
 					carousel.setCarousel_modifytime(TimeUtil.getStringSecond());
-					// System.out.println("DDDDDD" + carousel);
+					 System.out.println("DDDDDD" + carousel);
 					carouselManageDao.saveOrUpdateObject(carousel);
-					// System.out.println("=======");
+					 System.out.println("=======");
 					result = "deleteSuccess";
 				} else {
 					result = "deleteFailed";
@@ -139,27 +160,25 @@ public class CarouselManagerServiceImpl implements CarouselManagerService {
 	/**
 	 * 用户添加轮播图
 	 */
-	@Override
-	public void addCarousel(carousel carousel) {
+//	@Override
+//	public void addCarousel(carousel carousel) {
+//System.out.println("SDAF"+carousel);
+//		carousel.setCarousel_id(BuildUuid.getUuid());
+//		// 将图集顺序设置为特殊值，便去后面补充信息是重置
+//		carousel.setCarousel_creationtime(TimeUtil.getStringSecond());
+//		carousel.setCarousel_modifytime(TimeUtil.getStringSecond());
+//		carousel.setIs_delete(0);
+//		carouselManageDao.saveOrUpdateObject(carousel);
+//	}
 
-		carousel.setCarousel_id(BuildUuid.getUuid());
-		// 将图集顺序设置为特殊值，便去后面补充信息是重置
-		carousel.setCarousel_creationtime(TimeUtil.getStringSecond());
-		carousel.setCarousel_modifytime(TimeUtil.getStringSecond());
-		carousel.setIs_delete(0);
-		;
-		carouselManageDao.saveOrUpdateObject(carousel);
-	}
-
-	// 查询所有轮播图
+	// 跟据id查询轮播图
 	@Override
-	public List<carousel> findCarousels() {
-		List<carousel> listCarousel = new ArrayList<>();
-		listCarousel = (List<carousel>) carouselManageDao
-				.listObject("from carousel where is_delete='0' order by carousel_creationtime desc");
-		if (!listCarousel.isEmpty()) {
-			return listCarousel;
-		}
+	public carousel findCarousel(carousel carousel) {
+		carousel carousel1 = new carousel();
+		carousel1 = carouselManageDao.getCarouselById(carousel.getCarousel_id());
+		if(carousel1!=null) {
+			return carousel1;
+			}
 		return null;
 	}
 
@@ -207,7 +226,7 @@ public class CarouselManagerServiceImpl implements CarouselManagerService {
 		String userCountHql = "select count(*) from carousel where 1=1";
 		
 		// 这里如果不加desc表示正序，如果加上desc表示倒序
-		userCountHql = userCountHql + "order by carousel_creationtime desc";
+		userCountHql = userCountHql + "and is_delete='0' order by carousel_creationtime desc";
 				int userCount = carouselManageDao.getCount(userCountHql);
 				// 设置总数量
 				carouselVO.setTotalRecords(userCount);
@@ -227,10 +246,12 @@ public class CarouselManagerServiceImpl implements CarouselManagerService {
 					carouselVO.setHaveNextPage(true);
 				}
 				listCarousel = (List<carousel>) carouselManageDao.queryForPage(
-						"from carousel order by carousel_creationtime desc", carouselVO.getPageIndex(),
+						"from carousel where is_delete='0' order by carousel_creationtime desc", carouselVO.getPageIndex(),
 						carouselVO.getPageSize());
 				carouselVO.setListCarousel(listCarousel);;
 				return carouselVO;
 	}
+
+	
 
 }

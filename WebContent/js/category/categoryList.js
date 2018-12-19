@@ -46,7 +46,7 @@ function deleteMore(){
 		var formData=new FormData();
 		var ch=new Array();
 		var obj = document.getElementsByName("item");
-//		console.log("obj.length"+obj)
+		console.log("obj.length"+obj.length)
 		for(var i=0;i<obj.length;i++){
 			if(obj[i].checked){
 				ch[i]=obj[i].value
@@ -73,7 +73,7 @@ function deleteMore(){
 					toastr.success("类型删除成功了哦!");
 					setTimeout(function(){
 						location.href="/fleaMarketSystem/skip/skip_intoCategoryList";
-					},100);
+					},500);
 				}else{
 					toastr.error("删除失败!");
 				}}
@@ -83,23 +83,7 @@ function deleteMore(){
 		});
 	}
 
-//全选
-function allChoose(){
-	var checkal=document.getElementById("allChoose");
-	var checkbos=document.getElementsByName("item");
-	for(i=0;i<checkbos.length;i++){
-		var checkbo=checkbos[i];
-		if(checkal.checked){
-			checkbo.checked="checked";
-		}else{
-			checkbo.checked=null;
-		}
-	}	
-	layui.use('form', function(){
-		var form = layui.form; 
-		form.render();
-		});
-}			
+
 
 
 //单个删除

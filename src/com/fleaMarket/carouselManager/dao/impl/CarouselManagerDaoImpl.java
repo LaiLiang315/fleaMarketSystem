@@ -166,8 +166,17 @@ public class CarouselManagerDaoImpl implements CarouselManagerDao {
 		Query query = session.createQuery(hql);
 		query.setParameter("ID", trim);
 		 user =(user) query.uniqueResult();
-		// TODO Auto-generated method stub
 		return user;
+	}
+
+	/**
+	 * 得到最大顺序
+	 */
+	@Override
+	public String getMaxSequenceNum(Integer carousel_sequence) {
+		Session session = getSession();
+		String hql = "from carousel where  is_delete='0' and user_id=:ID";
+		return null;
 	}
 
 	// /**
